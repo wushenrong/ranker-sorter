@@ -138,10 +138,10 @@ dependencies = [
 
 [[package]]
 name = "python-elo-system"
-version = "2.0.1"
+version = "2.1.0"
 requires_python = ">=3.10"
 git = "https://github.com/TwoPizza9621536/Python-Elo-System.git"
-revision = "a29ce16b85baa345e7c6e0fc2818d04eed0b0055"
+revision = "05d2a09981bc2dc4105d5598c49bc7597b85b80d"
 summary = "Yet another Python Implementation of the Elo rating system."
 
 [[package]]

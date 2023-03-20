@@ -1,6 +1,6 @@
 [project]
 name = "Ranker-Sorter"
-version = "0.0.0"
+version = "1.0.0"
 description = ""
 authors = [{ name = "Samuel Wu", email = "twopizza9621536@gmail.com" }]
 dependencies = [

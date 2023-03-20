@@ -50,7 +50,7 @@ def file_dialog(sender, app_data, user_data):
         )
 
 
-def get_results(data: Container):
+def display_results(data: Container):
     NEW_WINDOW_WIDTH = 600
     NEW_WINDOW_HEIGHT = 480
     SPACING = 0.75
@@ -125,9 +125,9 @@ def rank_players(sender, app_data, user_data: tuple[Container, bool, bool]):
     if data.index_j > num_of_players:
         data.index_i += 1
         data.index_j = data.index_i + 1
+        dpg.set_item_label("player_a", label=data.players[data.index_i])
 
     if data.index_i != num_of_players:
-        dpg.set_item_label("player_a", label=data.players[data.index_i])
         dpg.set_item_label("player_b", label=data.players[data.index_j])
         return
 
@@ -136,9 +136,9 @@ def rank_players(sender, app_data, user_data: tuple[Container, bool, bool]):
     dpg.delete_item("draw")
 
     for player in data.players:
-        data.elo.record_match(winner=player, loser=player, draw=draw)
+        data.elo.record_match(winner=player, loser=player, draw=True)
 
-    get_results(data)
+    display_results(data)
 
 
 def create_ranker(data):
