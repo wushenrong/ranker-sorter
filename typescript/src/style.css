@@ -17,6 +17,23 @@ h1 {
   text-align: center;
 }
 
-.stats {
-  width: 1024px;
+#load {
+  display: none;
+}
+
+#load-label {
+  border: 1px black solid;
+  border-radius: 1px;
+  padding: 16px;
+}
+
+.selection {
+  width: 128px;
+  height: 128px;
+  padding: 16px;
+}
+
+.results {
+  width: 60vw;
+  height: 50vh;
 }

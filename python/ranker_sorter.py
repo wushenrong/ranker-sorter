@@ -135,9 +135,6 @@ def rank_players(sender, app_data, user_data: tuple[Container, bool, bool]):
     dpg.delete_item("player_b")
     dpg.delete_item("draw")
 
-    for player in data.players:
-        data.elo.record_match(winner=player, loser=player, draw=True)
-
     display_results(data)
 
 

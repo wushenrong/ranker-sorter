@@ -5,7 +5,7 @@ description = ""
 authors = [{ name = "Samuel Wu", email = "twopizza9621536@gmail.com" }]
 dependencies = [
     "dearpygui>=1.8.0",
-    "Python-Elo-System @ git+https://github.com/TwoPizza9621536/Python-Elo-System.git",
+    "Python-Elo-System @ git+https://github.com/TwoPizza9621536/Python-Elo-System/#subdirectory=python",
 ]
 requires-python = ">=3.10"
 license = { text = "MIT" }

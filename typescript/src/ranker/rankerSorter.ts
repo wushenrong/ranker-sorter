@@ -1,19 +1,19 @@
-import EloSystem from './elo_system'
+import EloSystem from 'elo-system'
 
 interface PlayerList { name: string, players: string[] }
 
-export default class Container {
+export default class RankerSorter {
   name: string
   players: string[]
-  elo: EloSystem
+  elo_system: EloSystem
   index_i = 0
   index_j = 1
 
   constructor (obj: PlayerList) {
     this.name = obj.name
     this.players = obj.players
-    this.elo = new EloSystem()
+    this.elo_system = new EloSystem()
 
-    this.players.forEach(element => { this.elo.add_player(element) })
+    this.players.forEach(element => { this.elo_system.add_player(element) })
   }
 }

@@ -1,4 +1,4 @@
 root = false
 
-[*.{json,html,*s,*css}]
+[*.{{j,t}s,html,css}]
 indent_size = 2

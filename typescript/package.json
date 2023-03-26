@@ -11,7 +11,6 @@
     "build": "parcel build"
   },
   "devDependencies": {
-    "@types/file-saver": "^2.0.5",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "eslint": "^8.36.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
@@ -22,7 +21,9 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
-    "chart.js": "^4.0.0",
-    "file-saver": "^2.0.5"
+    "@hyperjump/json-schema": "^1.4.1",
+    "chartist": "^1.3.0",
+    "elo-system": "https://gitpkg.now.sh/TwoPizza9621536/Elo-System/typescript?main&scripts.postinstall=npm%20install%20--ignore-scripts%20%26%26%20npm%20run%20build",
+    "mathjs": "^11.7.0"
   }
 }

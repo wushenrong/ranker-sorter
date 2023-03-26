@@ -140,8 +140,9 @@ dependencies = [
 name = "python-elo-system"
 version = "2.1.0"
 requires_python = ">=3.10"
-git = "https://github.com/TwoPizza9621536/Python-Elo-System.git"
-revision = "05d2a09981bc2dc4105d5598c49bc7597b85b80d"
+subdirectory = "python"
+git = "https://github.com/TwoPizza9621536/Python-Elo-System/"
+revision = "e7f51d2ca55a5510be35087af537cd0763be289b"
 summary = "Yet another Python Implementation of the Elo rating system."
 
 [[package]]
@@ -170,7 +171,7 @@ summary = "Module for decorators, wrappers and monkey patching."
 
 [metadata]
 lock_version = "4.1"
-content_hash = "sha256:13009baec5595eb3ba84aebefa5ab0e72ea0c94fd52049a5e568dca33f45edfb"
+content_hash = "sha256:bac45bc02a7732c26ed55aa3ab910b559a083aa30c7f766ec1d86c7fd2213edf"
 
 [metadata.files]
 "astroid 2.15.0" = [
