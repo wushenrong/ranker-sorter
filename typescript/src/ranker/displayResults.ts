@@ -2,7 +2,7 @@ import 'chartist/dist/index.css'
 import { BarChart } from 'chartist'
 
 import type EloSystem from 'elo-system'
-import { type PlayerList } from '../loadFile'
+import { type PlayerList } from './loadFile'
 
 export let results_saved = false
 

@@ -1,7 +1,7 @@
 import EloSystem from 'elo-system'
 
 import { displayResults } from './displayResults'
-import { type PlayerList } from '../loadFile'
+import { type PlayerList } from './createRanker'
 
 export const ELO_SYSTEM = new EloSystem()
 let player_a_index = 0

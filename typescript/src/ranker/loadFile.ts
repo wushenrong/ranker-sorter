@@ -1,6 +1,6 @@
 import { validate } from '@hyperjump/json-schema/draft-07'
 
-export interface PlayerList { name: string, players: string[] }
+import { type PlayerList } from './createRanker'
 
 export const loadFile = async (element: HTMLInputElement): Promise<PlayerList> => {
   const _infoParagraph = document.querySelector<HTMLParagraphElement>('#info')!
@@ -23,17 +23,20 @@ export const loadFile = async (element: HTMLInputElement): Promise<PlayerList> =
   const _data = JSON.parse(await file.text())
   const _schema = 'https://twopizza9621536.github.io/schema/json/players.json'
 
-  const validator = await validate(_schema)
-  const _output = validator(_data)
-
-  if (!_output.valid) {
-    _infoParagraph.textContent = `
-      The contents of the JSON file does not match the following structure:
-      '{ name: string, players: string[] }'
-    `
-    console.log(_output.errors)
-    throw new Error("Data is not type '{ name: string, players: string[] }'")
-  }
+  await validate(_schema)
+    .then((validator) => { return validator(_data) })
+    .then((output) => {
+      if (!output.valid) {
+        _infoParagraph.textContent = `
+            The contents of the JSON file does not match the following
+            structure: '{ name: string, players: string[] }'
+          `
+        console.log(output.errors)
+        throw new Error(`
+          Data is not type '{ name: string, players: string[] }'
+        `)
+      }
+    })
 
   return _data
 }
