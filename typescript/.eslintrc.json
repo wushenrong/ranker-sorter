@@ -11,6 +11,19 @@
     "project": "tsconfig.json"
   },
   "rules": {
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": [
+          "camelCase",
+          "snake_case",
+          "UPPER_CASE"
+        ],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      }
+    ]
   }
 }

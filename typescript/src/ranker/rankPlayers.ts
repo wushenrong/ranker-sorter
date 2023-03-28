@@ -3,43 +3,44 @@ import EloSystem from 'elo-system'
 import { displayResults } from './displayResults'
 import { type PlayerList } from '../loadFile'
 
-let IndexI = 0
-let IndexJ = 1
-export const eloSystem = new EloSystem()
+export const ELO_SYSTEM = new EloSystem()
+let player_a_index = 0
+let player_b_index = 1
 
 export const rankPlayers = (data: PlayerList, playerAWon: boolean, draw: boolean): void => {
-  const playerAButton = document.querySelector<HTMLButtonElement>('#player-a')!
-  const playerBButton = document.querySelector<HTMLButtonElement>('#player-b')!
-  const NUM_OF_PLAYERS = data.players.length - 1
+  const _playerAButton = document.querySelector<HTMLButtonElement>('#player-a')!
+  const _playerBButton = document.querySelector<HTMLButtonElement>('#player-b')!
+  const _draw = document.querySelector<HTMLButtonElement>('#draw')!
+  const _numOfPlayers = data.players.length - 1
   let winner: string
   let loser: string
 
   if (playerAWon) {
-    winner = data.players[IndexI]
-    loser = data.players[IndexJ]
+    winner = data.players[player_a_index]
+    loser = data.players[player_b_index]
   } else {
-    winner = data.players[IndexJ]
-    loser = data.players[IndexI]
+    winner = data.players[player_b_index]
+    loser = data.players[player_a_index]
   }
 
-  eloSystem.record_match({ winner, loser, draw })
+  ELO_SYSTEM.record_match({ winner, loser, draw })
 
-  IndexJ += 1
+  player_b_index += 1
 
-  if (IndexJ > NUM_OF_PLAYERS) {
-    IndexI += 1
-    IndexJ = IndexI + 1
-    playerAButton.innerHTML = `${data.players[IndexI]}`
+  if (player_b_index > _numOfPlayers) {
+    player_a_index += 1
+    player_b_index = player_a_index + 1
+    _playerAButton.innerHTML = `${data.players[player_a_index]}`
   }
 
-  if (IndexI !== NUM_OF_PLAYERS) {
-    playerBButton.innerHTML = `${data.players[IndexJ]}`
+  if (player_a_index !== _numOfPlayers) {
+    _playerBButton.innerHTML = `${data.players[player_b_index]}`
     return
   }
 
-  playerAButton.remove()
-  playerBButton.remove()
-  document.querySelector<HTMLButtonElement>('#draw')!.remove()
+  _playerAButton.remove()
+  _playerBButton.remove()
+  _draw.remove()
 
-  displayResults(data, eloSystem)
+  displayResults(data, ELO_SYSTEM)
 }

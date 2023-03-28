@@ -1,7 +1,7 @@
 import { addMediaTypePlugin } from '@hyperjump/json-schema'
 
-import { eloSystem, rankPlayers } from './ranker/rankPlayers'
-import { resultsSaved } from './ranker/displayResults'
+import { ELO_SYSTEM, rankPlayers } from './ranker/rankPlayers'
+import { results_saved } from './ranker/displayResults'
 
 import { loadFile, type PlayerList } from './loadFile'
 import { combinations } from './math'
@@ -13,37 +13,37 @@ addMediaTypePlugin('application/json', {
   matcher: (path) => path.endsWith('.json')
 })
 
-const app = document.querySelector<HTMLDivElement>('#app')!
+const APP = document.querySelector<HTMLDivElement>('#app')!
 
-let rankerCreated = false
+let ranker_created = false
 
 const createRanker = (data: PlayerList): void => {
-  rankerCreated = true
-  data.players.forEach(player => { eloSystem.add_player(player) })
+  ranker_created = true
+  data.players.forEach(player => { ELO_SYSTEM.add_player(player) })
 
-  const comb: number = combinations(data.players.length, 2)
-  app.innerHTML = `
+  const _comb: number = combinations(data.players.length, 2)
+  APP.innerHTML = `
     <p id="info">
-      There are ${comb} combinations of 2 players for ${data.players.length}
+      There are ${_comb} combinations of 2 players for ${data.players.length}
       players.
       <br>
-      This will take you about ${comb / 6} minutes if each choice takes about 10
-      seconds.
+      This will take you about ${_comb / 6} minutes if each choice takes about
+      10 seconds.
     </p>
     <button id="player-a" class="selection"></button>
     <button id="draw" class="selection">Both are equal</button>
     <button id="player-b" class="selection"></button>
   `
 
-  const playerA = document.querySelector<HTMLButtonElement>('#player-a')!
-  const playerB = document.querySelector<HTMLButtonElement>('#player-b')!
-  const draw = document.querySelector<HTMLButtonElement>('#draw')!
+  const _playerA = document.querySelector<HTMLButtonElement>('#player-a')!
+  const _playerB = document.querySelector<HTMLButtonElement>('#player-b')!
+  const _draw = document.querySelector<HTMLButtonElement>('#draw')!
 
-  playerA.innerHTML = `${data.players[0]}`
-  playerB.innerHTML = `${data.players[1]}`
-  playerA.addEventListener('click', () => { rankPlayers(data, true, false) })
-  playerB.addEventListener('click', () => { rankPlayers(data, false, false) })
-  draw.addEventListener('click', () => { rankPlayers(data, false, true) })
+  _playerA.innerHTML = `${data.players[0]}`
+  _playerB.innerHTML = `${data.players[1]}`
+  _playerA.addEventListener('click', () => { rankPlayers(data, true, false) })
+  _playerB.addEventListener('click', () => { rankPlayers(data, false, false) })
+  _draw.addEventListener('click', () => { rankPlayers(data, false, true) })
 }
 
 const getPlayerList = async (): Promise<void> => {
@@ -56,6 +56,6 @@ button.addEventListener('change', () => {
 })
 
 window.addEventListener('beforeunload', (e) => {
-  if (!rankerCreated || resultsSaved) return
+  if (!ranker_created || results_saved) return
   e.returnValue = true
 })

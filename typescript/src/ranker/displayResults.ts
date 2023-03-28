@@ -4,29 +4,28 @@ import { BarChart } from 'chartist'
 import type EloSystem from 'elo-system'
 import { type PlayerList } from '../loadFile'
 
-export let resultsSaved = false
+export let results_saved = false
 
 const saveFile = (data: any, fileName = 'results.json'): void => {
-  const blob = new Blob([data], { type: 'octet-stream' })
-  const href = URL.createObjectURL(blob)
+  const _href = URL.createObjectURL(new Blob([data], { type: 'octet-stream' }))
 
-  const a = Object.assign(
+  const _a = Object.assign(
     document.createElement('a'),
     {
-      href,
+      href: _href,
       style: 'display:none',
       download: fileName
     }
   )
-  document.body.appendChild(a)
+  document.body.appendChild(_a)
 
-  a.click()
-  URL.revokeObjectURL(href)
-  a.remove()
+  _a.click()
+  URL.revokeObjectURL(_href)
+  _a.remove()
 }
 
 export const displayResults = (playerList: PlayerList, eloSystem: EloSystem): void => {
-  const results = eloSystem.get_overall_list()
+  const _results = eloSystem.get_overall_list()
   document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <h2>${playerList.name}</h2>
     <div class="results"></div>
@@ -38,24 +37,24 @@ export const displayResults = (playerList: PlayerList, eloSystem: EloSystem): vo
   new BarChart(
     '.results',
     {
-      labels: results.map(player => { return player.player }),
+      labels: _results.map(player => { return player.player }),
       series: [
-        results.map(player => { return player.elo })
+        _results.map(player => { return player.elo })
       ]
     }
   )
 
-  const saveButton = document.querySelector<HTMLButtonElement>('#save-results')!
-  const newButton = document.querySelector<HTMLButtonElement>('#new-ranker')!
-  saveButton.addEventListener('click', () => {
+  const _saveButton = document.querySelector<HTMLButtonElement>('#save-results')!
+  const _newButton = document.querySelector<HTMLButtonElement>('#new-ranker')!
+  _saveButton.addEventListener('click', () => {
     const data = {
       name: playerList.name,
       baseElo: eloSystem.base_elo,
       kFactor: eloSystem.k_factor,
-      players: results
+      players: _results
     }
     saveFile(JSON.stringify(data, undefined, 2))
-    resultsSaved = true
+    results_saved = true
   })
-  newButton.addEventListener('click', () => { window.location.reload() })
+  _newButton.addEventListener('click', () => { window.location.reload() })
 }

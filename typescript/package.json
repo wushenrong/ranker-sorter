@@ -7,7 +7,7 @@
   "source": "src/index.html",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "parcel",
+    "start": "parcel",
     "build": "parcel build"
   },
   "devDependencies": {
@@ -17,6 +17,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
+    "hint": "^7.1.6",
     "parcel": "latest",
     "typescript": "^5.0.2"
   },
