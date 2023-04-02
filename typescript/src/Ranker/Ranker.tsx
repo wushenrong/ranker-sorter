@@ -1,9 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { combinations } from 'mathjs'
 
-import { useEloSystem } from './useEloSystem'
+import { useEloSystem } from '../hooks/useEloSystem'
+
+import Button from '../components/Button/Button'
+import Icon from '../components/Icon'
+
 import { type PlayerList } from '../ListLoader'
-import type { RankerResults } from '../Results'
+import { type RankerResults } from '../Results'
 
 type RankerProps = {
   data: PlayerList
@@ -51,24 +55,38 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
   const onClick = (playerAWon: boolean, isDraw: boolean) =>
     () => { rankPlayers(playerAWon, isDraw) }
 
+  const minutes = comb / 6
+  const seconds = Math.floor(minutes % 1 * 60)
+
   return (
     <>
       <p>
-        There are {comb} combinations of 2 players for {data.players.length}
-        players.
+        There are {comb} combinations of 2 players
+        for {data.players.length} players.
         <br />
-        This will take you about {comb / 6} minutes if each choice takes about
-        10 seconds.
+        This will take you about {Math.floor(minutes)} minutes
+        {seconds > 0 ? <> and {seconds} seconds</> : <></>} if each choice takes
+        about 10 seconds.
       </p>
-      <button type='button' onClick={onClick(true, false)}>
-        {data.players[playerAIndex]}
-      </button>
-      <button type='button' onClick={onClick(false, true)}>
+      <Button type='button' onClick={onClick(true, false)}>
+        {data.images != null
+          ? <Icon
+            src={data.images[playerAIndex]} title={data.players[playerAIndex]}
+          />
+          : data.players[playerAIndex]
+        }
+      </Button>
+      <Button type='button' onClick={onClick(false, true)}>
         Both are equal
-      </button>
-      <button type='button' onClick={onClick(false, false)}>
-        {data.players[playerBIndex]}
-      </button>
+      </Button>
+      <Button type='button' onClick={onClick(false, false)}>
+        {data.images != null
+          ? <Icon
+            src={data.images[playerBIndex]} title={data.players[playerBIndex]}
+          />
+          : data.players[playerBIndex]
+        }
+      </Button>
     </>
   )
 }

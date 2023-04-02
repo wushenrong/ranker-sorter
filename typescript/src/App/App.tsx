@@ -1,36 +1,36 @@
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 
 import ListLoader from '../ListLoader'
-import Ranker from '../Ranker'
-import Results from '../Results'
-import './App.css'
+import Loading from '../components/Loading'
+
+const Ranker = lazy(async () => await import('../Ranker'))
+const Results = lazy(async () => await import('../Results'))
 
 function App (): JSX.Element {
   const [players, setPlayer] = useState(undefined)
   const [results, setResults] = useState(undefined)
 
-  const getPlayers = (playerList: any): void => {
-    setPlayer(playerList)
-  }
-
-  const getResults = (results: any): void => {
-    setResults(results)
-  }
+  const getPlayers = (playerList: any): void => { setPlayer(playerList) }
+  const getResults = (results: any): void => { setResults(results) }
 
   if (players === undefined) {
     return <ListLoader callback={getPlayers} />
   }
 
   if (results === undefined) {
-    return <Ranker data={players} callback={getResults} />
+    return (
+      <Suspense fallback={<Loading />}>
+        <Ranker data={players} callback={getResults} />
+      </Suspense>
+    )
   }
 
   return (
-    <Results
-      results={results}
-      resetData={getPlayers}
-      resetResults={getResults}
-    />
+    <Suspense fallback={<Loading />}>
+      <Results
+        results={results} resetData={getPlayers} resetResults={getResults}
+      />
+    </Suspense>
   )
 }
 

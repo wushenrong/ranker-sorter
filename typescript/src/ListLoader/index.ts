@@ -1,2 +1,2 @@
 export { default } from './ListLoader'
-export type PlayerList = { name: string, players: string[] }
+export type PlayerList = { name: string, players: string[], images?: string[] }

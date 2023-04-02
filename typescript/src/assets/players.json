@@ -17,6 +17,15 @@
       },
       "minItems": 2,
       "uniqueItems": true
+    },
+    "images": {
+      "description": "Icons or image of the players, url or base64 image",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "uniqueItems": true
     }
   },
   "required": [

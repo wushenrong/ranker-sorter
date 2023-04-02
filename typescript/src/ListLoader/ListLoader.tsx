@@ -1,16 +1,19 @@
-import type React from 'react'
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { Draft07 } from 'json-schema-library'
 
+import Button from '../components/Button'
+import schema from '../assets/players.json'
+import Loading from '../components/Loading/Loading'
+
 import { type PlayerList } from '.'
-import schema from './players.json'
-import CreateList from './CreateList/CreateList'
 
 type Callback = { callback: (playerList: PlayerList) => void }
 type InputEvent = React.ChangeEvent<HTMLInputElement>
 
+const CreateList = lazy(async () => await import('./CreateList'))
+
 function ListLoader ({ callback }: Callback): JSX.Element {
-  const [error, setError] = useState({ message: '', validatorError: '' })
+  const [error, setError] = useState<JSX.Element>()
   const [isNew, setIsNew] = useState(false)
 
   const loadFile = async (e: InputEvent): Promise<void> => {
@@ -18,13 +21,12 @@ function ListLoader ({ callback }: Callback): JSX.Element {
     const validator = new Draft07(schema)
 
     if (file.type !== 'application/json') {
-      setError({
-        message: `
+      setError(
+        <p>
           The file you selected ({file.name}) is not a JSON file, please select
           a JSON file.
-        `,
-        validatorError: ''
-      })
+        </p>
+      )
       return
     }
 
@@ -32,53 +34,50 @@ function ListLoader ({ callback }: Callback): JSX.Element {
     const output = validator.validate(data)
 
     if (output.length > 0) {
-      setError({
-        message: `
+      setError(
+        <p>
           The JSON file you selected has the wrong data structure, please fix
           the error before you reselect the JSON file:
-        `,
-        validatorError: output[0].message
-      })
+          <br />
+          {output[0].message}
+        </p>
+      )
       return
     }
 
+    if (data.players.length !== data.images.length) {
+      setError(
+        <p>
+          The number of images you have provided does not match up with the
+          number of players, please provide an image for each player.
+        </p>
+      )
+    }
     callback(data)
   }
 
-  let info
-  if (error.message.length > 0) {
-    info = <p>
-      {error.message}
-      {
-        error.validatorError.length > 0
-          ? <><br />{error.validatorError}</>
-          : <></>
-      }
-    </p>
-  } else {
-    info = <p>
-      To start ranking characters, either create a new list with the
-      names of the characters or load a JSON file containing the name of
-      the list and a list of characters.
-    </p>
-  }
-
   if (isNew) {
-    return <CreateList />
+    return (
+      <Suspense fallback={<Loading />}>
+        <CreateList callback={callback} />
+      </Suspense>
+    )
   }
 
   return (
     <>
-      {info}
-      <button type='button' onChange={() => { setIsNew(true) }}>
-        New List
-      </button>
-      <button type='button'><label htmlFor='load'>Load List</label></button>
-      <input
-        type='file'
-        id='load'
+      {error != null
+        ? error
+        : <p>
+          To start ranking characters, either create a new list with the
+          names of the characters or load a JSON file containing name and players.
+          The JSON may optionally include a list of urls for images.
+        </p>
+      }
+      <Button type='button' onClick={() => { setIsNew(true) }}>New List</Button>
+      <Button type='button'><label htmlFor='load'>Load List</label></Button>
+      <input type='file' id='load' onChange={(e) => { void loadFile(e) }}
         accept='application/json'
-        onChange={(e) => { void loadFile(e) }}
       />
     </>
   )
