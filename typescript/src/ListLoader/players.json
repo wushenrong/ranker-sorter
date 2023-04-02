@@ -1,0 +1,27 @@
+{
+  "$id": "https://twopizza9621536.github.io/schema/json/players.json",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Players",
+  "description": "A list of players to rate based on Elo",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The title of the list",
+      "type": "string"
+    },
+    "players": {
+      "description": "The players to match",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "name",
+    "players"
+  ],
+  "additionalProperties": false
+}

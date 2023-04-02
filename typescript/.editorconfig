@@ -1,4 +1,4 @@
 root = false
 
-[*.{{j,t}s,html,css,scss,hintrc}]
+[*.{ts,tsx,html,css,scss,hintrc}]
 indent_size = 2
