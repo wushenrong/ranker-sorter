@@ -1,4 +1,4 @@
 root = false
 
-[*.{ts,tsx,html,css,scss,hintrc}]
+[*.{ts,tsx,html,css,hintrc}]
 indent_size = 2

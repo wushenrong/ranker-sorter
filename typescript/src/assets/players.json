@@ -5,6 +5,10 @@
   "description": "A list of players to rate based on Elo",
   "type": "object",
   "properties": {
+    "$schema": {
+      "description": "The schema to verify this document against.",
+      "type": "string"
+    },
     "name": {
       "description": "The title of the list",
       "type": "string"
@@ -19,10 +23,21 @@
       "uniqueItems": true
     },
     "images": {
-      "description": "Icons or image of the players, url or base64 image",
+      "description": "Icons or image of the players, url or base64 png image",
       "type": "array",
       "items": {
-        "type": "string"
+        "anyOf": [
+          {
+            "type": "string",
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png"
+          },
+          {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https?://"
+          }
+        ]
       },
       "minItems": 2,
       "uniqueItems": true

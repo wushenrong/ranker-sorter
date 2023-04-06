@@ -1,0 +1,13 @@
+.selections {
+  display: flex;
+  justify-content: center;
+  margin: 1em 1em 0;
+
+  > button {
+    width: 128px;
+    height: 128px;
+    padding: 8px;
+    border: 1px;
+    border-radius: 1px;
+  }
+}

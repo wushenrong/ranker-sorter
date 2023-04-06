@@ -2,11 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { combinations } from 'mathjs'
 
 import { useEloSystem } from '../hooks/useEloSystem'
+import classes from './Ranker.module.css'
 
-import Button from '../components/Button/Button'
-import Icon from '../components/Icon'
-
-import { type PlayerList } from '../ListLoader'
+import { type PlayerList } from '../LoadList'
 import { type RankerResults } from '../Results'
 
 type RankerProps = {
@@ -18,7 +16,10 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
   const [eloSystem, calculateMatch] = useEloSystem(data)
   const [playerAIndex, setPlayerAIndex] = useState(0)
   const [playerBIndex, setPlayerBIndex] = useState(1)
-  const comb = useMemo(() => combinations(data.players.length, 2), [data])
+  const comb = useMemo(
+    () => combinations(data.players.length, 2),
+    [data.players]
+  )
 
   useEffect(() => {
     if (playerAIndex >= data.players.length - 1) {
@@ -35,7 +36,7 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
     let loser: string
 
     if (playerBIndex >= data.players.length - 1) {
-      setPlayerAIndex(playerAIndex => playerAIndex + 1)
+      setPlayerAIndex(currentPlayerAIndex => currentPlayerAIndex + 1)
       setPlayerBIndex(() => playerAIndex + 1)
     }
 
@@ -49,7 +50,7 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
 
     calculateMatch({ winner, loser, draw: isDraw })
 
-    setPlayerBIndex(playerBIndex => playerBIndex + 1)
+    setPlayerBIndex(currentPlayerBIndex => currentPlayerBIndex + 1)
   }
 
   const onClick = (playerAWon: boolean, isDraw: boolean) =>
@@ -61,32 +62,38 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
   return (
     <>
       <p>
-        There are {comb} combinations of 2 players
-        for {data.players.length} players.
+        There are {comb} combinations of 2 characters
+        for {data.players.length} characters.
         <br />
         This will take you about {Math.floor(minutes)} minutes
         {seconds > 0 ? <> and {seconds} seconds</> : <></>} if each choice takes
         about 10 seconds.
       </p>
-      <Button type='button' onClick={onClick(true, false)}>
-        {data.images != null
-          ? <Icon
-            src={data.images[playerAIndex]} title={data.players[playerAIndex]}
-          />
-          : data.players[playerAIndex]
-        }
-      </Button>
-      <Button type='button' onClick={onClick(false, true)}>
-        Both are equal
-      </Button>
-      <Button type='button' onClick={onClick(false, false)}>
-        {data.images != null
-          ? <Icon
-            src={data.images[playerBIndex]} title={data.players[playerBIndex]}
-          />
-          : data.players[playerBIndex]
-        }
-      </Button>
+      <div className={classes.selections}>
+        <button type='button' onClick={onClick(true, false)}>
+          {data.images !== undefined
+            ? <img
+              src={data.images[playerAIndex]}
+              referrerPolicy='no-referrer'
+              alt={data.players[playerAIndex]}
+            />
+            : data.players[playerAIndex]
+          }
+        </button>
+        <button type='button' onClick={onClick(false, true)}>
+          Both are equal
+        </button>
+        <button type='button' onClick={onClick(false, false)}>
+          {data.images !== undefined
+            ? <img
+              src={data.images[playerBIndex]}
+              referrerPolicy='no-referrer'
+              alt={data.players[playerBIndex]}
+            />
+            : data.players[playerBIndex]
+          }
+        </button>
+      </div>
     </>
   )
 }

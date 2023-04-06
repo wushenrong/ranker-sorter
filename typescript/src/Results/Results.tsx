@@ -1,5 +1,3 @@
-import Button from '../components/Button'
-
 import { type RankerResults } from '.'
 
 type ResultProps = {
@@ -28,7 +26,7 @@ function Results ({ results, resetData, resetResults }: ResultProps): JSX.Elemen
     a.remove()
   }
 
-  const onClick = (data: any) => () => { saveFile(data) }
+  const onSave = (data: any) => () => { saveFile(data) }
 
   const newRanker = (): void => {
     resetData(undefined)
@@ -37,9 +35,9 @@ function Results ({ results, resetData, resetResults }: ResultProps): JSX.Elemen
 
   return (
     <>
-      <h2>{results.name}</h2>
-      <Button type='button' onClick={() => { newRanker() }}>New Ranker</Button>
-      <Button type='button' onClick={onClick(results)}>Save Results</Button>
+      <h3>{results.name}</h3>
+      <button type='button' onClick={() => { newRanker() }}>New Ranker</button>
+      <button type='button' onClick={onSave(results)}>Save Results</button>
     </>
   )
 }

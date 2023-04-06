@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import EloSystem, { type MatchRecord } from 'js-elo-system'
-import { type PlayerList } from '../ListLoader'
+import { type PlayerList } from '../LoadList'
 
 type RecordMatch = ({ winner, loser, draw }: MatchRecord) => void
 type EloSystemHook = [EloSystem, (RecordMatch)]

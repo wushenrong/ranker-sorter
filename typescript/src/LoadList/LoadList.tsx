@@ -1,9 +1,9 @@
 import { Suspense, lazy, useState } from 'react'
 import { Draft07 } from 'json-schema-library'
 
-import Button from '../components/Button'
+import Loading from '../components/Loading'
 import schema from '../assets/players.json'
-import Loading from '../components/Loading/Loading'
+import classes from './LoadList.module.css'
 
 import { type PlayerList } from '.'
 
@@ -12,7 +12,7 @@ type InputEvent = React.ChangeEvent<HTMLInputElement>
 
 const CreateList = lazy(async () => await import('./CreateList'))
 
-function ListLoader ({ callback }: Callback): JSX.Element {
+function LoadList ({ callback }: Callback): JSX.Element {
   const [error, setError] = useState<JSX.Element>()
   const [isNew, setIsNew] = useState(false)
 
@@ -45,7 +45,8 @@ function ListLoader ({ callback }: Callback): JSX.Element {
       return
     }
 
-    if (data.players.length !== data.images.length) {
+    if (data.images !== undefined &&
+      data.players.length !== data.images.length) {
       setError(
         <p>
           The number of images you have provided does not match up with the
@@ -56,31 +57,42 @@ function ListLoader ({ callback }: Callback): JSX.Element {
     callback(data)
   }
 
+  const goBack = (): void => { setIsNew(false) }
+
   if (isNew) {
     return (
       <Suspense fallback={<Loading />}>
-        <CreateList callback={callback} />
+        <CreateList goBack={goBack} callback={callback} />
       </Suspense>
     )
   }
 
+  let info = <p>
+    To start ranking characters, either create a new list with the
+    names of the characters or load a JSON file containing name and
+    players.
+    <br />
+    The JSON may optionally include a list of urls for images.
+  </p>
+
+  if (error !== undefined) {
+    info = error
+  }
+
   return (
     <>
-      {error != null
-        ? error
-        : <p>
-          To start ranking characters, either create a new list with the
-          names of the characters or load a JSON file containing name and players.
-          The JSON may optionally include a list of urls for images.
-        </p>
-      }
-      <Button type='button' onClick={() => { setIsNew(true) }}>New List</Button>
-      <Button type='button'><label htmlFor='load'>Load List</label></Button>
+      {info}
+      <div className='list-selection'>
+        <button type='button' onClick={() => { setIsNew(true) }}>
+          New List
+        </button>
+        <button type='button'><label htmlFor='load'>Load List</label></button>
+      </div>
       <input type='file' id='load' onChange={(e) => { void loadFile(e) }}
-        accept='application/json'
+        accept='application/json' className={classes.load}
       />
     </>
   )
 }
 
-export default ListLoader
+export default LoadList

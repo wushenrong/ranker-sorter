@@ -1,17 +1,16 @@
+@charset "UTF-8";
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
-
+  line-height: 1.5;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(255, 255, 255, 87%);
   background-color: #242424;
-
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
@@ -19,34 +18,113 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
+
+  &:hover {
+    color: #535bf2;
+  }
 }
 
-a:hover {
-  color: #535bf2;
+
+body, #questions {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  text-align: center;
 }
 
 body {
-  margin: 0;
-  display: grid;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  > header {
+    > h1 {
+      font-size: 3.2em;
+      line-height: 1.1;
+    }
+  }
+
+  > main {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
 }
 
-main {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+section {
+  width: 70%;
+  margin: auto;
 }
 
-header {
-  text-align: center;
+/* Accordion from https://codepen.io/raubaca/pen/PZzpVe, MIT License */
+#questions {
+  overflow: hidden;
+
+  .question {
+    width: 70%;
+    overflow: hidden;
+
+    > input {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    .question-label {
+      display: flex;
+      justify-content: space-between;
+      padding: 1em;
+      font-weight: bold;
+      text-align: left;
+      cursor: pointer;
+
+      &::after {
+        width: 1em;
+        height: 1em;
+        content: "\276F";
+        transition: all 0.35s;
+      }
+    }
+
+    .answer {
+      max-height: 0;
+      padding: 0 1em;
+      transition: all 0.35s;
+    }
+
+    > input:checked {
+      + .question-label {
+        &::after {
+          transform: rotate(90deg);
+        }
+      }
+
+      ~ .answer {
+        max-height: 100vh;
+        padding: 1em;
+      }
+    }
+  }
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+button {
+  padding: 0.6em 1.2em;
+  margin: 0.5em;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #1a1a1a;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.25s;
+
+  &:hover {
+    border-color: #646cff;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -57,5 +135,9 @@ h1 {
 
   a:hover {
     color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
   }
 }

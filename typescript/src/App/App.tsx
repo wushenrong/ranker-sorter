@@ -1,6 +1,6 @@
 import { Suspense, lazy, useState } from 'react'
 
-import ListLoader from '../ListLoader'
+import LoadList from '../LoadList'
 import Loading from '../components/Loading'
 
 const Ranker = lazy(async () => await import('../Ranker'))
@@ -14,7 +14,7 @@ function App (): JSX.Element {
   const getResults = (results: any): void => { setResults(results) }
 
   if (players === undefined) {
-    return <ListLoader callback={getPlayers} />
+    return <LoadList callback={getPlayers} />
   }
 
   if (results === undefined) {

@@ -1,13 +1,37 @@
 {
   "name": "ranker-sorter",
+  "description": "Yet another ranker for characters, then sort them using Elo.",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "tsc --noEmit && eslint"
+    "lint": "tsc --noEmit && eslint && stylelint 'src/**/*.css'"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.37.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "postcss-nesting": "^11.2.2",
+    "rollup-plugin-visualizer": "^5.9.0",
+    "stylelint": "^15.4.0",
+    "stylelint-config-recess-order": "^4.0.0",
+    "stylelint-config-standard": "^32.0.0",
+    "stylelint-css-modules": "^1.2.2",
+    "stylelint-use-nesting": "^4.1.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.2.0"
   },
   "dependencies": {
     "js-elo-system": "^1.2.2",
@@ -15,19 +39,5 @@
     "mathjs": "^11.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
-    "@vitejs/plugin-react-swc": "^3.0.0",
-    "eslint": "^8.37.0",
-    "eslint-config-standard-with-typescript": "^34.0.1",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2",
-    "typescript": "^4.9.5",
-    "vite": "^4.2.0"
   }
 }

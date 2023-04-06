@@ -1,0 +1,8 @@
+{
+  "name": "Ranker Sorter",
+  "description": "Yet another ranker for characters, then sort them using Elo.",
+  "repository": {
+    "url": "https://github.com/TwoPizza9621536/RankerSorter",
+    "license": "MIT"
+  }
+}

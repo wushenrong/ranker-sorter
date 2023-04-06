@@ -1,25 +1,77 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ranker Sorter</title>
-  <meta name="description" content="Yet another ranker for characters, then sort them based on Elo." />
-  <script type="module" src="/src/index.tsx"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="
+      script-src 'strict-dynamic' 'unsafe-inline' https:;
+      object-src 'none';
+      base-uri 'none';
+      require-trusted-types-for 'script';" /> -->
+    <title>Ranker Sorter</title>
+    <meta name="description"
+      content="Yet another ranker for characters, then sort them using Elo." />
+    <script type="module" src="/src/index.tsx"></script>
+  </head>
 
-<body>
-  <header>
-    <!-- <a href="#app">Skip to ranker</a> -->
-    <h1>Ranker Sorter</h1>
-    <h2>If you can rank people by using Elo, why not characters.</h2>
-  </header>
-  <main>
-    <p></p>
-    <div id="app"></div>
-  </main>
-  <footer></footer>
-</body>
+  <body>
+    <header>
+      <!-- <a href="#app">Skip to ranker</a> -->
+      <h1>Ranker Sorter</h1>
+    </header>
+    <section>
+      <h2>If you can rate people by using Elo, then why not characters.</h2>
+      <p>
+        This is yet another ranker that I created using the Elo Rating System,
+      </p>
+    </section>
+    <main id="app"></main>
+    <section>
+      <h2>Frequency Asked Questions</h2>
+      <div id="questions">
+        <div class="question">
+          <input type="checkbox" id="question-one">
+          <label for="question-one" class="question-label">
+            What is the Elo Rating System?
+          </label>
+          <div class="answer">
+            The Elo rating system is a method for calculating the relative skill
+            levels of players in zero-sum games such as chess. It is named after
+            its creator Arpad Elo, a Hungarian-American physics professor. ~
+            <a href="https://en.wikipedia.org/wiki/Elo_rating_system"
+              rel="noreferrer noopener nofollow" target="_blank">
+              Wikipedia
+            </a>
+          </div>
+        </div>
+        <div class="question">
+          <input type="checkbox" id="question-two">
+          <label for="question-two" class="question-label">
+            Why use the Elo Rating System?
+          </label>
+          <div class="answer"></div>
+        </div>
+        <div class="question">
+          <input type="checkbox" id="question-three">
+          <label for="question-three" class="question-label">
+            Are the results accurate and should I take those results seriously?
+          </label>
+          <div class="answer"></div>
+        </div>
+        <div class="question">
+          <input type="checkbox" id="question-four">
+          <label for="question-four" class="question-label">
+            Why use this ranker if it is inaccurate and what makes this ranker
+            any different from other rankers and tier lists?
+          </label>
+          <div class="answer"></div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      Hosted on GitHub Pages.
+    </footer>
+  </body>
 
 </html>
