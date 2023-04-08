@@ -1,0 +1,30 @@
+/* SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+@define-mixin button {
+  padding: 0.6em 1.2em;
+  margin: 0.5em;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #1a1a1a;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.25s;
+
+  &:hover {
+    border-color: #646cff;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  @media (prefers-color-scheme: light) {
+    background-color: #f9f9f9;
+  }
+}

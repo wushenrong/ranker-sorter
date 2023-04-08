@@ -11,6 +11,15 @@
   "reportInvalidScopeDisables": true,
   "reportNeedlessDisables": true,
   "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "mixin",
+          "define-mixin"
+        ]
+      }
+    ],
     "color-function-notation": "legacy",
     "color-hex-length": "long",
     "csstools/use-nesting": "always",

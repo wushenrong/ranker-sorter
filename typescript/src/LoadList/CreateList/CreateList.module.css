@@ -1,8 +1,13 @@
+/* SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .new-ranker-form {
   display: flex;
   flex-direction: column;
 
   > div {
-    margin: 5px;
+    margin: 0.3125em;
   }
 }

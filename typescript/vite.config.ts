@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react-swc'
 import { visualizer } from 'rollup-plugin-visualizer'
 
 import autoprefixer from 'autoprefixer'
+import postcssMixins from 'postcss-mixins'
+import postcssSimpleVars from 'postcss-simple-vars'
 import postcssNesting from 'postcss-nesting'
 
 // https://vitejs.dev/config/
@@ -18,8 +20,10 @@ export default defineConfig({
     },
     postcss: {
       plugins: [
-        autoprefixer(),
-        postcssNesting()
+        postcssMixins(),
+        postcssSimpleVars(),
+        postcssNesting(),
+        autoprefixer()
       ]
     }
   }

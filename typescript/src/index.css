@@ -1,4 +1,11 @@
+/* SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 @charset "UTF-8";
+
+@import url("./assets/mixins.css");
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -25,17 +32,17 @@ a {
 }
 
 
-body, #questions {
+body, #faq, #questions {
   display: flex;
   flex-flow: column wrap;
   align-content: center;
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
+  min-width: 400px;
   text-align: center;
 }
 
 body {
+  min-height: 100vh;
+
   > header {
     > h1 {
       font-size: 3.2em;
@@ -44,14 +51,18 @@ body {
   }
 
   > main {
-    max-width: 1280px;
-    margin: 0 auto;
+    max-width: 80rem;
+    margin-inline: auto;
   }
 }
 
 section {
   width: 70%;
-  margin: auto;
+  margin-inline: auto;
+}
+
+footer {
+  margin: 1em;
 }
 
 /* Accordion from https://codepen.io/raubaca/pen/PZzpVe, MIT License */
@@ -106,25 +117,7 @@ section {
 }
 
 button {
-  padding: 0.6em 1.2em;
-  margin: 0.5em;
-  font-family: inherit;
-  font-size: 1em;
-  font-weight: 500;
-  cursor: pointer;
-  background-color: #1a1a1a;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  transition: border-color 0.25s;
-
-  &:hover {
-    border-color: #646cff;
-  }
-
-  &:focus,
-  &:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-  }
+  @mixin button;
 }
 
 @media (prefers-color-scheme: light) {
@@ -135,9 +128,5 @@ button {
 
   a:hover {
     color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
   }
 }

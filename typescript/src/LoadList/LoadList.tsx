@@ -1,11 +1,17 @@
+/*! SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { Suspense, lazy, useState } from 'react'
 import { Draft07 } from 'json-schema-library'
 
 import Loading from '../components/Loading'
 import schema from '../assets/players.json'
-import classes from './LoadList.module.css'
 
-import { type PlayerList } from '.'
+import type { PlayerList } from '../hooks/useEloSystem'
+
+import classes from './LoadList.module.css'
 
 type Callback = { callback: (playerList: PlayerList) => void }
 type InputEvent = React.ChangeEvent<HTMLInputElement>
@@ -75,9 +81,7 @@ function LoadList ({ callback }: Callback): JSX.Element {
     The JSON may optionally include a list of urls for images.
   </p>
 
-  if (error !== undefined) {
-    info = error
-  }
+  if (error !== undefined) info = error
 
   return (
     <>
@@ -86,7 +90,7 @@ function LoadList ({ callback }: Callback): JSX.Element {
         <button type='button' onClick={() => { setIsNew(true) }}>
           New List
         </button>
-        <button type='button'><label htmlFor='load'>Load List</label></button>
+        <label htmlFor='load' className={classes.loadLabel}>Load List</label>
       </div>
       <input type='file' id='load' onChange={(e) => { void loadFile(e) }}
         accept='application/json' className={classes.load}

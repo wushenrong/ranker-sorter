@@ -12,6 +12,7 @@
     "lint": "tsc --noEmit && eslint && stylelint 'src/**/*.css'"
   },
   "devDependencies": {
+    "@types/postcss-mixins": "^9.0.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
@@ -23,7 +24,9 @@
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
+    "postcss-mixins": "^9.0.4",
     "postcss-nesting": "^11.2.2",
+    "postcss-simple-vars": "^7.0.1",
     "rollup-plugin-visualizer": "^5.9.0",
     "stylelint": "^15.4.0",
     "stylelint-config-recess-order": "^4.0.0",
@@ -34,6 +37,9 @@
     "vite": "^4.2.0"
   },
   "dependencies": {
+    "@react-hook/media-query": "^1.1.1",
+    "echarts": "^5.4.2",
+    "echarts-for-react": "^3.0.2",
     "js-elo-system": "^1.2.2",
     "json-schema-library": "^7.4.7",
     "mathjs": "^11.7.0",

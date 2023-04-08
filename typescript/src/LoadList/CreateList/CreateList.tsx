@@ -1,8 +1,13 @@
+/*! SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useRef } from 'react'
 
-import classes from './CreateList.module.css'
+import type { PlayerList } from '../../hooks/useEloSystem'
 
-import { type PlayerList } from '..'
+import classes from './CreateList.module.css'
 
 type CreateListProp = {
   goBack: () => void

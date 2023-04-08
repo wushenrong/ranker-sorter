@@ -1,6 +1,12 @@
+/*! SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useEffect, useState } from 'react'
 import EloSystem, { type MatchRecord } from 'js-elo-system'
-import { type PlayerList } from '../LoadList'
+
+export type PlayerList = { name: string, players: string[], images?: string[] }
 
 type RecordMatch = ({ winner, loser, draw }: MatchRecord) => void
 type EloSystemHook = [EloSystem, (RecordMatch)]

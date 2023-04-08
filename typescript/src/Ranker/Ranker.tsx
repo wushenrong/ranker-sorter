@@ -1,11 +1,17 @@
+/*! SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useEffect, useMemo, useState } from 'react'
 import { combinations } from 'mathjs'
 
 import { useEloSystem } from '../hooks/useEloSystem'
-import classes from './Ranker.module.css'
 
-import { type PlayerList } from '../LoadList'
-import { type RankerResults } from '../Results'
+import type { PlayerList } from '../hooks/useEloSystem'
+import type { RankerResults } from '../Results'
+
+import classes from './Ranker.module.css'
 
 type RankerProps = {
   data: PlayerList

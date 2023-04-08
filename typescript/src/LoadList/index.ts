@@ -1,2 +1,6 @@
+/*! SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 export { default } from './LoadList'
-export type PlayerList = { name: string, players: string[], images?: string[] }
