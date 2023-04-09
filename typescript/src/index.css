@@ -62,7 +62,9 @@ section {
 }
 
 footer {
-  margin: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.5em;
 }
 
 /* Accordion from https://codepen.io/raubaca/pen/PZzpVe, MIT License */

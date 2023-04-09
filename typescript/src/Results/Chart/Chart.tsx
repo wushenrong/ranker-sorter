@@ -54,7 +54,7 @@ const Chart = forwardRef<EChartsReactCore, ChartProps>(
 
     const dataset = [
       ['Player', 'Elo'],
-      ...results.players.map(player => [player.player!, player.elo])
+      ...results.players.map(player => [player.player as string, player.elo])
     ]
 
     const option: EChartOption = {

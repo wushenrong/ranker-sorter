@@ -6,7 +6,7 @@
 import { Suspense, lazy, useState } from 'react'
 
 import LoadList from '../LoadList'
-import Loading from '../components/Loading'
+import Loading from '../Loading'
 
 import type { PlayerList } from '../hooks/useEloSystem'
 import type { RankerResults } from '../Results'

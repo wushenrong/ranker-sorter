@@ -6,7 +6,7 @@
 import { Suspense, lazy, useState } from 'react'
 import { Draft07 } from 'json-schema-library'
 
-import Loading from '../components/Loading'
+import Loading from '../Loading'
 import schema from '../assets/players.json'
 
 import type { PlayerList } from '../hooks/useEloSystem'
@@ -23,7 +23,12 @@ function LoadList ({ callback }: Callback): JSX.Element {
   const [isNew, setIsNew] = useState(false)
 
   const loadFile = async (e: InputEvent): Promise<void> => {
-    const file = e.target.files![0]
+    if (e.target.files == null) {
+      setError(<p>Please select a JSON file.</p>)
+      return
+    }
+
+    const file = e.target.files[0]
     const validator = new Draft07(schema)
 
     if (file.type !== 'application/json') {

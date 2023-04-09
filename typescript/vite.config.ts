@@ -6,7 +6,6 @@ import { optimizeCssModules } from 'vite-plugin-optimize-css-modules'
 
 import autoprefixer from 'autoprefixer'
 import postcssMixins from 'postcss-mixins'
-import postcssSimpleVars from 'postcss-simple-vars'
 import postcssNesting from 'postcss-nesting'
 
 // https://vitejs.dev/config/
@@ -23,7 +22,6 @@ export default defineConfig({
     postcss: {
       plugins: [
         postcssMixins(),
-        postcssSimpleVars(),
         postcssNesting(),
         autoprefixer()
       ]

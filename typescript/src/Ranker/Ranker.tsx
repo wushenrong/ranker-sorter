@@ -26,16 +26,18 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
   const [playerBIndex, setPlayerBIndex] = useState(1)
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0)
   const isLightTheme = useMediaQuery('(prefers-color-scheme: light)')
+  const combination = combinations(data.players.length, 2)
 
   useEffect(() => {
-    if (playerAIndex >= data.players.length - 1) {
+    if (currentMatchIndex === combination) {
+      console.log('if block ran')
       const results = {
         name: data.name,
         players: eloSystem.get_overall_list()
       }
       callback(results)
     }
-  }, [playerAIndex])
+  }, [currentMatchIndex])
 
   const rankPlayers = (playerAWon: boolean, isDraw: boolean): void => {
     let winner: string
@@ -63,7 +65,6 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
   const onClick = (playerAWon: boolean, isDraw: boolean) =>
     () => { rankPlayers(playerAWon, isDraw) }
 
-  const combination = combinations(data.players.length, 2)
   const percentProgress = currentMatchIndex / combination
   const progress = Math.floor(percentProgress * 100)
 

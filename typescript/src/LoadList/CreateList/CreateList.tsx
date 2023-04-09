@@ -20,9 +20,25 @@ function CreateList ({ goBack, callback }: CreateListProp): JSX.Element {
 
   const createNewRanker = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
+
+    const inputList =
+      (characterList.current as HTMLTextAreaElement).value.split('\n')
+
+    const noDuplicatesList: string[] = []
+
+    for (const character of inputList) {
+      let isDuplicate = false
+
+      for (const existingCharacter of noDuplicatesList) {
+        if (character === existingCharacter) isDuplicate = true
+      }
+
+      if (!isDuplicate) noDuplicatesList.push(character)
+    }
+
     const data = {
-      name: listName.current!.value,
-      players: characterList.current!.value.split('\n')
+      name: (listName.current as HTMLInputElement).value,
+      players: noDuplicatesList
     }
     callback(data)
   }
@@ -40,10 +56,15 @@ function CreateList ({ goBack, callback }: CreateListProp): JSX.Element {
       </div>
 
       <div>
-        <label htmlFor='characters'>Characters (Separated by newlines)</label>
+        <label htmlFor='characters'>
+          Characters
+          <br />
+          (Separated by newlines, duplicate characters are removed)
+        </label>
         <br />
         <textarea
           id='characters'
+          className={styles.characters}
           ref={characterList}
           rows={5}
           cols={30}

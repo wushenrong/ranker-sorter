@@ -6,8 +6,8 @@
 .new-ranker-form {
   display: flex;
   flex-direction: column;
+}
 
-  > div {
-    margin: 0.3125em;
-  }
+.characters {
+  margin: 0.5em;
 }

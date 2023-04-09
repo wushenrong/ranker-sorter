@@ -6,7 +6,7 @@
 import { Suspense, lazy, useRef } from 'react'
 import type EChartsReactCore from 'echarts-for-react/lib/core'
 
-import Loading from '../components/Loading'
+import Loading from '../Loading'
 import type { RankerResults } from '.'
 
 type ResultProps = {
