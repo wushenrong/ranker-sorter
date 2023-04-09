@@ -11,8 +11,8 @@ import type { RankerResults } from '.'
 
 type ResultProps = {
   results: RankerResults
-  resetResults: (results: undefined) => void
-  resetData: (playerList: undefined) => void
+  resetResults: (results: null) => void
+  resetData: (playerList: null) => void
 }
 
 const Chart = lazy(async () => await import('./Chart'))
@@ -21,8 +21,8 @@ function Results ({ results, resetData, resetResults }: ResultProps): JSX.Elemen
   const chartRef = useRef<EChartsReactCore>(null)
 
   const newRanker = (): void => {
-    resetData(undefined)
-    resetResults(undefined)
+    resetData(null)
+    resetResults(null)
   }
 
   const saveFile = (href: string, filename = 'results.json'): void => {
@@ -51,7 +51,7 @@ function Results ({ results, resetData, resetResults }: ResultProps): JSX.Elemen
     const chartInstance = chartRef.current?.getEchartsInstance()
     const chartHref = chartInstance?.getDataURL()
 
-    if (chartHref === undefined) return
+    if (chartHref == null) return
 
     saveFile(chartHref, 'chart.svg')
   }

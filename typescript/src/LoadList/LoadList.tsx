@@ -56,8 +56,7 @@ function LoadList ({ callback }: Callback): JSX.Element {
       return
     }
 
-    if (data.images !== undefined &&
-      data.players.length !== data.images.length) {
+    if (data.images != null && data.players.length !== data.images.length) {
       setError(
         <p>
           The number of images you have provided does not match up with the
@@ -88,7 +87,7 @@ function LoadList ({ callback }: Callback): JSX.Element {
     </p>
   )
 
-  if (error !== undefined) info = error
+  if (error != null) info = error
 
   return (
     <>

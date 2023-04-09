@@ -114,7 +114,7 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
 
       <div className={styles.selections}>
         <button type='button' onClick={onClick(true, false)}>
-          {data.images !== undefined
+          {data.images != null
             ? <img
               src={data.images[playerAIndex]}
               alt={data.players[playerAIndex]}
@@ -126,7 +126,7 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
           Both are equal
         </button>
         <button type='button' onClick={onClick(false, false)}>
-          {data.images !== undefined
+          {data.images != null
             ? <img
               src={data.images[playerBIndex]}
               alt={data.players[playerBIndex]}

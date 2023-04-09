@@ -31,17 +31,10 @@ a {
   }
 }
 
-
-body, #faq, #questions {
-  display: flex;
-  flex-flow: column wrap;
-  align-content: center;
-  min-width: 400px;
-  text-align: center;
-}
-
 body {
+  min-width: 400px;
   min-height: 100vh;
+  text-align: center;
 
   > header {
     > h1 {
@@ -57,65 +50,31 @@ body {
 }
 
 section {
-  width: 70%;
+  width: 80%;
   margin-inline: auto;
+}
+
+#faq {
+  text-align: left;
+
+  > details {
+    width: 70%;
+    margin-inline: auto;
+
+    > summary {
+      cursor: pointer;
+    }
+
+    > p {
+      margin: 0.5em 0;
+    }
+  }
 }
 
 footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 0.5em;
-}
-
-/* Accordion from https://codepen.io/raubaca/pen/PZzpVe, MIT License */
-#questions {
-  overflow: hidden;
-
-  .question {
-    width: 70%;
-    overflow: hidden;
-
-    > input {
-      position: absolute;
-      z-index: -1;
-      opacity: 0;
-    }
-
-    .question-label {
-      display: flex;
-      justify-content: space-between;
-      padding: 1em;
-      font-weight: bold;
-      text-align: left;
-      cursor: pointer;
-
-      &::after {
-        width: 1em;
-        height: 1em;
-        content: "\276F";
-        transition: all 0.35s;
-      }
-    }
-
-    .answer {
-      max-height: 0;
-      padding: 0 1em;
-      transition: all 0.35s;
-    }
-
-    > input:checked {
-      + .question-label {
-        &::after {
-          transform: rotate(90deg);
-        }
-      }
-
-      ~ .answer {
-        max-height: 100vh;
-        padding: 1em;
-      }
-    }
-  }
 }
 
 button {

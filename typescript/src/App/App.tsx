@@ -15,19 +15,19 @@ const Ranker = lazy(async () => await import('../Ranker'))
 const Results = lazy(async () => await import('../Results'))
 
 function App (): JSX.Element {
-  const [players, setPlayer] = useState<PlayerList | undefined>(undefined)
-  const [results, setResults] = useState<RankerResults | undefined>(undefined)
+  const [players, setPlayer] = useState<PlayerList | null>(null)
+  const [results, setResults] = useState<RankerResults | null>(null)
 
-  const getPlayers = (playerList: PlayerList | undefined): void => {
+  const getPlayers = (playerList: PlayerList | null): void => {
     setPlayer(playerList)
   }
-  const getResults = (results: RankerResults | undefined): void => {
+  const getResults = (results: RankerResults | null): void => {
     setResults(results)
   }
 
-  if (players === undefined) return <LoadList callback={getPlayers} />
+  if (players == null) return <LoadList callback={getPlayers} />
 
-  if (results === undefined) {
+  if (results == null) {
     return (
       <Suspense fallback={<Loading />}>
         <Ranker data={players} callback={getResults} />
