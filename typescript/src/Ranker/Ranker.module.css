@@ -3,10 +3,15 @@
  * SPDX-License-Identifier: MIT
  */
 
+.progress-bar-label {
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+
 .selections {
   display: flex;
   justify-content: center;
-  margin: 1em 1em 0;
+  margin-top: 0.5em;
 
   > button {
     width: 8em;

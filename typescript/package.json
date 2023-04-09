@@ -9,7 +9,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "tsc --noEmit && eslint && stylelint 'src/**/*.css'"
+    "lint": "tsc && eslint src/**/*.{ts,tsx} && stylelint src/**/*.css",
+    "format": "eslint --fix src/**/*.{ts,tsx} && stylelint --fix src/**/*.css"
   },
   "devDependencies": {
     "@types/postcss-mixins": "^9.0.0",
@@ -34,9 +35,11 @@
     "stylelint-css-modules": "^1.2.2",
     "stylelint-use-nesting": "^4.1.0",
     "typescript": "^4.9.5",
-    "vite": "^4.2.0"
+    "vite": "^4.2.0",
+    "vite-plugin-optimize-css-modules": "^1.0.4"
   },
   "dependencies": {
+    "@ramonak/react-progress-bar": "^5.0.3",
     "@react-hook/media-query": "^1.1.1",
     "echarts": "^5.4.2",
     "echarts-for-react": "^3.0.2",

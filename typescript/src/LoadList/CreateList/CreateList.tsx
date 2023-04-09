@@ -7,7 +7,7 @@ import { useRef } from 'react'
 
 import type { PlayerList } from '../../hooks/useEloSystem'
 
-import classes from './CreateList.module.css'
+import styles from './CreateList.module.css'
 
 type CreateListProp = {
   goBack: () => void
@@ -28,20 +28,29 @@ function CreateList ({ goBack, callback }: CreateListProp): JSX.Element {
   }
 
   return (
-    <form id='new-ranker' onSubmit={createNewRanker}
-      className={classes.newRankerForm}>
+    <form
+      id='new-ranker'
+      onSubmit={createNewRanker}
+      className={styles.newRankerForm}
+    >
       <div>
         <label htmlFor='name'>Name Of The List</label>
         <br />
         <input id='name' ref={listName} required />
       </div>
+
       <div>
         <label htmlFor='characters'>Characters (Separated by newlines)</label>
         <br />
-        <textarea id='characters' ref={characterList}
-          rows={5} cols={30} required
+        <textarea
+          id='characters'
+          ref={characterList}
+          rows={5}
+          cols={30}
+          required
         />
       </div>
+
       <div className='selections'>
         <button type='button' onClick={goBack}>Back</button>
         <button type='submit'>Create Ranker</button>

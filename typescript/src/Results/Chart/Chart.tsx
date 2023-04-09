@@ -22,17 +22,20 @@ import type {
   BarSeriesOption,
   DatasetComponentOption,
   GridComponentOption,
+  TitleComponentOption,
   TooltipComponentOption
 } from 'echarts'
 
-import classes from './Chart.module.css'
 import type { RankerResults } from '..'
+
+import styles from './Chart.module.css'
 
 type ChartProps = { results: RankerResults }
 type EChartOption = echarts.ComposeOption<(
   | BarSeriesOption
   | DatasetComponentOption
   | GridComponentOption
+  | TitleComponentOption
   | TooltipComponentOption
 )>
 
@@ -80,8 +83,10 @@ const Chart = forwardRef<EChartsReactCore, ChartProps>(
     if (isLightTheme) theme = 'light'
 
     return (
-      <ReactEChartsCore echarts={echarts} option={option} theme={theme}
-        className={classes.chart} ref={ref} />
+      <ReactEChartsCore
+        echarts={echarts} option={option} theme={theme}
+        className={styles.chart} ref={ref}
+      />
     )
   })
 

@@ -3,7 +3,9 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { useEffect, useMemo, useState } from 'react'
+import ProgressBar from '@ramonak/react-progress-bar'
+import { useEffect, useState } from 'react'
+import { useMediaQuery } from '@react-hook/media-query'
 import { combinations } from 'mathjs'
 
 import { useEloSystem } from '../hooks/useEloSystem'
@@ -11,7 +13,7 @@ import { useEloSystem } from '../hooks/useEloSystem'
 import type { PlayerList } from '../hooks/useEloSystem'
 import type { RankerResults } from '../Results'
 
-import classes from './Ranker.module.css'
+import styles from './Ranker.module.css'
 
 type RankerProps = {
   data: PlayerList
@@ -22,10 +24,8 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
   const [eloSystem, calculateMatch] = useEloSystem(data)
   const [playerAIndex, setPlayerAIndex] = useState(0)
   const [playerBIndex, setPlayerBIndex] = useState(1)
-  const comb = useMemo(
-    () => combinations(data.players.length, 2),
-    [data.players]
-  )
+  const [currentMatchIndex, setCurrentMatchIndex] = useState(0)
+  const isLightTheme = useMediaQuery('(prefers-color-scheme: light)')
 
   useEffect(() => {
     if (playerAIndex >= data.players.length - 1) {
@@ -35,7 +35,7 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
       }
       callback(results)
     }
-  }, [playerBIndex])
+  }, [playerAIndex])
 
   const rankPlayers = (playerAWon: boolean, isDraw: boolean): void => {
     let winner: string
@@ -57,34 +57,69 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
     calculateMatch({ winner, loser, draw: isDraw })
 
     setPlayerBIndex(currentPlayerBIndex => currentPlayerBIndex + 1)
+    setCurrentMatchIndex(currentProgress => currentProgress + 1)
   }
 
   const onClick = (playerAWon: boolean, isDraw: boolean) =>
     () => { rankPlayers(playerAWon, isDraw) }
 
-  const minutes = comb / 6
+  const combination = combinations(data.players.length, 2)
+  const percentProgress = currentMatchIndex / combination
+  const progress = Math.floor(percentProgress * 100)
+
+  const estimateChoiceTime = 12
+  const minutes = combination / estimateChoiceTime
   const seconds = Math.floor(minutes % 1 * 60)
+
+  let estimateCompletionTime = <>
+    {Math.floor(minutes)} minutes and {seconds} seconds
+  </>
+
+  if (seconds <= 0) {
+    estimateCompletionTime = <>{Math.floor(minutes)} minutes</>
+  } else if (minutes < 1) {
+    estimateCompletionTime = <>{seconds} seconds</>
+  }
+
+  let progressBarColor = 'rgba(255, 255, 255, 87%)'
+  let barColor = '#1a1a1a'
+  let labelColor = '#242424'
+
+  if (isLightTheme) {
+    progressBarColor = '#213547'
+    barColor = '#f9f9f9'
+    labelColor = '#fff'
+  }
 
   return (
     <>
       <p>
-        There are {comb} combinations of 2 characters
+        There are {combination} combinations of 2 characters
         for {data.players.length} characters.
         <br />
-        This will take you about {Math.floor(minutes)} minutes
-        {seconds > 0 ? <> and {seconds} seconds</> : <></>} if each choice takes
-        about 10 seconds.
+        This will take you about {estimateCompletionTime} if each choice takes
+        about {60 / estimateChoiceTime} seconds.
       </p>
-      <div className={classes.selections}>
+
+      <p className={styles.progressBarLabel}>Ranking Completion</p>
+      <ProgressBar
+        completed={progress}
+        customLabel={`${progress}%`}
+        height='1.5em'
+        baseBgColor={barColor}
+        bgColor={progressBarColor}
+        labelColor={labelColor}
+      />
+
+      <div className={styles.selections}>
         <button type='button' onClick={onClick(true, false)}>
           {data.images !== undefined
             ? <img
               src={data.images[playerAIndex]}
-              referrerPolicy='no-referrer'
               alt={data.players[playerAIndex]}
+              referrerPolicy='no-referrer'
             />
-            : data.players[playerAIndex]
-          }
+            : data.players[playerAIndex]}
         </button>
         <button type='button' onClick={onClick(false, true)}>
           Both are equal
@@ -93,11 +128,10 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
           {data.images !== undefined
             ? <img
               src={data.images[playerBIndex]}
-              referrerPolicy='no-referrer'
               alt={data.players[playerBIndex]}
+              referrerPolicy='no-referrer'
             />
-            : data.players[playerBIndex]
-          }
+            : data.players[playerBIndex]}
         </button>
       </div>
     </>

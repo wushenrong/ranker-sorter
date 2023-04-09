@@ -4,15 +4,20 @@
  */
 
 .chart {
-  width: 31.25em;
-  height: 250px !important;
+  width: 80em;
+  height: 600px !important;
 
-  @media (width > 800px) {
-    width: 60em;
+  @media (1000px < width < 1200px) {
+    width: 65em;
+    height: 500px !important;
+  }
+
+  @media (700px < width < 1000px) {
+    width: 50em;
     height: 400px !important;
   }
 
-  @media (800px > width > 600px) {
+  @media (width < 700px) {
     width: 40em;
     height: 300px !important;
   }

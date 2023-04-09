@@ -11,7 +11,7 @@ import schema from '../assets/players.json'
 
 import type { PlayerList } from '../hooks/useEloSystem'
 
-import classes from './LoadList.module.css'
+import styles from './LoadList.module.css'
 
 type Callback = { callback: (playerList: PlayerList) => void }
 type InputEvent = React.ChangeEvent<HTMLInputElement>
@@ -73,13 +73,15 @@ function LoadList ({ callback }: Callback): JSX.Element {
     )
   }
 
-  let info = <p>
-    To start ranking characters, either create a new list with the
-    names of the characters or load a JSON file containing name and
-    players.
-    <br />
-    The JSON may optionally include a list of urls for images.
-  </p>
+  let info = (
+    <p>
+      To start ranking characters, either create a new list with the
+      names of the characters or load a JSON file containing name and
+      players.
+      <br />
+      The JSON may optionally include a list of urls for images.
+    </p>
+  )
 
   if (error !== undefined) info = error
 
@@ -90,10 +92,11 @@ function LoadList ({ callback }: Callback): JSX.Element {
         <button type='button' onClick={() => { setIsNew(true) }}>
           New List
         </button>
-        <label htmlFor='load' className={classes.loadLabel}>Load List</label>
+        <label htmlFor='load' className={styles.loadLabel}>Load List</label>
       </div>
-      <input type='file' id='load' onChange={(e) => { void loadFile(e) }}
-        accept='application/json' className={classes.load}
+      <input
+        type='file' id='load' onChange={(e) => { void loadFile(e) }}
+        accept='application/json' className={styles.load}
       />
     </>
   )
