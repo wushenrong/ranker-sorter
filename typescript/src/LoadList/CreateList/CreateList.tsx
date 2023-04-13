@@ -48,6 +48,7 @@ function CreateList ({ goBack, callback }: CreateListProp): JSX.Element {
       id='new-ranker'
       onSubmit={createNewRanker}
       className={styles.newRankerForm}
+      autoComplete='off'
     >
       <div>
         <label htmlFor='name'>Name Of The List</label>
