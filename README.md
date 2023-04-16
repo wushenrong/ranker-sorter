@@ -15,14 +15,16 @@ file with this data structure:
     "character 2",
     "character 3",
     "character n/etc"
+  ],
+  "images": [
+    "Optional",
+    "Must be the same length as players",
+    "Must be in the same order as the players",
+    "Must be an url pointing to an image"
   ]
 }
 ```
 
-### Offline
+## License
 
-For an offline usage, install Python and [pdm][1]. Clone the repository and
-change into the directory. Then run `pdm sync` to install dependcies. Run
-`pdm run ranker_sorter.py`.
-
-[1]: https://pdm.fming.dev/latest/
+Ranker Sorter is licensed under the MIT License.
