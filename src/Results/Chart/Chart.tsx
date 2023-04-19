@@ -76,6 +76,9 @@ const Chart = forwardRef<EChartsReactCore, ChartProps>(
       ],
       tooltip: {
         trigger: 'item'
+      },
+      aria: {
+        show: true
       }
     }
 

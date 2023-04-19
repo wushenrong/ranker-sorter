@@ -68,6 +68,7 @@ function LoadList ({ callback }: Callback): JSX.Element {
   }
 
   const goBack = (): void => { setIsNew(false) }
+  const onChange = (e: InputEvent): void => { void loadFile(e) }
 
   if (isNew) {
     return (
@@ -99,8 +100,11 @@ function LoadList ({ callback }: Callback): JSX.Element {
         <label htmlFor='load' className={styles.loadLabel}>Load List</label>
       </div>
       <input
-        type='file' id='load' onChange={(e) => { void loadFile(e) }}
-        accept='application/json' className={styles.load}
+        id='load'
+        type='file'
+        onChange={onChange}
+        accept='application/json'
+        className={styles.load}
       />
     </>
   )

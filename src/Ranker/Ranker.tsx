@@ -30,7 +30,6 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
 
   useEffect(() => {
     if (currentMatchIndex === combination) {
-      console.log('if block ran')
       const results = {
         name: data.name,
         players: eloSystem.get_overall_list()
@@ -62,8 +61,9 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
     setCurrentMatchIndex(currentProgress => currentProgress + 1)
   }
 
-  const onClick = (playerAWon: boolean, isDraw: boolean) =>
-    () => { rankPlayers(playerAWon, isDraw) }
+  function onClick (playerAWon: boolean, isDraw: boolean) {
+    return () => { rankPlayers(playerAWon, isDraw) }
+  }
 
   const percentProgress = currentMatchIndex / combination
   const progress = Math.floor(percentProgress * 100)
@@ -114,25 +114,29 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
 
       <div className={styles.selections}>
         <button type='button' onClick={onClick(true, false)}>
-          {data.images != null
-            ? <img
-              src={data.images[playerAIndex]}
-              alt={data.players[playerAIndex]}
-              referrerPolicy='no-referrer'
-            />
-            : data.players[playerAIndex]}
+          {
+            data.images != null
+              ? <img
+                src={data.images[playerAIndex]}
+                alt={data.players[playerAIndex]}
+                referrerPolicy='no-referrer'
+              />
+              : data.players[playerAIndex]
+          }
         </button>
         <button type='button' onClick={onClick(false, true)}>
           Both are equal
         </button>
         <button type='button' onClick={onClick(false, false)}>
-          {data.images != null
-            ? <img
-              src={data.images[playerBIndex]}
-              alt={data.players[playerBIndex]}
-              referrerPolicy='no-referrer'
-            />
-            : data.players[playerBIndex]}
+          {
+            data.images != null
+              ? <img
+                src={data.images[playerBIndex]}
+                alt={data.players[playerBIndex]}
+                referrerPolicy='no-referrer'
+              />
+              : data.players[playerBIndex]
+          }
         </button>
       </div>
     </>

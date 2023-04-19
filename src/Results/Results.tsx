@@ -20,7 +20,7 @@ const Chart = lazy(async () => await import('./Chart'))
 function Results ({ results, resetData, resetResults }: ResultProps): JSX.Element {
   const chartRef = useRef<EChartsReactCore>(null)
 
-  const newRanker = (): void => {
+  function newRanker (): void {
     resetData(null)
     resetResults(null)
   }
@@ -40,20 +40,24 @@ function Results ({ results, resetData, resetResults }: ResultProps): JSX.Elemen
     a.remove()
   }
 
-  const onSave = (data: any) => () => {
-    const blob = new Blob([data], { type: 'octet-stream' })
-    const href = URL.createObjectURL(blob)
-    saveFile(href)
-    URL.revokeObjectURL(href)
+  function onSave (data: any) {
+    return () => {
+      const blob = new Blob([data], { type: 'octet-stream' })
+      const href = URL.createObjectURL(blob)
+      saveFile(href)
+      URL.revokeObjectURL(href)
+    }
   }
 
-  const saveChart = (): void => {
-    const chartInstance = chartRef.current?.getEchartsInstance()
-    const chartHref = chartInstance?.getDataURL()
+  function saveChart () {
+    return () => {
+      const chartInstance = chartRef.current?.getEchartsInstance()
+      const chartHref = chartInstance?.getDataURL()
 
-    if (chartHref == null) return
+      if (chartHref == null) return
 
-    saveFile(chartHref, 'chart.svg')
+      saveFile(chartHref, 'chart.svg')
+    }
   }
 
   return (
@@ -61,7 +65,7 @@ function Results ({ results, resetData, resetResults }: ResultProps): JSX.Elemen
       <Suspense fallback={<Loading />}>
         <Chart results={results} ref={chartRef} />
       </Suspense>
-      <button type='button' onClick={() => { newRanker() }}>New Ranker</button>
+      <button type='button' onClick={newRanker}>New Ranker</button>
       <button type='button' onClick={onSave(results)}>Save Results</button>
       <button type='button' onClick={() => { saveChart() }}>Save Chart</button>
     </>

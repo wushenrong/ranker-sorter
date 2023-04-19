@@ -16,7 +16,7 @@ export function useEloSystem (data: PlayerList): EloSystemHook {
 
   useEffect(() => {
     data.players.forEach(player => { eloSystem.add_player(player) })
-    setEloSystem(eloSystem)
+    setEloSystem(() => eloSystem)
   }, [])
 
   function calculateMatch ({ winner, loser, draw }: MatchRecord): void {
