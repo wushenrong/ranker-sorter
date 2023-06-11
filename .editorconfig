@@ -8,5 +8,5 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{ts,tsx,html,css,hintrc,json}]
+[*.{ts,tsx,html,css,hintrc,json,yaml,yml}]
 indent_size = 2
