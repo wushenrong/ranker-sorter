@@ -19,7 +19,6 @@ repos:
     rev: v8.42.0
     hooks:
       - id: eslint
-        args: ["src"]
         files: \.[jt]sx?$
         types: [file]
         additional_dependencies:
