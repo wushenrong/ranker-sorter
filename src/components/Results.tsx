@@ -6,8 +6,10 @@
 import { Suspense, lazy, useRef } from 'react'
 import type EChartsReactCore from 'echarts-for-react/lib/core'
 
-import Loading from '../Loading'
-import type { RankerResults } from '.'
+import type { OverallStatistics } from 'js-elo-system'
+
+import Loading from './loading'
+export type RankerResults = { name: string, players: OverallStatistics }
 
 type ResultProps = {
   results: RankerResults
@@ -15,12 +17,12 @@ type ResultProps = {
   resetData: (playerList: null) => void
 }
 
-const Chart = lazy(async () => await import('./Chart'))
+const Chart = lazy(async () => await import('./chart'))
 
-function Results ({ results, resetData, resetResults }: ResultProps): JSX.Element {
+export default function Results ({ results, resetData, resetResults }: ResultProps): JSX.Element {
   const chartRef = useRef<EChartsReactCore>(null)
 
-  function newRanker (): void {
+  const newRanker = (): void => {
     resetData(null)
     resetResults(null)
   }
@@ -40,16 +42,16 @@ function Results ({ results, resetData, resetResults }: ResultProps): JSX.Elemen
     a.remove()
   }
 
-  function onSave (data: any) {
+  function onSave (data: unknown) {
     return () => {
-      const blob = new Blob([data], { type: 'octet-stream' })
+      const blob = new Blob([data as BlobPart], { type: 'octet-stream' })
       const href = URL.createObjectURL(blob)
       saveFile(href)
       URL.revokeObjectURL(href)
     }
   }
 
-  function saveChart () {
+  const saveChart = () => {
     return () => {
       const chartInstance = chartRef.current?.getEchartsInstance()
       const chartHref = chartInstance?.getDataURL()
@@ -67,9 +69,7 @@ function Results ({ results, resetData, resetResults }: ResultProps): JSX.Elemen
       </Suspense>
       <button type='button' onClick={newRanker}>New Ranker</button>
       <button type='button' onClick={onSave(results)}>Save Results</button>
-      <button type='button' onClick={() => { saveChart() }}>Save Chart</button>
+      <button type='button' onClick={saveChart()}>Save Chart</button>
     </>
   )
 }
-
-export default Results

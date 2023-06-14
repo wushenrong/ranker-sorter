@@ -5,16 +5,16 @@
 
 import { useRef } from 'react'
 
-import type { PlayerList } from '../../hooks/useEloSystem'
+import type { PlayerList } from '../hooks/useEloSystem'
 
-import styles from './CreateList.module.css'
+import styles from './create-list.module.css'
 
 type CreateListProp = {
   goBack: () => void
   callback: (playerList: PlayerList) => void
 }
 
-function CreateList ({ goBack, callback }: CreateListProp): JSX.Element {
+export default function CreateList ({ goBack, callback }: CreateListProp): JSX.Element {
   const listName = useRef<HTMLInputElement>(null)
   const characterList = useRef<HTMLTextAreaElement>(null)
 
@@ -80,5 +80,3 @@ function CreateList ({ goBack, callback }: CreateListProp): JSX.Element {
     </form>
   )
 }
-
-export default CreateList

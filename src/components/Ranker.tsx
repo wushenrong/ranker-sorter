@@ -8,19 +8,19 @@ import { useEffect, useState } from 'react'
 import { useMediaQuery } from '@react-hook/media-query'
 import { combinations } from 'mathjs'
 
-import { useEloSystem } from '../hooks/useEloSystem'
+import useEloSystem from '../hooks/useEloSystem'
 
 import type { PlayerList } from '../hooks/useEloSystem'
-import type { RankerResults } from '../Results'
+import type { RankerResults } from './results'
 
-import styles from './Ranker.module.css'
+import styles from './ranker.module.css'
 
 type RankerProps = {
   data: PlayerList
   callback: ({ name, players }: RankerResults) => void
 }
 
-function Ranker ({ data, callback }: RankerProps): JSX.Element {
+export default function Ranker ({ data, callback }: RankerProps): JSX.Element {
   const [eloSystem, calculateMatch] = useEloSystem(data)
   const [playerAIndex, setPlayerAIndex] = useState(0)
   const [playerBIndex, setPlayerBIndex] = useState(1)
@@ -36,7 +36,7 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
       }
       callback(results)
     }
-  }, [currentMatchIndex])
+  })
 
   const rankPlayers = (playerAWon: boolean, isDraw: boolean): void => {
     let winner: string
@@ -61,7 +61,7 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
     setCurrentMatchIndex(currentProgress => currentProgress + 1)
   }
 
-  function onClick (playerAWon: boolean, isDraw: boolean) {
+  const onClick = (playerAWon: boolean, isDraw: boolean) => {
     return () => { rankPlayers(playerAWon, isDraw) }
   }
 
@@ -72,9 +72,9 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
   const minutes = combination / estimateChoiceTime
   const seconds = Math.floor(minutes % 1 * 60)
 
-  let estimateCompletionTime = <>
-    {Math.floor(minutes)} minutes and {seconds} seconds
-  </>
+  let estimateCompletionTime = (
+    <>{Math.floor(minutes)} minutes and {seconds} seconds</>
+  )
 
   if (seconds <= 0) {
     estimateCompletionTime = <>{Math.floor(minutes)} minutes</>
@@ -116,11 +116,11 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
         <button type='button' onClick={onClick(true, false)}>
           {
             data.images != null
-              ? <img
-                src={data.images[playerAIndex]}
-                alt={data.players[playerAIndex]}
-                referrerPolicy='no-referrer'
-              />
+              ? (<img
+                  src={data.images[playerAIndex]}
+                  alt={data.players[playerAIndex]}
+                  referrerPolicy='no-referrer'
+                />)
               : data.players[playerAIndex]
           }
         </button>
@@ -130,11 +130,11 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
         <button type='button' onClick={onClick(false, false)}>
           {
             data.images != null
-              ? <img
-                src={data.images[playerBIndex]}
-                alt={data.players[playerBIndex]}
-                referrerPolicy='no-referrer'
-              />
+              ? (<img
+                  src={data.images[playerBIndex]}
+                  alt={data.players[playerBIndex]}
+                  referrerPolicy='no-referrer'
+                />)
               : data.players[playerBIndex]
           }
         </button>
@@ -142,5 +142,3 @@ function Ranker ({ data, callback }: RankerProps): JSX.Element {
     </>
   )
 }
-
-export default Ranker

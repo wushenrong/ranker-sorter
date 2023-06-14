@@ -11,8 +11,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.5;
-  color-scheme: light dark;
   color: rgba(255, 255, 255, 87%);
+  color-scheme: light dark;
   background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizelegibility;
@@ -36,11 +36,9 @@ body {
   min-height: 100vh;
   text-align: center;
 
-  > header {
-    > h1 {
-      font-size: 3.2em;
-      line-height: 1.1;
-    }
+  > h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
   }
 
   > main {
@@ -52,6 +50,11 @@ body {
 section {
   width: 80%;
   margin-inline: auto;
+
+  > p {
+    width: 90%;
+    margin: 1em auto;
+  }
 }
 
 #faq {
@@ -66,7 +69,8 @@ section {
     }
 
     > p {
-      margin: 0.5em 0;
+      width: 90%;
+      margin: 0.5em auto;
     }
   }
 }

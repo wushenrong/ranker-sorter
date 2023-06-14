@@ -6,19 +6,19 @@
 import { Suspense, lazy, useState } from 'react'
 import { Draft07 } from 'json-schema-library'
 
-import Loading from '../Loading'
+import Loading from './loading'
 import schema from '../assets/players.json'
 
 import type { PlayerList } from '../hooks/useEloSystem'
 
-import styles from './LoadList.module.css'
+import styles from './load-list.module.css'
 
 type Callback = { callback: (playerList: PlayerList) => void }
 type InputEvent = React.ChangeEvent<HTMLInputElement>
 
-const CreateList = lazy(async () => await import('./CreateList'))
+const CreateList = lazy(async () => await import('./create-list'))
 
-function LoadList ({ callback }: Callback): JSX.Element {
+export default function LoadList ({ callback }: Callback): JSX.Element {
   const [error, setError] = useState<JSX.Element>()
   const [isNew, setIsNew] = useState(false)
 
@@ -109,5 +109,3 @@ function LoadList ({ callback }: Callback): JSX.Element {
     </>
   )
 }
-
-export default LoadList
