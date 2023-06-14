@@ -5,16 +5,16 @@
 
 import { Suspense, lazy, useState } from 'react'
 
-import LoadList from '../LoadList'
-import Loading from '../Loading'
+import LoadList from './components/load-list'
+import Loading from './components/loading'
 
-import type { PlayerList } from '../hooks/useEloSystem'
-import type { RankerResults } from '../Results'
+import type { PlayerList } from './hooks/useEloSystem'
+import type { RankerResults } from './components/results'
 
-const Ranker = lazy(async () => await import('../Ranker'))
-const Results = lazy(async () => await import('../Results'))
+const Ranker = lazy(async () => await import('./components/ranker'))
+const Results = lazy(async () => await import('./components/results'))
 
-function App (): JSX.Element {
+export default function App (): JSX.Element {
   const [players, setPlayer] = useState<PlayerList | null>(null)
   const [results, setResults] = useState<RankerResults | null>(null)
 
@@ -43,5 +43,3 @@ function App (): JSX.Element {
     </Suspense>
   )
 }
-
-export default App

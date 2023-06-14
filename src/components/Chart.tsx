@@ -26,9 +26,9 @@ import type {
   TooltipComponentOption
 } from 'echarts'
 
-import type { RankerResults } from '..'
+import type { RankerResults } from './results'
 
-import styles from './Chart.module.css'
+import styles from './chart.module.css'
 
 type ChartProps = { results: RankerResults }
 type EChartOption = echarts.ComposeOption<(

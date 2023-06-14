@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-function Loading (): JSX.Element {
+export default function Loading (): JSX.Element {
   return <p><i>Loading ...</i></p>
 }
-export default Loading

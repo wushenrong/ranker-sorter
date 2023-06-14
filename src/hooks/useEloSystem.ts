@@ -11,15 +11,15 @@ export type PlayerList = { name: string, players: string[], images?: string[] }
 type RecordMatch = ({ winner, loser, draw }: MatchRecord) => void
 type EloSystemHook = [EloSystem, (RecordMatch)]
 
-export function useEloSystem (data: PlayerList): EloSystemHook {
+export default function useEloSystem (data: PlayerList): EloSystemHook {
   const [eloSystem, setEloSystem] = useState(new EloSystem())
 
   useEffect(() => {
     data.players.forEach(player => { eloSystem.add_player(player) })
     setEloSystem(() => eloSystem)
-  }, [])
+  }, [eloSystem, data])
 
-  function calculateMatch ({ winner, loser, draw }: MatchRecord): void {
+  const calculateMatch = ({ winner, loser, draw }: MatchRecord): void => {
     eloSystem.record_match({ winner, loser, draw })
     setEloSystem(eloSystem)
   }
