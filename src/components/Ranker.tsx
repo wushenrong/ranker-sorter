@@ -116,13 +116,11 @@ export default function Ranker ({ data, callback }: RankerProps): JSX.Element {
         <button type='button' onClick={onClick(true, false)}>
           {
             data.images != null
-              ? (
-                <img
+              ? (<img
                   src={data.images[playerAIndex]}
                   alt={data.players[playerAIndex]}
                   referrerPolicy='no-referrer'
-                />
-              )
+                />)
               : data.players[playerAIndex]
           }
         </button>
@@ -132,13 +130,11 @@ export default function Ranker ({ data, callback }: RankerProps): JSX.Element {
         <button type='button' onClick={onClick(false, false)}>
           {
             data.images != null
-              ? (
-                <img
+              ? (<img
                   src={data.images[playerBIndex]}
                   alt={data.players[playerBIndex]}
                   referrerPolicy='no-referrer'
-                />
-              )
+                />)
               : data.players[playerBIndex]
           }
         </button>
