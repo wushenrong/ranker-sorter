@@ -1,0 +1,23 @@
+/* SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+.progress-bar-label {
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.selections {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+
+  > button {
+    width: 8em;
+    height: 8em;
+    padding: 0.5em;
+    border: 1px;
+    border-radius: 1px;
+  }
+}

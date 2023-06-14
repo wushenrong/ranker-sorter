@@ -1,0 +1,24 @@
+/* SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+.chart {
+  width: 80em;
+  height: 600px !important;
+
+  @media (1000px < width < 1200px) {
+    width: 65em;
+    height: 500px !important;
+  }
+
+  @media (700px < width < 1000px) {
+    width: 50em;
+    height: 400px !important;
+  }
+
+  @media (width < 700px) {
+    width: 40em;
+    height: 300px !important;
+  }
+}
