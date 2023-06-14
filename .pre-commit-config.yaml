@@ -3,12 +3,10 @@ repos:
     rev: v4.4.0
     hooks:
       - id: check-added-large-files
-      - id: check-json
       - id: check-yaml
       - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: no-commit-to-branch
-      - id: pretty-format-json
       - id: trailing-whitespace
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v2.3.0
