@@ -4,6 +4,7 @@
  */
 
 import { useRef } from 'react'
+import type { ReactElement } from 'react'
 
 import type { PlayerList } from '../hooks/useEloSystem'
 
@@ -14,7 +15,7 @@ type CreateListProp = {
   callback: (playerList: PlayerList) => void
 }
 
-export default function CreateList ({ goBack, callback }: CreateListProp): JSX.Element {
+export default function CreateList ({ goBack, callback }: CreateListProp): ReactElement {
   const listName = useRef<HTMLInputElement>(null)
   const characterList = useRef<HTMLTextAreaElement>(null)
 

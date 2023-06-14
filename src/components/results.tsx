@@ -3,12 +3,15 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { Suspense, lazy, useRef } from 'react'
 import type EChartsReactCore from 'echarts-for-react/lib/core'
+
+import { Suspense, lazy, useRef } from 'react'
+import type { ReactElement } from 'react'
 
 import type { OverallStatistics } from 'js-elo-system'
 
 import Loading from './loading'
+
 export type RankerResults = { name: string, players: OverallStatistics }
 
 type ResultProps = {
@@ -19,7 +22,7 @@ type ResultProps = {
 
 const Chart = lazy(async () => await import('./chart'))
 
-export default function Results ({ results, resetData, resetResults }: ResultProps): JSX.Element {
+export default function Results ({ results, resetData, resetResults }: ResultProps): ReactElement {
   const chartRef = useRef<EChartsReactCore>(null)
 
   const newRanker = (): void => {

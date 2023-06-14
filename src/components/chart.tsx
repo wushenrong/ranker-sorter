@@ -8,6 +8,7 @@ import type EChartsReactCore from 'echarts-for-react/lib/core'
 
 import { forwardRef } from 'react'
 import { useMediaQuery } from '@react-hook/media-query'
+import type { ReactElement } from 'react'
 
 import * as echarts from 'echarts/core'
 import { BarChart } from 'echarts/charts'
@@ -49,7 +50,7 @@ echarts.use([
 ])
 
 const Chart = forwardRef<EChartsReactCore, ChartProps>(
-  function Chart ({ results }: ChartProps, ref): JSX.Element {
+  function Chart ({ results }: ChartProps, ref): ReactElement {
     const isLightTheme = useMediaQuery('(prefers-color-scheme: light)')
 
     const dataset = [

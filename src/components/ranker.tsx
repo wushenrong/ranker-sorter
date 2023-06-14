@@ -7,6 +7,7 @@ import ProgressBar from '@ramonak/react-progress-bar'
 import { useEffect, useState } from 'react'
 import { useMediaQuery } from '@react-hook/media-query'
 import { combinations } from 'mathjs'
+import type { ReactElement } from 'react'
 
 import useEloSystem from '../hooks/useEloSystem'
 
@@ -20,7 +21,7 @@ type RankerProps = {
   callback: ({ name, players }: RankerResults) => void
 }
 
-export default function Ranker ({ data, callback }: RankerProps): JSX.Element {
+export default function Ranker ({ data, callback }: RankerProps): ReactElement {
   const [eloSystem, calculateMatch] = useEloSystem(data)
   const [playerAIndex, setPlayerAIndex] = useState(0)
   const [playerBIndex, setPlayerBIndex] = useState(1)
