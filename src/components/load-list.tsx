@@ -5,6 +5,7 @@
 
 import { Suspense, lazy, useState } from 'react'
 import { Draft07 } from 'json-schema-library'
+import type { ReactElement } from 'react'
 
 import Loading from './loading'
 import schema from '../assets/players.json'
@@ -18,8 +19,8 @@ type InputEvent = React.ChangeEvent<HTMLInputElement>
 
 const CreateList = lazy(async () => await import('./create-list'))
 
-export default function LoadList ({ callback }: Callback): JSX.Element {
-  const [error, setError] = useState<JSX.Element>()
+export default function LoadList ({ callback }: Callback): ReactElement {
+  const [error, setError] = useState<ReactElement>()
   const [isNew, setIsNew] = useState(false)
 
   const loadFile = async (e: InputEvent): Promise<void> => {

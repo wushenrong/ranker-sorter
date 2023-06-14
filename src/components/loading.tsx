@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-export default function Loading (): JSX.Element {
+import type { ReactElement } from 'react'
+
+export default function Loading (): ReactElement {
   return <p><i>Loading ...</i></p>
 }
