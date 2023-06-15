@@ -9,8 +9,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "tsc && eslint src/**/*.{ts,tsx} && stylelint src/**/*.css",
-    "format": "eslint --fix src/**/*.{ts,tsx} && stylelint --fix src/**/*.css"
+    "lint": "tsc && eslint src/**/*.{ts,tsx} && stylelint src/**/*.css && prettier -c .",
+    "format": "eslint --fix src/**/*.{ts,tsx} && stylelint --fix src/**/*.css && prettier -w ."
   },
   "devDependencies": {
     "@types/postcss-mixins": "^9.0.0",
