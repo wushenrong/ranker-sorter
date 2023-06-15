@@ -26,6 +26,7 @@ repos:
         files: \.[jt]sx?$
         types: [file]
         additional_dependencies:
+          - eslint
           - eslint-config-prettier
           - eslint-config-standard-with-typescript
           - eslint-plugin-import
@@ -40,6 +41,7 @@ repos:
     hooks:
       - id: stylelint
         additional_dependencies:
+          - postcss
           - stylelint
           - stylelint-config-recess-order
           - stylelint-config-standard
