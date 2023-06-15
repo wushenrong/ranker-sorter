@@ -20,7 +20,7 @@ type InputEvent = React.ChangeEvent<HTMLInputElement>
 
 const CreateList = lazy(async () => await import('./create-list'))
 
-export default function LoadList ({ callback }: Callback): ReactElement {
+export default function LoadList({ callback }: Callback): ReactElement {
   const [error, setError] = useState<ReactElement>()
   const [isNew, setIsNew] = useState(false)
 
@@ -69,8 +69,13 @@ export default function LoadList ({ callback }: Callback): ReactElement {
     callback(data)
   }
 
-  const goBack = (): void => { setIsNew(false) }
-  const onChange = (e: InputEvent): void => { void loadFile(e) }
+  const goBack = (): void => {
+    setIsNew(false)
+  }
+
+  const onChange = (e: InputEvent): void => {
+    void loadFile(e)
+  }
 
   if (isNew) {
     return (
@@ -82,9 +87,8 @@ export default function LoadList ({ callback }: Callback): ReactElement {
 
   let info = (
     <p>
-      To start ranking characters, either create a new list with the
-      names of the characters or load a JSON file containing name and
-      players.
+      To start ranking characters, either create a new list with the names of
+      the characters or load a JSON file containing name and players.
       <br />
       The JSON may optionally include a list of urls for images.
     </p>
@@ -96,10 +100,16 @@ export default function LoadList ({ callback }: Callback): ReactElement {
     <>
       {info}
       <div className='list-selection'>
-        <button type='button' onClick={() => { setIsNew(true) }}>
+        <button
+          type='button'
+          onClick={() => {
+            setIsNew(true)
+          }}>
           New List
         </button>
-        <label htmlFor='load' className={styles.loadLabel}>Load List</label>
+        <label htmlFor='load' className={styles.loadLabel}>
+          Load List
+        </label>
       </div>
       <input
         id='load'

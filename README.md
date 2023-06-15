@@ -9,19 +9,14 @@ file with this data structure:
 
 ```json
 {
-  "name": "Name of list",
-  "players": [
-    "character 1",
-    "character 2",
-    "character 3",
-    "character n/etc"
-  ],
-  "images": [
-    "Optional",
-    "Must be the same length as players",
-    "Must be in the same order as the players",
-    "Must be an url pointing to an image"
-  ]
+    "name": "Name of list",
+    "players": ["character 1", "character 2", "character 3", "character n/etc"],
+    "images": [
+        "Optional",
+        "Must be the same length as players",
+        "Must be in the same order as the players",
+        "Must be an url pointing to an image"
+    ]
 }
 ```
 

@@ -13,7 +13,7 @@ import type { OverallStatistics } from 'js-elo-system'
 
 import Loading from './loading'
 
-export type RankerResults = { name: string, players: OverallStatistics }
+export type RankerResults = { name: string; players: OverallStatistics }
 
 type ResultProps = {
   results: RankerResults
@@ -23,7 +23,11 @@ type ResultProps = {
 
 const Chart = lazy(async () => await import('./chart'))
 
-export default function Results ({ results, resetData, resetResults }: ResultProps): ReactElement {
+export default function Results({
+  results,
+  resetData,
+  resetResults,
+}: ResultProps): ReactElement {
   const chartRef = useRef<EChartsReactCore>(null)
 
   const newRanker = (): void => {
@@ -32,21 +36,18 @@ export default function Results ({ results, resetData, resetResults }: ResultPro
   }
 
   const saveFile = (href: string, filename = 'results.json'): void => {
-    const a = Object.assign(
-      document.createElement('a'),
-      {
-        href,
-        style: 'display:none',
-        download: filename
-      }
-    )
+    const a = Object.assign(document.createElement('a'), {
+      href,
+      style: 'display:none',
+      download: filename,
+    })
     document.body.appendChild(a)
 
     a.click()
     a.remove()
   }
 
-  function onSave (data: unknown) {
+  function onSave(data: unknown) {
     return () => {
       const blob = new Blob([data as BlobPart], { type: 'octet-stream' })
       const href = URL.createObjectURL(blob)
@@ -71,9 +72,15 @@ export default function Results ({ results, resetData, resetResults }: ResultPro
       <Suspense fallback={<Loading />}>
         <Chart results={results} ref={chartRef} />
       </Suspense>
-      <button type='button' onClick={newRanker}>New Ranker</button>
-      <button type='button' onClick={onSave(results)}>Save Results</button>
-      <button type='button' onClick={saveChart()}>Save Chart</button>
+      <button type='button' onClick={newRanker}>
+        New Ranker
+      </button>
+      <button type='button' onClick={onSave(results)}>
+        Save Results
+      </button>
+      <button type='button' onClick={saveChart()}>
+        Save Chart
+      </button>
     </>
   )
 }
