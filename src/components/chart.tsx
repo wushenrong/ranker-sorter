@@ -54,7 +54,7 @@ const Chart = forwardRef<EChartsReactCore, ChartProps>(function Chart(
   { results }: ChartProps,
   ref
 ): ReactElement {
-  const isLightTheme = useMediaQuery('(prefers-color-scheme: light)')
+  const isLightTheme: boolean = useMediaQuery('(prefers-color-scheme: light)')
 
   const dataset = [
     ['Player', 'Elo'],

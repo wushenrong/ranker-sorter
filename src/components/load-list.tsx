@@ -22,7 +22,7 @@ const CreateList = lazy(async () => await import('./create-list'))
 
 export default function LoadList({ callback }: Callback): ReactElement {
   const [error, setError] = useState<ReactElement>()
-  const [isNew, setIsNew] = useState(false)
+  const [isNew, setIsNew] = useState<boolean>(false)
 
   const loadFile = async (e: InputEvent): Promise<void> => {
     if (e.target.files == null) {
