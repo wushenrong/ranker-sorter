@@ -37,6 +37,7 @@ repos:
           - eslint-plugin-react
           - eslint-plugin-react-hooks
           - eslint-plugin-react-refresh
+          - react@v18.2.0
 
   - repo: https://github.com/awebdeveloper/pre-commit-stylelint
     rev: 8f63da4
