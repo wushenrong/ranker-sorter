@@ -24,10 +24,10 @@ type RankerProps = {
 
 export default function Ranker({ data, callback }: RankerProps): ReactElement {
   const [eloSystem, calculateMatch] = useEloSystem(data)
-  const [playerAIndex, setPlayerAIndex] = useState<number>(0)
-  const [playerBIndex, setPlayerBIndex] = useState<number>(1)
+  const [playerAIndex, setPlayerAIndex] = useState(0)
+  const [playerBIndex, setPlayerBIndex] = useState(1)
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0)
-  const isLightTheme: boolean = useMediaQuery('(prefers-color-scheme: light)')
+  const isLightTheme = useMediaQuery('(prefers-color-scheme: light)')
   const combination = combinations(data.players.length, 2)
 
   useEffect(() => {
