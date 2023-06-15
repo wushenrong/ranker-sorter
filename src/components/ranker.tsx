@@ -22,7 +22,7 @@ type RankerProps = {
   callback: ({ name, players }: RankerResults) => void
 }
 
-export default function Ranker ({ data, callback }: RankerProps): ReactElement {
+export default function Ranker({ data, callback }: RankerProps): ReactElement {
   const [eloSystem, calculateMatch] = useEloSystem(data)
   const [playerAIndex, setPlayerAIndex] = useState(0)
   const [playerBIndex, setPlayerBIndex] = useState(1)
@@ -34,7 +34,7 @@ export default function Ranker ({ data, callback }: RankerProps): ReactElement {
     if (currentMatchIndex === combination) {
       const results = {
         name: data.name,
-        players: eloSystem.get_overall_list()
+        players: eloSystem.get_overall_list(),
       }
       callback(results)
     }
@@ -45,7 +45,7 @@ export default function Ranker ({ data, callback }: RankerProps): ReactElement {
     let loser: string
 
     if (playerBIndex >= data.players.length - 1) {
-      setPlayerAIndex(currentPlayerAIndex => currentPlayerAIndex + 1)
+      setPlayerAIndex((currentPlayerAIndex) => currentPlayerAIndex + 1)
       setPlayerBIndex(() => playerAIndex + 1)
     }
 
@@ -59,12 +59,14 @@ export default function Ranker ({ data, callback }: RankerProps): ReactElement {
 
     calculateMatch({ winner, loser, draw: isDraw })
 
-    setPlayerBIndex(currentPlayerBIndex => currentPlayerBIndex + 1)
-    setCurrentMatchIndex(currentProgress => currentProgress + 1)
+    setPlayerBIndex((currentPlayerBIndex) => currentPlayerBIndex + 1)
+    setCurrentMatchIndex((currentProgress) => currentProgress + 1)
   }
 
   const onClick = (playerAWon: boolean, isDraw: boolean) => {
-    return () => { rankPlayers(playerAWon, isDraw) }
+    return () => {
+      rankPlayers(playerAWon, isDraw)
+    }
   }
 
   const percentProgress = currentMatchIndex / combination
@@ -72,10 +74,12 @@ export default function Ranker ({ data, callback }: RankerProps): ReactElement {
 
   const estimateChoiceTime = 12
   const minutes = combination / estimateChoiceTime
-  const seconds = Math.floor(minutes % 1 * 60)
+  const seconds = Math.floor((minutes % 1) * 60)
 
   let estimateCompletionTime = (
-    <>{Math.floor(minutes)} minutes and {seconds} seconds</>
+    <>
+      {Math.floor(minutes)} minutes and {seconds} seconds
+    </>
   )
 
   if (seconds <= 0) {
@@ -97,8 +101,8 @@ export default function Ranker ({ data, callback }: RankerProps): ReactElement {
   return (
     <>
       <p>
-        There are {combination} combinations of 2 characters
-        for {data.players.length} characters.
+        There are {combination} combinations of 2 characters for{' '}
+        {data.players.length} characters.
         <br />
         This will take you about {estimateCompletionTime} if each choice takes
         about {60 / estimateChoiceTime} seconds.
@@ -116,29 +120,29 @@ export default function Ranker ({ data, callback }: RankerProps): ReactElement {
 
       <div className={styles.selections}>
         <button type='button' onClick={onClick(true, false)}>
-          {
-            data.images != null
-              ? (<img
-                  src={data.images[playerAIndex]}
-                  alt={data.players[playerAIndex]}
-                  referrerPolicy='no-referrer'
-                />)
-              : data.players[playerAIndex]
-          }
+          {data.images != null ? (
+            <img
+              src={data.images[playerAIndex]}
+              alt={data.players[playerAIndex]}
+              referrerPolicy='no-referrer'
+            />
+          ) : (
+            data.players[playerAIndex]
+          )}
         </button>
         <button type='button' onClick={onClick(false, true)}>
           Both are equal
         </button>
         <button type='button' onClick={onClick(false, false)}>
-          {
-            data.images != null
-              ? (<img
-                  src={data.images[playerBIndex]}
-                  alt={data.players[playerBIndex]}
-                  referrerPolicy='no-referrer'
-                />)
-              : data.players[playerBIndex]
-          }
+          {data.images != null ? (
+            <img
+              src={data.images[playerBIndex]}
+              alt={data.players[playerBIndex]}
+              referrerPolicy='no-referrer'
+            />
+          ) : (
+            data.players[playerBIndex]
+          )}
         </button>
       </div>
     </>

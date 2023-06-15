@@ -18,14 +18,14 @@ import {
   GridComponent,
   DatasetComponent,
   TooltipComponent,
-  TitleComponent
+  TitleComponent,
 } from 'echarts/components'
 import type {
   BarSeriesOption,
   DatasetComponentOption,
   GridComponentOption,
   TitleComponentOption,
-  TooltipComponentOption
+  TooltipComponentOption,
 } from 'echarts'
 
 import type { RankerResults } from './results'
@@ -33,13 +33,13 @@ import type { RankerResults } from './results'
 import styles from './chart.module.css'
 
 type ChartProps = { results: RankerResults }
-type EChartOption = echarts.ComposeOption<(
+type EChartOption = echarts.ComposeOption<
   | BarSeriesOption
   | DatasetComponentOption
   | GridComponentOption
   | TitleComponentOption
   | TooltipComponentOption
-)>
+>
 
 echarts.use([
   BarChart,
@@ -47,52 +47,55 @@ echarts.use([
   GridComponent,
   TitleComponent,
   TooltipComponent,
-  SVGRenderer
+  SVGRenderer,
 ])
 
-const Chart = forwardRef<EChartsReactCore, ChartProps>(
-  function Chart ({ results }: ChartProps, ref): ReactElement {
-    const isLightTheme = useMediaQuery('(prefers-color-scheme: light)')
+const Chart = forwardRef<EChartsReactCore, ChartProps>(function Chart(
+  { results }: ChartProps,
+  ref
+): ReactElement {
+  const isLightTheme = useMediaQuery('(prefers-color-scheme: light)')
 
-    const dataset = [
-      ['Player', 'Elo'],
-      ...results.players.map(player => [player.player as string, player.elo])
-    ]
+  const dataset = [
+    ['Player', 'Elo'],
+    ...results.players.map((player) => [player.player as string, player.elo]),
+  ]
 
-    const option: EChartOption = {
-      title: {
-        text: results.name
-      },
-      dataset: {
-        source: dataset
-      },
-      xAxis: {
-        name: 'Players',
-        type: 'category'
-      },
-      yAxis: {
-        name: 'Ratings'
-      },
-      series: [
-        { type: 'bar' }
-      ],
-      tooltip: {
-        trigger: 'item'
-      },
-      aria: {
-        show: true
-      }
-    }
+  const option: EChartOption = {
+    title: {
+      text: results.name,
+    },
+    dataset: {
+      source: dataset,
+    },
+    xAxis: {
+      name: 'Players',
+      type: 'category',
+    },
+    yAxis: {
+      name: 'Ratings',
+    },
+    series: [{ type: 'bar' }],
+    tooltip: {
+      trigger: 'item',
+    },
+    aria: {
+      show: true,
+    },
+  }
 
-    let theme = 'dark'
-    if (isLightTheme) theme = 'light'
+  let theme = 'dark'
+  if (isLightTheme) theme = 'light'
 
-    return (
-      <ReactEChartsCore
-        echarts={echarts} option={option} theme={theme}
-        className={styles.chart} ref={ref}
-      />
-    )
-  })
+  return (
+    <ReactEChartsCore
+      echarts={echarts}
+      option={option}
+      theme={theme}
+      className={styles.chart}
+      ref={ref}
+    />
+  )
+})
 
 export default Chart

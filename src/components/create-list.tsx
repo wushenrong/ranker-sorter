@@ -16,15 +16,19 @@ type CreateListProp = {
   callback: (playerList: PlayerList) => void
 }
 
-export default function CreateList ({ goBack, callback }: CreateListProp): ReactElement {
+export default function CreateList({
+  goBack,
+  callback,
+}: CreateListProp): ReactElement {
   const listName = useRef<HTMLInputElement>(null)
   const characterList = useRef<HTMLTextAreaElement>(null)
 
   const createNewRanker = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    const inputList =
-      (characterList.current as HTMLTextAreaElement).value.split('\n')
+    const inputList = (
+      characterList.current as HTMLTextAreaElement
+    ).value.split('\n')
 
     const noDuplicatesList: string[] = []
 
@@ -40,7 +44,7 @@ export default function CreateList ({ goBack, callback }: CreateListProp): React
 
     const data = {
       name: (listName.current as HTMLInputElement).value,
-      players: noDuplicatesList
+      players: noDuplicatesList,
     }
     callback(data)
   }
@@ -50,8 +54,7 @@ export default function CreateList ({ goBack, callback }: CreateListProp): React
       id='new-ranker'
       onSubmit={createNewRanker}
       className={styles.newRankerForm}
-      autoComplete='off'
-    >
+      autoComplete='off'>
       <div>
         <label htmlFor='name'>Name Of The List</label>
         <br />
@@ -76,7 +79,9 @@ export default function CreateList ({ goBack, callback }: CreateListProp): React
       </div>
 
       <div className='selections'>
-        <button type='button' onClick={goBack}>Back</button>
+        <button type='button' onClick={goBack}>
+          Back
+        </button>
         <button type='submit'>Create Ranker</button>
       </div>
     </form>

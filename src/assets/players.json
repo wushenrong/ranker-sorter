@@ -43,9 +43,6 @@
       "uniqueItems": true
     }
   },
-  "required": [
-    "name",
-    "players"
-  ],
+  "required": ["name", "players"],
   "additionalProperties": false
 }

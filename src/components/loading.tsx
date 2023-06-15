@@ -6,6 +6,10 @@
 
 import type { ReactElement } from 'react'
 
-export default function Loading (): ReactElement {
-  return <p><i>Loading ...</i></p>
+export default function Loading(): ReactElement {
+  return (
+    <p>
+      <i>Loading ...</i>
+    </p>
+  )
 }
