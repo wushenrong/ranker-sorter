@@ -19,18 +19,14 @@ export default defineConfig({
   plugins: [
     react(),
     optimizeCssModules(),
-    [visualizer({ gzipSize: true, brotliSize: true })]
+    [visualizer({ gzipSize: true, brotliSize: true })],
   ],
   css: {
     modules: {
-      localsConvention: 'camelCaseOnly'
+      localsConvention: 'camelCaseOnly',
     },
     postcss: {
-      plugins: [
-        postcssMixins(),
-        postcssNesting(),
-        autoprefixer()
-      ]
-    }
-  }
+      plugins: [postcssMixins(), postcssNesting(), autoprefixer()],
+    },
+  },
 })
