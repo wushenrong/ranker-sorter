@@ -39,8 +39,6 @@ repos:
           - eslint-plugin-react
           - eslint-plugin-react-hooks
           - eslint-plugin-react-refresh
-          - react
-          - '@react-hook/media-query'
 
   - repo: https://github.com/awebdeveloper/pre-commit-stylelint
     rev: 0.0.2
