@@ -15,18 +15,18 @@ import postcssNesting from 'postcss-nesting'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/Ranker-Sorter/',
-  plugins: [
-    react(),
-    optimizeCssModules(),
-    [visualizer({ gzipSize: true, brotliSize: true })],
-  ],
-  css: {
-    modules: {
-      localsConvention: 'camelCaseOnly',
+    base: '/Ranker-Sorter/',
+    plugins: [
+        react(),
+        optimizeCssModules(),
+        [visualizer({ gzipSize: true, brotliSize: true })],
+    ],
+    css: {
+        modules: {
+            localsConvention: 'camelCaseOnly',
+        },
+        postcss: {
+            plugins: [postcssMixins(), postcssNesting(), autoprefixer()],
+        },
     },
-    postcss: {
-      plugins: [postcssMixins(), postcssNesting(), autoprefixer()],
-    },
-  },
 })
