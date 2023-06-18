@@ -13,14 +13,16 @@ repos:
       - id: no-commit-to-branch
       - id: trailing-whitespace
 
-  - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v2.3.0
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.5.0
     hooks:
-      - id: conventional-pre-commit
+      - id: commitlint
         stages: [commit-msg]
+        additional_dependencies:
+          - '@commitlint/config-conventional'
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.42.0
+    rev: v8.43.0
     hooks:
       - id: eslint
         files: \.[jt]sx?$
@@ -39,7 +41,7 @@ repos:
           - eslint-plugin-react-refresh
 
   - repo: https://github.com/awebdeveloper/pre-commit-stylelint
-    rev: 8f63da4
+    rev: 0.0.2
     hooks:
       - id: stylelint
         additional_dependencies:
@@ -51,6 +53,6 @@ repos:
           - stylelint-use-nesting
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v2.7.1
+    rev: v3.0.0-alpha.9-for-vscode
     hooks:
       - id: prettier
