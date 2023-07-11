@@ -22,7 +22,7 @@ repos:
           - '@commitlint/config-conventional'
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.43.0
+    rev: v8.44.0
     hooks:
       - id: eslint
         files: \.[jt]sx?$
@@ -53,6 +53,6 @@ repos:
           - stylelint-use-nesting
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.0-alpha.9-for-vscode
+    rev: v3.0.0
     hooks:
       - id: prettier
