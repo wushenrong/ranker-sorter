@@ -1,0 +1,48 @@
+#root {
+  max-width: 1280px;
+  padding: 2rem;
+  margin: 0 auto;
+  text-align: center;
+
+  strong {
+    font-size: 2.5em;
+  }
+}
+
+#characters {
+  margin: 0.5em;
+}
+
+#faq {
+  text-align: left;
+
+  > details {
+    width: 70%;
+    margin-inline: auto;
+
+    > summary {
+      cursor: pointer;
+    }
+
+    > p {
+      width: 90%;
+      margin: 0.5em auto;
+    }
+  }
+}
+
+.charts {
+  display: flex;
+}
+
+.form {
+  div {
+    margin: 0.5em;
+  }
+}
+
+.selection {
+  width: 8em;
+  height: 8em;
+  padding: 0.5rem;
+}
