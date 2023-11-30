@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { combinations } from '../utils/math'
 import useEloSystem, { type Players } from '../hooks/useEloSystem'
+import { combinations } from '../utils/math'
 import Result from './Result'
 
 interface RankerProps {

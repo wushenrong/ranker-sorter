@@ -49,7 +49,16 @@ const chartTitleLabelProps = {
   },
 }
 
-const chartStatisticsKeys = ['losses', 'draws', 'wins']
+const stackColorScale = [
+  '#DCE775',
+  '#FFF59D',
+  '#F4511E',
+  '#8BC34A',
+  '#00796B',
+  '#006064',
+]
+
+const chartStatisticsKeys = ['wins', 'draws', 'losses']
 
 function Charts({ data }: { data: Results }) {
   const ratingsTitle = `${data.title} Ratings Chart`
@@ -88,7 +97,7 @@ function Charts({ data }: { data: Results }) {
           y={30}
           data={chartStatisticsKeys.map((key) => ({ name: key }))}
         />
-        <VictoryStack>
+        <VictoryStack colorScale={stackColorScale}>
           {chartStatisticsKeys.map((key, i) => {
             return (
               <VictoryBar

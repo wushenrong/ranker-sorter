@@ -1,5 +1,5 @@
-import { Suspense, lazy, useContext /* , useRef */ } from 'react'
 import { type PlayerStatistics } from 'js-elo-system'
+import { Suspense, lazy, useContext /* , useRef */ } from 'react'
 import { CallbackContext } from '../context'
 
 const Charts = lazy(async () => import('./Charts'))

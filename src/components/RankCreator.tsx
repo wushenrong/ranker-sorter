@@ -1,7 +1,7 @@
-import { ReactElement, useContext, useRef, useState } from 'react'
 import { Draft07, type JsonSchema } from 'json-schema-library'
-import { Players } from '../hooks/useEloSystem'
+import { ReactElement, useContext, useRef, useState } from 'react'
 import { CallbackContext } from '../context'
+import { Players } from '../hooks/useEloSystem'
 
 const schemaURL = 'https://twopizza9621536.github.io/schema/json/players.json'
 const acceptedFileType = 'application/json'

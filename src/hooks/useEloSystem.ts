@@ -1,5 +1,5 @@
-import { useDebugValue, useEffect, useState } from 'react'
 import EloSystem, { type MatchRecord } from 'js-elo-system'
+import { useDebugValue, useEffect, useState } from 'react'
 
 interface Player {
   name: string

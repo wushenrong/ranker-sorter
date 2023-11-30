@@ -12,4 +12,4 @@ function combinations(n: number, k: number) {
   return factorial(n) / (factorial(k) * factorial(n - k))
 }
 
-export { factorial, combinations }
+export { combinations, factorial }

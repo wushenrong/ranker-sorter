@@ -1,9 +1,9 @@
 import { useState } from 'react'
+import './App.css'
 import RankCreator from './components/RankCreator'
 import Ranker from './components/Ranker'
+import { CallbackContext, type SetPlayersCallback } from './context'
 import { type Players } from './hooks/useEloSystem'
-import { type SetPlayersCallback, CallbackContext } from './context'
-import './App.css'
 
 function App() {
   const [players, setPlayerList] = useState<Players>()
@@ -12,17 +12,9 @@ function App() {
     setPlayerList(playerList)
   }
 
-  if (players) {
-    return (
-      <CallbackContext.Provider value={setPlayers}>
-        <Ranker data={players} />
-      </CallbackContext.Provider>
-    )
-  }
-
   return (
     <CallbackContext.Provider value={setPlayers}>
-      <RankCreator />
+      {players ? <Ranker data={players} /> : <RankCreator />}
     </CallbackContext.Provider>
   )
 }
