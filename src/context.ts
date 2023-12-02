@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { createContext } from 'react'
 import { type Players } from './hooks/useEloSystem'
 

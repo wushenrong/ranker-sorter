@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useState } from 'react'
 import useEloSystem, { type Players } from '../hooks/useEloSystem'
 import { combinations } from '../utils/math'

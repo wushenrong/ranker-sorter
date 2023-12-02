@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useState } from 'react'
 import './App.css'
 import RankCreator from './components/RankCreator'

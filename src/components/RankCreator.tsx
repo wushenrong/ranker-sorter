@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { Draft07, type JsonSchema } from 'json-schema-library'
 import { ReactElement, useContext, useRef, useState } from 'react'
 import { CallbackContext } from '../context'

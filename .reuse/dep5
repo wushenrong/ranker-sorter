@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: ranker-sorter
+Upstream-Contact: Samuel Wu
+Source: https://github.com/TwoPizza9621536/ranker-sorter
+
+Files: *.json
+Copyright: 2023 Samuel Wu
+License: CC0-1.0

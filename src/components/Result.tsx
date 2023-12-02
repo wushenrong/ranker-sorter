@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { type PlayerStatistics } from 'js-elo-system'
 import { Suspense, lazy, useContext /* , useRef */ } from 'react'
 import { CallbackContext } from '../context'

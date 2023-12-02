@@ -32,4 +32,11 @@ file with this data structure:
 
 ## License
 
-Ranker Sorter is licensed under the MIT License.
+Ranker Sorter is licensed under the MIT License using the following SPDX
+expression.
+
+```text
+SPDX-FileCopyrightText: 2023 Samuel Wu
+
+SPDX-License-Identifier: MIT
+```

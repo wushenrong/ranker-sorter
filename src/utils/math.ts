@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: CC0-1.0
+ */
+
 function factorial(n: number): number {
   let output = 1
 

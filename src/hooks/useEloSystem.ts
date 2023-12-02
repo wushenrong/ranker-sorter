@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import EloSystem, { type MatchRecord } from 'js-elo-system'
 import { useDebugValue, useEffect, useState } from 'react'
 
