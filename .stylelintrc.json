@@ -1,7 +1,15 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-recess-order"],
-  "plugins": ["stylelint-use-nesting", "stylelint-css-modules"],
-  "ignoreFiles": ["node_modules/", "dist/"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recess-order"
+  ],
+  "plugins": [
+    "stylelint-use-nesting"
+  ],
+  "ignoreFiles": [
+    "node_modules/",
+    "dist/"
+  ],
   "rules": {
     "alpha-value-notation": "number",
     "color-function-notation": "legacy",

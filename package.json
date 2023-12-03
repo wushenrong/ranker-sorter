@@ -7,14 +7,28 @@
     "> 0.3%",
     "defaults",
     "last 2 versions",
-    "not dead"
+    "not dead",
+    "not samsung <= 23"
   ],
+  "hintConfig": {
+    "extends": [
+      "development"
+    ],
+    "hints": {
+      "typescript-config/is-valid": "off"
+    },
+    "browserslist": [
+      "defaults",
+      "not ie 11",
+      "not samsung <= 23"
+    ]
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "csslint": "stylelint src/*.css --max-warnings 0",
-    "format": "prettier src -w",
+    "lint": "eslint src --report-unused-disable-directives --max-warnings 0",
+    "csslint": "stylelint src/*.css --report-needless-disables --max-warnings 0",
+    "format": "eslint --fix src && prettier src -w",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -42,7 +56,6 @@
     "stylelint": "^15.11.0",
     "stylelint-config-recess-order": "^4.4.0",
     "stylelint-config-standard": "^34.0.0",
-    "stylelint-css-modules": "^1.2.2",
     "stylelint-use-nesting": "^4.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"

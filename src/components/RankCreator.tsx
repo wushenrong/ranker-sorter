@@ -10,37 +10,45 @@ import { CallbackContext } from '../context'
 import { Players } from '../hooks/useEloSystem'
 
 const schemaURL = 'https://twopizza9621536.github.io/schema/json/players.json'
-const acceptedFileType = 'application/json'
+
+const parseJSON = async (file: File) => {
+  try {
+    return JSON.parse(await file.text()) as Players
+  } catch {
+    return
+  }
+}
 
 function RankCreator() {
+  const [error, setError] = useState<ReactElement>()
   const listTitle = useRef<HTMLInputElement>(null)
   const names = useRef<HTMLTextAreaElement>(null)
-  const [error, setError] = useState<ReactElement>()
   const callback = useContext(CallbackContext)
 
   const loadList = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0]
+    const schema = await fetch(schemaURL)
+    const validator: Draft07 = new Draft07((await schema.json()) as JsonSchema)
+    const data = await parseJSON(file)
 
-    if (file.type !== acceptedFileType) {
+    if (!data) {
       setError(
         <p>
-          The file you selected ({file.name}) is not a JSON file, please select
-          a JSON file.
+          The file you selected is either not a JSON file or the JSON file is
+          malformed, please select another file.
         </p>
       )
       return
     }
 
-    const data: Players = JSON.parse(await file.text()) as Players
-    const schema = await fetch(schemaURL)
-    const validator: Draft07 = new Draft07((await schema.json()) as JsonSchema)
     const errors = validator.validate(data)
 
     if (errors.length) {
       setError(
         <p>
           The JSON file you selected has the wrong data structure, please fix
-          the error before you reselect the JSON file:
+          the error before you reselect the JSON file (# being the root json
+          object):
           <br />
           {errors[0].message}
         </p>
@@ -51,7 +59,10 @@ function RankCreator() {
     callback(data)
   }
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => void loadList(e)
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    void loadList(e)
+    return
+  }
 
   const createList = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -95,7 +106,8 @@ function RankCreator() {
             cols={30}
             rows={10}
             ref={names}
-            required></textarea>
+            required
+          ></textarea>
         </div>
         {error}
         <div>
@@ -105,7 +117,7 @@ function RankCreator() {
         <input
           type='file'
           id='load'
-          accept={acceptedFileType}
+          accept='application/json'
           onChange={onChange}
         />
       </form>

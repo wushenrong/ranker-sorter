@@ -51,8 +51,8 @@ function Result({ data }: { data: Results }) {
   }
 
   /* const saveCharts = () => {
-    if (chartRef == null) return
-    if (chartRef.firstChild == null) return
+    if (!chartRef) return
+    if (!chartRef.firstChild) return
 
     const xml = new XMLSerializer().serializeToString(chartRef.firstChild)
     const href = 'data:image/svg+xml,' + xml
