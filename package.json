@@ -26,9 +26,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --report-unused-disable-directives --max-warnings 0",
-    "csslint": "stylelint src/*.css --report-needless-disables --max-warnings 0",
-    "format": "eslint --fix src && prettier src -w",
+    "lint": "eslint src --report-unused-disable-directives --max-warnings 0 && stylelint src/*.css --report-needless-disables --max-warnings 0 && prettier src -c",
+    "format": "eslint --fix src && stylelint --fix src/*.css && prettier src -w",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -39,7 +38,8 @@
     "victory": "^36.6.12"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.12",
+    "@eslint/eslintrc": "^2.1.4",
+    "@eslint/js": "^8.55.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",

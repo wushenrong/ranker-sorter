@@ -15,7 +15,7 @@ const parseJSON = async (file: File) => {
   try {
     return JSON.parse(await file.text()) as Players
   } catch {
-    return
+    return null
   }
 }
 
@@ -31,37 +31,34 @@ function RankCreator() {
     const validator: Draft07 = new Draft07((await schema.json()) as JsonSchema)
     const data = await parseJSON(file)
 
-    if (!data) {
-      setError(
-        <p>
+    if (data == null) {
+      return await Promise.reject(
+        new Error(`
           The file you selected is either not a JSON file or the JSON file is
           malformed, please select another file.
-        </p>
+        `)
       )
-      return
     }
 
     const errors = validator.validate(data)
 
-    if (errors.length) {
-      setError(
-        <p>
+    if (errors.length !== 0) {
+      return await Promise.reject(
+        new Error(`
           The JSON file you selected has the wrong data structure, please fix
           the error before you reselect the JSON file (# being the root json
-          object):
-          <br />
-          {errors[0].message}
-        </p>
+          object): ${errors[0].message}.
+        `)
       )
-      return
     }
 
     callback(data)
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    void loadList(e)
-    return
+    loadList(e).catch((error: Error) => {
+      setError(<p>{error.message}</p>)
+    })
   }
 
   const createList = (e: React.FormEvent<HTMLFormElement>) => {
@@ -101,13 +98,7 @@ function RankCreator() {
             (Separated by newlines. Duplicate characters are removed.)
           </label>
           <br />
-          <textarea
-            id='characters'
-            cols={30}
-            rows={10}
-            ref={names}
-            required
-          ></textarea>
+          <textarea id='characters' cols={30} rows={10} ref={names} required />
         </div>
         {error}
         <div>

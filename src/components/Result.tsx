@@ -8,7 +8,7 @@ import { type PlayerStatistics } from 'js-elo-system'
 import { Suspense, lazy, useContext /* , useRef */ } from 'react'
 import { CallbackContext } from '../context'
 
-const Charts = lazy(async () => import('./Charts'))
+const Charts = lazy(async () => await import('./Charts'))
 
 export interface Results {
   title: string
@@ -27,7 +27,9 @@ function Result({ data }: { data: Results }) {
   const callback = useContext(CallbackContext)
   // const [chartRef, setChartRef] = useRef<HTMLElement | null>()
 
-  const newRanker = () => callback(undefined)
+  const newRanker = () => {
+    callback(undefined)
+  }
 
   const saveFile = (href: string, filename: string) => {
     const a = Object.assign(document.createElement('a'), {

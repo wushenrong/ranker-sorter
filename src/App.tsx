@@ -20,7 +20,7 @@ function App() {
 
   return (
     <CallbackContext.Provider value={setPlayers}>
-      {players ? <Ranker data={players} /> : <RankCreator />}
+      {players != null ? <Ranker data={players} /> : <RankCreator />}
     </CallbackContext.Provider>
   )
 }

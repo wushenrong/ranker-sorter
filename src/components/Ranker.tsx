@@ -34,7 +34,9 @@ function Ranker({ data }: RankerProps) {
     setCurrentMatchIndex((currentProgress) => currentProgress + 1)
   }
 
-  const onClick = (record: MatchRecord) => () => rankPlayers(record)
+  const onClick = (record: MatchRecord) => () => {
+    rankPlayers(record)
+  }
 
   return (
     <>
@@ -67,7 +69,7 @@ function Ranker({ data }: RankerProps) {
                 draw: false,
               })}
             >
-              {data.players[playerAIndex].image ? (
+              {data.players[playerAIndex].image != null ? (
                 <img
                   src={data.players[playerAIndex].image}
                   alt={data.players[playerAIndex].name}
@@ -88,7 +90,7 @@ function Ranker({ data }: RankerProps) {
                 draw: false,
               })}
             >
-              {data.players[playerBIndex].image ? (
+              {data.players[playerBIndex].image != null ? (
                 <img
                   src={data.players[playerBIndex].image}
                   alt={data.players[playerBIndex].name}
