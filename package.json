@@ -16,12 +16,7 @@
     ],
     "hints": {
       "typescript-config/is-valid": "off"
-    },
-    "browserslist": [
-      "defaults",
-      "not ie 11",
-      "not samsung <= 23"
-    ]
+    }
   },
   "scripts": {
     "dev": "vite",

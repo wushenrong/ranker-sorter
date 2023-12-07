@@ -27,19 +27,21 @@ function RankCreator() {
 
   const loadList = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0]
-    const schema = await fetch(schemaURL)
-    const validator: Draft07 = new Draft07((await schema.json()) as JsonSchema)
-    const data = await parseJSON(file)
+    const [schema, data] = await Promise.all([
+      (await fetch(schemaURL)).json() as Promise<JsonSchema>,
+      parseJSON(file),
+    ])
 
     if (data == null) {
       return await Promise.reject(
         new Error(`
           The file you selected is either not a JSON file or the JSON file is
           malformed, please select another file.
-        `)
+          `)
       )
     }
 
+    const validator: Draft07 = new Draft07(schema)
     const errors = validator.validate(data)
 
     if (errors.length !== 0) {
