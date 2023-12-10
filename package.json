@@ -4,11 +4,10 @@
   "version": "2.0.0",
   "type": "module",
   "browserslist": [
-    "> 0.3%",
-    "defaults",
+    "> 0.5%",
     "last 2 versions",
-    "not dead",
-    "not samsung <= 23"
+    "Firefox ESR",
+    "not dead"
   ],
   "hintConfig": {
     "extends": [
