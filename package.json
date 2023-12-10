@@ -3,12 +3,6 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
-  "browserslist": [
-    "> 0.5%",
-    "last 2 versions",
-    "Firefox ESR",
-    "not dead"
-  ],
   "hintConfig": {
     "extends": [
       "development"
