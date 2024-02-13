@@ -13,7 +13,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.54.0
+    rev: v9.0.0-beta.0
     hooks:
       - id: eslint
         files: \.tsx?$
@@ -41,13 +41,13 @@ repos:
           - stylelint-use-nesting
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.1.0
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
         exclude_types:
           - json
 
   - repo: https://github.com/fsfe/reuse-tool
-    rev: v2.1.0
+    rev: v3.0.1
     hooks:
       - id: reuse
