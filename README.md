@@ -14,19 +14,19 @@ file with this data structure:
   "players": [
     {
       "name": "character 1",
-      "image": "https://example.com/charactericon.png" // url to image, optional
+      "image": "https://example.com/charactericon.png", // url to image, optional
     },
     {
-      "name": "character 2"
+      "name": "character 2",
     },
     {
-      "name": "character 3"
+      "name": "character 3",
     },
     {
       "name": "etc",
-      "image": "https://example.com/anothercharactericon.jpg" // Must use https
-    }
-  ]
+      "image": "https://example.com/anothercharactericon.jpg", // Must use https
+    },
+  ],
 }
 ```
 
