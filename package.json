@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --max-warnings 0 && stylelint '**/*.css' --max-warnings 0",
-    "format": "eslint . --fix",
+    "lint": "eslint src --max-warnings 0 && stylelint src --max-warnings 0",
+    "format": "eslint src --fix && stylelint src --fix",
     "preview": "vite preview"
   },
   "packageManager": "pnpm@8.15.3+sha256.fc4a49bd609550a41e14d20efbce802a4b892aa4cac877322de2f0924f122991",

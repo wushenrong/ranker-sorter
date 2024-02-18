@@ -60,12 +60,12 @@ function Index() {
             <FileForm invalid={error ? true : false}>
               Select a file that can be used for the ranker
             </FileForm>
-          )
+            )
           : (
             <ManualForm invalid={error ? true : false}>
               Custom Ranker Creation
             </ManualForm>
-          )
+            )
       }
 
       {error && <p role="alert">{error.toString()}</p>}
