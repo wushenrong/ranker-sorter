@@ -21,7 +21,7 @@
     "use-immer": "^0.9.0",
     "zod": "^3.22.4",
     "zod-validation-error": "^3.0.2",
-    "zustand": "^4.5.0"
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
     "@csstools/normalize.css": "^12.1.1",
