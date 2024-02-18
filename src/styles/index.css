@@ -1,0 +1,51 @@
+@import url("@csstools/normalize.css");
+@import url("sanitize.css");
+@import url("sanitize.css/forms.css");
+@import url("sanitize.css/typography.css");
+
+:root {
+  font-weight: 400;
+  color: rgb(255 255 255 / 87%);
+  color-scheme: light dark;
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizelegibility;
+  transition: border-color 0.25s;
+
+  @media (prefers-color-scheme: light) {
+    color: #213547;
+    background-color: #fff;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  min-width: 20rem;
+  min-height: 100vh;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.2rem;
+  line-height: 1.1;
+}
+
+p {
+  max-width: 72ch;
+}
+
+a {
+  font-weight: 500;
+  color: #8cb4ff;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  @media (prefers-color-scheme: light) {
+    color: #0059a5;
+  }
+}

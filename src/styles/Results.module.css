@@ -1,0 +1,16 @@
+.margin {
+  margin: 0.625rem;
+}
+
+.table {
+  composes: margin;
+
+  .heading {
+    padding: 0.5rem;
+  }
+
+  .icon {
+    width: 4rem;
+    height: 4rem;
+  }
+}

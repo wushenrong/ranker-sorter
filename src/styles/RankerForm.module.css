@@ -1,0 +1,24 @@
+.ranker-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.fields {
+  composes: ranker-form;
+}
+
+.title-input {
+  min-width: 20rem;
+}
+
+.character-input {
+  min-width: 30rem;
+}
+
+.file-input {
+  composes: character-input;
+}
+
+.submit-button {
+  composes: center-input from "./FormPrimitives.module.css";
+}

@@ -1,0 +1,12 @@
+.center-input {
+  align-self: center;
+}
+
+.fields {
+  min-width: 40rem;
+  margin: 0.625rem;
+}
+
+.label {
+  margin: 0.5rem;
+}
