@@ -5,7 +5,7 @@
   font-weight: 500;
   cursor: pointer;
   background-color: #1a1a1a;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
 
   &:hover {
     border-color: #8cb4ff;

@@ -1,16 +1,47 @@
-.margin {
-  margin: 0.625rem;
+.save-margin {
+  composes: margin from "./FormPrimitives.module.css";
 }
 
-.table {
-  composes: margin;
+.results {
+  composes: margin from "./FormPrimitives.module.css";
 
-  .heading {
-    padding: 0.5rem;
+  .caption {
+    margin: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
   }
 
-  .icon {
-    width: 4rem;
-    height: 4rem;
+  .stat-categories {
+    background-color: dimgray;
+
+    @media (prefers-color-scheme: light) {
+      background-color: gainsboro;
+    }
+
+    .category {
+      padding: 0.5rem;
+    }
+  }
+
+  tbody {
+    background-color: rgb(175 175 175 / 10%);
+
+    tr:nth-of-type(even) {
+      background-color: rgb(170 170 170 / 20%);
+    }
+
+    @media (prefers-color-scheme: light) {
+      background-color: rgba(133 133 133 / 10%);
+
+      tr:nth-of-type(even) {
+        background-color: rgba(100 100 100 / 10%);
+      }
+    }
+
+    .character {
+      width: 4rem;
+      height: 4rem;
+      padding: 0.5rem;
+    }
   }
 }

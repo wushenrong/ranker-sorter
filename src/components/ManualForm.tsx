@@ -7,9 +7,10 @@ import TextInput from './FormPrimitives/TextInput'
 
 interface ManualFormProperties {
   children: ReactNode
+  invalid?: boolean
 }
 
-function ManualForm({ children }: ManualFormProperties) {
+function ManualForm({ children, invalid: ariaInvalid }: ManualFormProperties) {
   return (
     <Fieldset className={styles.fields}>
       <legend>{children}</legend>
@@ -23,6 +24,7 @@ function ManualForm({ children }: ManualFormProperties) {
         Title of Ranker
       </TextInput>
       <TextAreaInput
+        ariaInvalid={ariaInvalid}
         className={styles.characterInput}
         defaultValue="List of character names separated by newlines"
         id="characters"

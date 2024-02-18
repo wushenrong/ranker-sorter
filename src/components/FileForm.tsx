@@ -6,13 +6,15 @@ import JsonFileInput from './FormPrimitives/JsonFileInput'
 
 interface FileFormProperties {
   children: ReactNode
+  invalid?: boolean
 }
 
-function FileForm({ children }: FileFormProperties) {
+function FileForm({ children, invalid }: FileFormProperties) {
   return (
     <Fieldset className={styles.fields}>
       <legend>{children}</legend>
       <JsonFileInput
+        ariaInvalid={invalid}
         className={styles.fileInput}
         id="file"
         name="file"

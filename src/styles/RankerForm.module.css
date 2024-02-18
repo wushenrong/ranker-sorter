@@ -5,20 +5,20 @@
 
 .fields {
   composes: ranker-form;
+  composes: margin from "./FormPrimitives.module.css";
 }
 
-.title-input {
-  min-width: 20rem;
+.title-input,
+.file-input {
+  margin: 0.5rem;
 }
 
 .character-input {
-  min-width: 30rem;
-}
-
-.file-input {
-  composes: character-input;
+  composes: title-input;
+  min-width: 20rem;
 }
 
 .submit-button {
   composes: center-input from "./FormPrimitives.module.css";
+  composes: margin from "./FormPrimitives.module.css";
 }

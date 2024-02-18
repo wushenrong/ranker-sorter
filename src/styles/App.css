@@ -1,4 +1,9 @@
 #root {
   max-width: 80rem;
-  padding: 2rem;
+  margin: 1.5rem;
+}
+
+#faq {
+  width: 70%;
+  margin: 0 auto;
 }

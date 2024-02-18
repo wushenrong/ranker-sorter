@@ -112,9 +112,11 @@ function Ranker() {
           })}
           type="button"
         >
-          {playerAImage == undefined
-            ? playerAName
-            : <IconImage alt={playerAName} src={playerAImage} />}
+          {
+            playerAImage == undefined
+              ? playerAName
+              : <IconImage alt={playerAName} src={playerAImage} />
+          }
         </Button>
         <Button
           className={styles.selection}
@@ -125,9 +127,11 @@ function Ranker() {
           })}
           type="button"
         >
-          {playerBImage == undefined
-            ? playerBName
-            : <IconImage alt={playerBName} src={playerBImage} />}
+          {
+            playerBImage == undefined
+              ? playerBName
+              : <IconImage alt={playerBName} src={playerBImage} />
+          }
         </Button>
       </div>
 

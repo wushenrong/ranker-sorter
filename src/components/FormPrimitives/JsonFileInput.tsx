@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import styles from '../../styles/FormPrimitives.module.css'
 
 interface JsonFileInputProperties {
+  ariaInvalid?: boolean
   children: ReactNode
   className?: string
   id: string
@@ -13,6 +14,7 @@ interface JsonFileInputProperties {
 }
 
 function JsonFileInput({
+  ariaInvalid,
   children,
   className,
   id,
@@ -24,6 +26,7 @@ function JsonFileInput({
       <label className={styles.label} htmlFor={id}>{children}</label>
       <input
         accept="application/json"
+        aria-invalid={ariaInvalid}
         className={classNames(className, styles.centerInput)}
         id={id}
         name={name}

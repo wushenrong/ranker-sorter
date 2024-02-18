@@ -46,18 +46,18 @@ function Results() {
     <>
       <p role="alert">Do not forget to save your results.</p>
 
-      <table className={styles.table}>
-        <caption>
+      <table className={styles.results}>
+        <caption className={styles.caption}>
           Result of ranking
           {' '}
           {results.data.title}
         </caption>
-        <thead>
+        <thead className={styles.statCategories}>
           <tr>
             {
               tableHeadings.map((heading) => {
                 return (
-                  <th className={styles.heading} key={heading} scope="col">
+                  <th className={styles.category} key={heading} scope="col">
                     {heading}
                   </th>
                 )
@@ -71,7 +71,7 @@ function Results() {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <th className={styles.icon} scope="row">
+                  <th className={styles.character} scope="row">
                     {
                       player.image == undefined
                         ? player.name
@@ -90,7 +90,7 @@ function Results() {
       </table>
 
       <Button
-        className={styles.margin}
+        className={styles.saveMargin}
         onClick={saveResults}
         type="button"
       >
@@ -98,7 +98,7 @@ function Results() {
       </Button>
 
       <div>
-        <Link to="/">Back To Beginning</Link>
+        <Link to="/">Back To The Beginning</Link>
       </div>
     </>
   )

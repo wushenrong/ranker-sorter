@@ -11,7 +11,7 @@ interface FieldsetProperties {
 
 function Fieldset({ children, className }: FieldsetProperties) {
   return (
-    <fieldset className={classNames(className, styles.fields)}>
+    <fieldset className={classNames(className, styles.margin)}>
       {children}
     </fieldset>
   )

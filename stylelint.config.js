@@ -31,5 +31,6 @@ export default {
         ignoreProperties: ['composes'],
       },
     ],
+    'rem-over-px/rem-over-px': true,
   },
 }

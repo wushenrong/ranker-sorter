@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import styles from '../../styles/FormPrimitives.module.css'
 
 interface TextAreaProperties {
+  ariaInvalid?: boolean
   children: ReactNode
   className?: string
   defaultValue?: string
@@ -14,6 +15,7 @@ interface TextAreaProperties {
 }
 
 function TextAreaInput({
+  ariaInvalid,
   children,
   className,
   defaultValue,
@@ -25,6 +27,7 @@ function TextAreaInput({
     <>
       <label className={styles.label} htmlFor={id}>{children}</label>
       <textarea
+        aria-invalid={ariaInvalid}
         className={classNames(className, styles.centerInput)}
         defaultValue={defaultValue}
         id={id}

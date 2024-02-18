@@ -3,8 +3,6 @@ import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom'
 function ErrorBoundary() {
   const error = useRouteError()
 
-  console.error(error)
-
   if (isRouteErrorResponse(error) && error.status == 404) {
     return (
       <p>

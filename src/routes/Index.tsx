@@ -42,7 +42,7 @@ function Index() {
           required
           value="json"
         >
-          JSON or YAML File
+          JSON File
         </RadioInput>
         <RadioInput
           id="manual"
@@ -56,9 +56,18 @@ function Index() {
 
       {
         isFileForm
-          ? <FileForm>Select a file that can be used for the ranker</FileForm>
-          : <ManualForm>Custom Ranker Creation</ManualForm>
+          ? (
+            <FileForm invalid={error ? true : false}>
+              Select a file that can be used for the ranker
+            </FileForm>
+          )
+          : (
+            <ManualForm invalid={error ? true : false}>
+              Custom Ranker Creation
+            </ManualForm>
+          )
       }
+
       {error && <p role="alert">{error.toString()}</p>}
 
       <Button className={styles.submitButton} type="submit">

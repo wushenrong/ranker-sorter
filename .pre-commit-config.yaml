@@ -17,7 +17,6 @@ repos:
           - "@eslint/eslintrc"
           - "@eslint/js"
           - "@stylistic/eslint-plugin"
-          - eslint
           - eslint-plugin-jsx-a11y
           - eslint-plugin-perfectionist
           - eslint-plugin-react
@@ -35,7 +34,6 @@ repos:
         types: [file]
         additional_dependencies:
           - "@stylistic/stylelint-config"
-          - stylelint
           - stylelint-config-recess-order
           - stylelint-config-standard
           - stylelint-css-modules

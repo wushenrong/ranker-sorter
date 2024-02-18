@@ -1,11 +1,12 @@
 .selections {
+  composes: margin from "./FormPrimitives.module.css";
   display: flex;
-  place-items: center;
+  place-content: center;
 }
 
 .selection {
-  width: 8rem;
-  height: 8rem;
-  padding: 0.5rem;
-  margin: 0.625rem;
+  composes: margin from "./FormPrimitives.module.css";
+  width: 6rem;
+  height: 6rem;
+  padding: 1rem;
 }
