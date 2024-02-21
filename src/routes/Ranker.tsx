@@ -5,12 +5,12 @@ import { useSubmit } from 'react-router-dom'
 import { useRankerStore } from '../app/store'
 import Button from '../components/Button'
 import IconImage from '../components/IconImage'
-import { type MatchRecord, useRankerHook } from '../hooks/useRankerHook'
+import { type MatchRecord, useRanker } from '../hooks/useRanker'
 import styles from '../styles/Ranker.module.css'
 
 function Ranker() {
   const characters = useRankerStore((state) => state.characters)
-  const [state, recordMatch] = useRankerHook(characters)
+  const [state, recordMatch] = useRanker(characters)
 
   const [playerAIndex, setPlayerAIndex] = useState(0)
   const [playerBIndex, setPlayerBIndex] = useState(1)

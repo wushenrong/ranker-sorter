@@ -48,7 +48,7 @@ function Results() {
 
       <table className={styles.results}>
         <caption className={styles.caption}>
-          Result of ranking
+          Result of Ranking
           {' '}
           {results.data.title}
         </caption>

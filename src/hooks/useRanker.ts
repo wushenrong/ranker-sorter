@@ -12,25 +12,21 @@ export interface MatchRecord {
 
 const K_VALUE = 24
 
-const INITIAL_PLAYER_DATA = {
-  draws: 0,
-  elo: 1000,
-  losses: 0,
-  wins: 0,
-} satisfies Player
-
-function createInitialState(characters: Character[]) {
-  const system: EloSystem = {}
-
-  for (const character of characters) {
-    system[character.name] = INITIAL_PLAYER_DATA
-  }
-
-  return system
-}
-
 function useRanker(characters: Character[]) {
-  const [ranker, setRanker] = useImmer(createInitialState(characters))
+  const [ranker, setRanker] = useImmer(() => {
+    const system: EloSystem = {}
+
+    for (const character of characters) {
+      system[character.name] = {
+        draws: 0,
+        elo: 1000,
+        losses: 0,
+        wins: 0,
+      } satisfies Player
+    }
+
+    return system
+  })
 
   const recordMatch = (record: MatchRecord) => {
     setRanker((draft) => {
@@ -75,4 +71,4 @@ function useRanker(characters: Character[]) {
   return [ranker, recordMatch] as const
 }
 
-export { useRanker as useRankerHook }
+export { useRanker }
