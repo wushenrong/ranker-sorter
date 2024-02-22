@@ -15,7 +15,6 @@ function FileForm({ children, invalid }: FileFormProperties) {
       <legend>{children}</legend>
       <JsonFileInput
         ariaInvalid={invalid}
-        className={styles.fileInput}
         id="file"
         name="file"
         required

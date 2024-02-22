@@ -1,9 +1,9 @@
-.save-margin {
-  composes: margin from "./FormPrimitives.module.css";
+.save-button {
+  margin: 0.625rem;
 }
 
 .results {
-  composes: margin from "./FormPrimitives.module.css";
+  margin: 0.625rem;
 
   .caption {
     margin: 0.5rem;

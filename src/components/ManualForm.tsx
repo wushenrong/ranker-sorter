@@ -15,7 +15,6 @@ function ManualForm({ children, invalid: ariaInvalid }: ManualFormProperties) {
     <Fieldset className={styles.fields}>
       <legend>{children}</legend>
       <TextInput
-        className={styles.titleInput}
         defaultValue="Custom Ranker"
         id="title"
         name="title"

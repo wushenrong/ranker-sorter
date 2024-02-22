@@ -90,7 +90,7 @@ function Results() {
       </table>
 
       <Button
-        className={styles.saveMargin}
+        className={styles.saveButton}
         onClick={saveResults}
         type="button"
       >

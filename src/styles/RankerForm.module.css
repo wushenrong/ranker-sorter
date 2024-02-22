@@ -1,24 +1,17 @@
 .ranker-form {
   display: flex;
   flex-direction: column;
+  row-gap: 1rem;
 }
 
 .fields {
   composes: ranker-form;
-  composes: margin from "./FormPrimitives.module.css";
-}
-
-.title-input,
-.file-input {
-  margin: 0.5rem;
 }
 
 .character-input {
-  composes: title-input;
   min-width: 20rem;
 }
 
 .submit-button {
   composes: center-input from "./FormPrimitives.module.css";
-  composes: margin from "./FormPrimitives.module.css";
 }

@@ -40,3 +40,4 @@ repos:
           - stylelint-config-standard
           - stylelint-css-modules
           - stylelint-rem-over-px
+          - stylelint-use-nesting
