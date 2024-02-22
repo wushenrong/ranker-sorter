@@ -1,3 +1,10 @@
+/*!
+ * Python-Elo-System
+ * MIT License
+ * Copyright (c) 2021 Kraktoos
+ * https://github.com/Kraktoos/Python-Elo-System
+ */
+
 import { useImmer } from 'use-immer'
 
 import type { Character, Player } from '../app/schemas'

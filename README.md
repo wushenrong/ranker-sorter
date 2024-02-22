@@ -33,7 +33,5 @@ file with this data structure:
 ## License
 
 This project is under the [MIT License](LICENSE). This project uses code from
-[Python-Elo-System][1] by @Kraktoos which is also licensed under the
-[MIT License](LICENSE).
-
-[1]: https://github.com/Kraktoos/Python-Elo-System
+[Python-Elo-System](https://github.com/Kraktoos/Python-Elo-System) by @Kraktoos
+which is also licensed under the [MIT License](LICENSE).
