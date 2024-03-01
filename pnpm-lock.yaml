@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@csstools/normalize.css':
+    specifier: ^12.1.1
+    version: 12.1.1
   classnames:
     specifier: ^2.5.1
     version: 2.5.1
@@ -23,6 +26,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.22.1
     version: 6.22.1(react-dom@18.2.0)(react@18.2.0)
+  sanitize.css:
+    specifier: ^13.0.0
+    version: 13.0.0
   use-immer:
     specifier: ^0.9.0
     version: 0.9.0(immer@10.0.3)(react@18.2.0)
@@ -37,15 +43,12 @@ dependencies:
     version: 4.5.1(@types/react@18.2.56)(immer@10.0.3)(react@18.2.0)
 
 devDependencies:
-  '@csstools/normalize.css':
-    specifier: ^12.1.1
-    version: 12.1.1
   '@eslint/eslintrc':
     specifier: ^3.0.1
     version: 3.0.1
   '@eslint/js':
-    specifier: ^8.56.0
-    version: 8.56.0
+    specifier: ^8.57.0
+    version: 8.57.0
   '@stylistic/eslint-plugin':
     specifier: ^1.6.2
     version: 1.6.2(eslint@8.56.0)(typescript@5.3.3)
@@ -94,9 +97,6 @@ devDependencies:
   rollup-plugin-visualizer:
     specifier: ^5.12.0
     version: 5.12.0
-  sanitize.css:
-    specifier: ^13.0.0
-    version: 13.0.0
   stylelint:
     specifier: ^16.2.1
     version: 16.2.1(typescript@5.3.3)
@@ -230,7 +230,7 @@ packages:
 
   /@csstools/normalize.css@12.1.1:
     resolution: {integrity: sha512-YAYeJ+Xqh7fUou1d1j9XHl44BmsuThiTr4iNrgCQ3J27IbhXsxXDGZ1cXv8Qvs99d4rBbLiSKy3+WZiet32PcQ==}
-    dev: true
+    dev: false
 
   /@csstools/postcss-cascade-layers@4.0.2(postcss@8.4.35):
     resolution: {integrity: sha512-PqM+jvg5T2tB4FHX+akrMGNWAygLupD4FNUjcv4PSvtVuWZ6ISxuo37m4jFGU7Jg3rCfloGzKd0+xfr5Ec3vZQ==}
@@ -808,6 +808,11 @@ packages:
 
   /@eslint/js@8.56.0:
     resolution: {integrity: sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@eslint/js@8.57.0:
+    resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
@@ -4493,7 +4498,7 @@ packages:
 
   /sanitize.css@13.0.0:
     resolution: {integrity: sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA==}
-    dev: true
+    dev: false
 
   /scheduler@0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
