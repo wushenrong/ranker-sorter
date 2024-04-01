@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@csstools/normalize.css':
+    specifier: ^12.1.1
+    version: 12.1.1
   classnames:
     specifier: ^2.5.1
     version: 2.5.1
@@ -12,8 +15,8 @@ dependencies:
     specifier: ^10.0.3
     version: 10.0.3
   mathjs:
-    specifier: ^12.3.2
-    version: 12.3.2
+    specifier: ^12.4.1
+    version: 12.4.1
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -23,6 +26,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.22.1
     version: 6.22.1(react-dom@18.2.0)(react@18.2.0)
+  sanitize.css:
+    specifier: ^13.0.0
+    version: 13.0.0
   use-immer:
     specifier: ^0.9.0
     version: 0.9.0(immer@10.0.3)(react@18.2.0)
@@ -37,9 +43,6 @@ dependencies:
     version: 4.5.1(@types/react@18.2.56)(immer@10.0.3)(react@18.2.0)
 
 devDependencies:
-  '@csstools/normalize.css':
-    specifier: ^12.1.1
-    version: 12.1.1
   '@eslint/eslintrc':
     specifier: ^3.0.1
     version: 3.0.1
@@ -94,9 +97,6 @@ devDependencies:
   rollup-plugin-visualizer:
     specifier: ^5.12.0
     version: 5.12.0
-  sanitize.css:
-    specifier: ^13.0.0
-    version: 13.0.0
   stylelint:
     specifier: ^16.2.1
     version: 16.2.1(typescript@5.3.3)
@@ -162,6 +162,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
+    dev: true
+
+  /@babel/runtime@7.24.1:
+    resolution: {integrity: sha512-+BIznRzyqBf+2wCTxcKE3wDjfGeCoVE61KSHGpkzqrLi8qxqFwBeUFyId2cxkTmm55fzDGnm0+yCxaxygrLUnQ==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
+    dev: false
 
   /@csstools/cascade-layer-name-parser@1.0.7(@csstools/css-parser-algorithms@2.5.0)(@csstools/css-tokenizer@2.2.3):
     resolution: {integrity: sha512-9J4aMRJ7A2WRjaRLvsMeWrL69FmEuijtiW1XlK/sG+V0UJiHVYUyvj9mY4WAXfU/hGIiGOgL8e0jJcRyaZTjDQ==}
@@ -230,7 +238,7 @@ packages:
 
   /@csstools/normalize.css@12.1.1:
     resolution: {integrity: sha512-YAYeJ+Xqh7fUou1d1j9XHl44BmsuThiTr4iNrgCQ3J27IbhXsxXDGZ1cXv8Qvs99d4rBbLiSKy3+WZiet32PcQ==}
-    dev: true
+    dev: false
 
   /@csstools/postcss-cascade-layers@4.0.2(postcss@8.4.35):
     resolution: {integrity: sha512-PqM+jvg5T2tB4FHX+akrMGNWAygLupD4FNUjcv4PSvtVuWZ6ISxuo37m4jFGU7Jg3rCfloGzKd0+xfr5Ec3vZQ==}
@@ -3260,12 +3268,12 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /mathjs@12.3.2:
-    resolution: {integrity: sha512-o+HwBVD71MHdYpdScDd6CEcdd6CJOF2eXQJE0kNuIkfTjffPyqoeYdYkzVqimTUr1YgIQkNbL8MakHCZ2Ml7mg==}
+  /mathjs@12.4.1:
+    resolution: {integrity: sha512-welnW3khgwYjPYvECFHO+xkCxAx9IKIIPDDWPi8B5rKAvmgoEHnQX9slEmHKZTNaJiE+OS4qrJJcB4sfDn/4sw==}
     engines: {node: '>= 18'}
     hasBin: true
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.1
       complex.js: 2.1.1
       decimal.js: 10.4.3
       escape-latex: 1.2.0
@@ -4493,7 +4501,7 @@ packages:
 
   /sanitize.css@13.0.0:
     resolution: {integrity: sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA==}
-    dev: true
+    dev: false
 
   /scheduler@0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
