@@ -51,7 +51,7 @@
     "stylelint-rem-over-px": "^1.0.1",
     "stylelint-use-nesting": "^4.1.0",
     "typescript": "^5.3.3",
-    "typescript-eslint": "^7.0.1",
+    "typescript-eslint": "^7.8.0",
     "vite": "^5.1.3",
     "vite-plugin-optimize-css-modules": "^1.0.6"
   }
