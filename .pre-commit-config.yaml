@@ -1,0 +1,36 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v9.0.0-beta.0
+    hooks:
+      - id: eslint
+        files: \.ts
+        types: [file]
+        additional_dependencies:
+          - "@eslint/js"
+          - "@stylistic/eslint-plugin"
+          - eslint
+          - eslint-plugin-perfectionist
+          - eslint-plugin-unicorn
+          - typescript-eslint
+
+  - repo: https://github.com/awebdeveloper/pre-commit-stylelint
+    rev: 0.0.2
+    hooks:
+      - id: stylelint
+        files: \.css
+        types: [file]
+        additional_dependencies:
+          - "@stylistic/stylelint-config"
+          - stylelint
+          - stylelint-config-recess-order
+          - stylelint-config-standard
+          - stylelint-rem-over-px
+          - stylelint-use-nesting
