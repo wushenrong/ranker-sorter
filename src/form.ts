@@ -3,23 +3,60 @@ import { ValidationError, fromZodError } from 'zod-validation-error'
 import { setupRanker } from './ranker'
 import { zodFormData, zodRankerCreationData } from './schemas'
 
-const fileForm = `
-  <legend>Ranker data from JSON file</legend>
-  <label for="get-file">Choose a JSON file:</label>
-  <input id="get-file" name="file" type="file" accept="application/json" required>
-`
+function fileFormSetup(): Node[] {
+  const legend = document.createElement('legend')
+  const label = document.createElement('label')
+  const input = document.createElement('input')
 
-const manualForm = `
-  <legend>Custom Ranker Creation</legend>
-  <label for="title">Title of Ranker</label>
-  <input id="title" name="title" minLength="1" value="Custom Ranker" required>
-  <label for="characters">List of Characters</label>
-  <textarea id="characters" name="characters" minLength="3" required>Names separated by newlines</textarea>
-`
+  legend.textContent = 'Ranker data from JSON file'
 
-export function setupForm(formElement: HTMLFormElement) {
+  label.textContent = 'Choose a JSON file:'
+  label.htmlFor = 'get-file'
+
+  input.id = 'get-file'
+  input.name = 'file'
+  input.type = 'file'
+  input.accept = 'application/json'
+  input.required = true
+
+  return [legend, label, input]
+}
+
+function manualFormSetup(): Node[] {
+  const legend = document.createElement('legend')
+  const titleLabel = document.createElement('label')
+  const titleInput = document.createElement('input')
+  const charactersLabel = document.createElement('label')
+  const charactersTextArea = document.createElement('textarea')
+
+  legend.textContent = 'Custom Ranker Creation'
+
+  titleLabel.textContent = 'Title of Ranker'
+  titleLabel.htmlFor = 'title'
+
+  titleInput.id = 'title'
+  titleInput.name = 'title'
+  titleInput.type = 'text'
+  titleInput.minLength = 1
+  titleInput.value = 'Custom Ranker'
+  titleInput.required = true
+
+  charactersLabel.textContent = 'List of Characters'
+  charactersLabel.htmlFor = 'characters'
+
+  charactersTextArea.id = 'characters'
+  charactersTextArea.name = 'characters'
+  charactersTextArea.minLength = 3
+  charactersTextArea.placeholder = 'Names separated by newlines'
+  charactersTextArea.required = true
+
+  return [legend, titleLabel, titleInput, charactersLabel, charactersTextArea]
+}
+
+export function setupForm(formElement: HTMLFormElement, rankerForm: HTMLFieldSetElement) {
   const formTypeInputs = formElement.querySelectorAll<HTMLInputElement>('[name="type"]')
-  const rankerForm = formElement.querySelector<HTMLFieldSetElement>('#ranker-data')!
+  const fileForm = fileFormSetup()
+  const manualForm = manualFormSetup()
 
   const setFormError = (error: Error) => {
     let errorMessageBox = formElement.querySelector<HTMLParagraphElement>('#error')
@@ -69,16 +106,16 @@ export function setupForm(formElement: HTMLFormElement) {
       throw fromZodError(parsedRankerData.error)
     }
 
-    return parsedRankerData.data
+    setupRanker(parsedRankerData.data)
   }
 
   const formTypeChangeListener = (event: Event) => {
     const checkedType = event.target as HTMLInputElement
 
     if (checkedType.value === 'manual') {
-      rankerForm.innerHTML = manualForm
+      rankerForm.replaceChildren(...manualForm)
     } else if (checkedType.value === 'json') {
-      rankerForm.innerHTML = fileForm
+      rankerForm.replaceChildren(...fileForm)
     } else {
       setFormError(new Error('Please reload the page.'))
     }
@@ -86,7 +123,7 @@ export function setupForm(formElement: HTMLFormElement) {
 
   const formSubmitListener = (event: SubmitEvent) => {
     event.preventDefault()
-    getFormData().then(data => setupRanker(data)).catch((error: Error) => setFormError(error))
+    getFormData().catch((error: Error) => setFormError(error))
   }
 
   for (const formTypeInput of formTypeInputs) {
@@ -95,5 +132,5 @@ export function setupForm(formElement: HTMLFormElement) {
 
   formElement.addEventListener('submit', formSubmitListener)
 
-  rankerForm.innerHTML = fileForm
+  rankerForm.replaceChildren(...fileForm)
 }

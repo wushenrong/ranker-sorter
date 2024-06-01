@@ -30,6 +30,14 @@ export default tseslint.config(
     linterOptions: {
       reportUnusedDisableDirectives: 'error',
     },
+    rules: {
+      '@stylistic/max-len': [
+        'warn',
+        {
+          code: 120,
+        },
+      ],
+    },
   },
   {
     files: ['*.js'],

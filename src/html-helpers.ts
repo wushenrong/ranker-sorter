@@ -1,3 +1,5 @@
+export const APP = document.querySelector('#app')!
+
 export function beforeUnloadEventListener(event: BeforeUnloadEvent) {
   event.preventDefault()
 }
@@ -23,4 +25,18 @@ export function addImageToElement(element: HTMLElement, alt: string, source?: st
   } else {
     element.replaceChildren(alt)
   }
+}
+
+export function createBrBlockedParagraph(...lines: string[]) {
+  const paragraph = document.createElement('p')
+
+  for (const [index, line] of lines.entries()) {
+    paragraph.append(document.createTextNode(line))
+
+    if (index < lines.length) {
+      paragraph.append(document.createElement('br'))
+    }
+  }
+
+  return paragraph
 }

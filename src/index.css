@@ -5,7 +5,7 @@
 body {
   display: flex;
   flex-direction: column;
-  place-items: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -46,6 +46,15 @@ label {
   margin: 0.5rem;
 }
 
+a,
+button[type="submit"] {
+  color: var(--indigo-2);
+
+  @media (--OS-Dark) {
+    color: var(--indigo-10);
+  }
+}
+
 del {
   color: var(--red-1);
 }
@@ -55,8 +64,7 @@ del {
   margin: 0 auto;
 }
 
-#ranker-options,
-#ranker-data {
+.form-flex-column {
   display: flex;
   flex-direction: column;
 }
@@ -72,4 +80,22 @@ del {
     height: 6rem;
     padding: 0.5rem;
   }
+}
+
+.result-buttons {
+  margin: 0.25rem;
+}
+
+/*! Visually hide elements from https://developer.mozilla.org */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -0.0625rem !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }

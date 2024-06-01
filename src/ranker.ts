@@ -2,7 +2,7 @@ import { combinations } from 'mathjs/number'
 
 import type { RankerCreationData } from './schemas'
 
-import { addImageToElement, beforeUnloadEventListener } from './html-helpers'
+import { APP, addImageToElement, beforeUnloadEventListener, createBrBlockedParagraph } from './html-helpers'
 import { displayResults } from './results'
 import { EloSystem } from './schemas'
 
@@ -11,8 +11,6 @@ interface MatchRecord {
   character_b: string
   winner?: string
 }
-
-const APP = document.querySelector('#app')!
 
 export function setupRanker(data: RankerCreationData) {
   const ELO_SYSTEM: EloSystem = {}
@@ -32,26 +30,28 @@ export function setupRanker(data: RankerCreationData) {
     }
   }
 
-  APP.innerHTML = `
-    <p id="info">
-      There are ${combination} combination${combination > 1 ? 's' : ''} of 2 characters for ${data.characters.length}
-      characters.
-      <br>
-      This will take you about ${estimatedTime} minute${estimatedTime > 1 ? 's' : ''} if each choice takes about 5
-      seconds.
-    </p>
-    <p id="progress-info">Current Progress: ${currentMatchIndex} / ${combination}</p>
-    <div class="selections">
-      <button id="character-a" type="button"></button>
-      <button id="character-b" type="button"></button>
-    </div>
-    <button id="draw" type="button">Both are equal</button>
-  `
+  const info = createBrBlockedParagraph(
+    `There are ${combination} combination${combination > 1 ? 's' : ''} of 2 characters for ${data.characters.length}
+    characters.`,
+    `This will take you about ${estimatedTime} minute${estimatedTime > 1 ? 's' : ''} if each choice takes about 5
+    seconds.`,
+  )
+  const progress = document.createElement('p')
+  const selections = document.createElement('div')
+  const characterAButton = document.createElement('button')
+  const characterBButton = document.createElement('button')
+  const drawButton = document.createElement('button')
 
-  const progressInfo = APP.querySelector('#progress-info')!
-  const characterAButton = APP.querySelector<HTMLButtonElement>('#character-a')!
-  const characterBButton = APP.querySelector<HTMLButtonElement>('#character-b')!
-  const drawButton = APP.querySelector<HTMLButtonElement>('#draw')!
+  selections.className = 'selections'
+  selections.append(characterAButton, characterBButton)
+
+  characterAButton.type = 'button'
+  characterBButton.type = 'button'
+
+  drawButton.textContent = 'Both are equal'
+  drawButton.type = 'button'
+
+  APP.replaceChildren(info, progress, selections, drawButton)
 
   const rankCharacters = (record: MatchRecord) => {
     const characterAElo = ELO_SYSTEM[record.character_a].elo
@@ -89,6 +89,13 @@ export function setupRanker(data: RankerCreationData) {
 
     ELO_SYSTEM[record.character_a].elo = Math.max(characterAElo + characterAEloChange, 0)
     ELO_SYSTEM[record.character_b].elo = Math.max(characterBElo + characterBEloChange, 0)
+  }
+
+  const updateRanker = () => {
+    progress.textContent = `Current Progress: ${currentMatchIndex} / ${combination}`
+
+    addImageToElement(characterAButton, data.characters[characterAIndex].name, data.characters[characterAIndex].image)
+    addImageToElement(characterBButton, data.characters[characterBIndex].name, data.characters[characterBIndex].image)
   }
 
   const viewResultsListener = () => {
@@ -132,28 +139,27 @@ export function setupRanker(data: RankerCreationData) {
     }
 
     if (currentMatchIndex === combination) {
-      APP.innerHTML = `
-        <p role="alert">
-          You have completed the ranker, on the next page you will have the chance to see and save your results.
-          <br>
-          Remember, do not reload your browser as the ranker does not store any information on your computer.
-        </p>
-        <button>View Results</button>
-      `
+      const completionMessage = createBrBlockedParagraph(
+        `You have completed the ranker, on the next page you will have the chance to see and save your results.`,
+        `Remember, do not reload your browser as the ranker does not store any information on your computer.`,
+      )
+      const viewResultsButton = document.createElement('button')
 
-      APP.querySelector('button')!.addEventListener('click', viewResultsListener)
+      completionMessage.role = 'alert'
+
+      viewResultsButton.textContent = 'View Results'
+      viewResultsButton.role = 'button'
+      viewResultsButton.addEventListener('click', viewResultsListener)
+
+      APP.replaceChildren(completionMessage, viewResultsButton)
 
       return
     }
 
-    progressInfo.textContent = `Current Progress: ${currentMatchIndex} / ${combination}`
-
-    addImageToElement(characterBButton, data.characters[characterBIndex].name, data.characters[characterBIndex].image)
-    addImageToElement(characterAButton, data.characters[characterAIndex].name, data.characters[characterAIndex].image)
+    updateRanker()
   }
 
-  addImageToElement(characterAButton, data.characters[characterAIndex].name, data.characters[characterAIndex].image)
-  addImageToElement(characterBButton, data.characters[characterBIndex].name, data.characters[characterBIndex].image)
+  updateRanker()
 
   characterAButton.addEventListener('click', onClickListener('character_a'))
   characterBButton.addEventListener('click', onClickListener('character_b'))

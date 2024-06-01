@@ -1,57 +1,79 @@
 import type { RankerResults } from './schemas'
 
-import { addImageToElement, beforeUnloadEventListener } from './html-helpers'
+import { APP, addImageToElement, beforeUnloadEventListener, createBrBlockedParagraph } from './html-helpers'
 
-const APP = document.querySelector('#app')!
+const TABLE_HEADINGS = [
+  'Rank',
+  'Character',
+  'Elo',
+  'Wins',
+  'Losses',
+  'Draws',
+]
 
 const newRankerListener = () => window.location.reload()
 
+function saveFile<T>(data: T, filename: string) {
+  const json = JSON.stringify(data, undefined, 2)
+  const blob = new Blob([json], { type: 'application/json' })
+  const href = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+
+  a.href = href
+  a.download = filename
+
+  document.body.append(a)
+
+  a.click()
+  a.remove()
+
+  URL.revokeObjectURL(href)
+}
+
+function createTableHead(headings: string[]) {
+  const tableHead = document.createElement('thead')
+  const tableRow = document.createElement('tr')
+
+  for (const heading of headings) {
+    const column = document.createElement('th')
+    column.textContent = heading
+    column.scope = 'col'
+    tableRow.append(column)
+  }
+
+  tableHead.append(tableRow)
+
+  return tableHead
+}
+
 export function displayResults(results: RankerResults) {
   const saveResultsListener = () => {
-    const json = JSON.stringify(results, undefined, 2)
-    const blob = new Blob([json], { type: 'application/json' })
-    const href = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-
-    a.href = href
-    a.download = `${results.title}-results.json`
-
-    document.body.append(a)
-
-    a.click()
-    a.remove()
-
-    URL.revokeObjectURL(href)
-
+    saveFile(results, `${results.title}-results.json`)
     window.removeEventListener('beforeunload', beforeUnloadEventListener)
   }
 
-  APP.innerHTML = `
-    <table>
-      <caption></caption>
-      <thead>
-        <tr>
-          <th scope="col">Rank</th>
-          <th scope="col">Character</th>
-          <th scope="col">Elo</th>
-          <th scope="col">Wins</th>
-          <th scope="col">Losses</th>
-          <th scope="col">Draws</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <p role="alert">Do not forget to save your results.</p>
-    <button id="save" type="button">Save Results</button>
-    <button id="new" type="button">New Ranker (Reloads Page)</button>
-  `
-
-  const tableCaption = APP.querySelector<HTMLTableCaptionElement>('caption')!
-  const tableBody = APP.querySelector<HTMLTableSectionElement>('tbody')!
-  const saveButton = APP.querySelector<HTMLButtonElement>('#save')!
-  const newButton = APP.querySelector<HTMLButtonElement>('#new')!
+  const table = document.createElement('table')
+  const tableCaption = document.createElement('caption')
+  const tableHead = createTableHead(TABLE_HEADINGS)
+  const tableBody = document.createElement('tbody')
+  const saveMessage = createBrBlockedParagraph('Do not forget to save your results.')
+  const saveButton = document.createElement('button')
+  const newButton = document.createElement('button')
 
   tableCaption.textContent = `Result of Ranking "${results.title}" Character`
+
+  saveMessage.role = 'alert'
+
+  saveButton.textContent = 'Save Results'
+  saveButton.type = 'button'
+  saveButton.className = 'result-buttons'
+  newButton.textContent = 'New Ranker (Reloads Page)'
+  newButton.type = 'button'
+  newButton.className = 'result-buttons'
+
+  table.append(tableCaption, tableHead, tableBody)
+
+  APP.replaceChildren(table, saveMessage, saveButton, newButton)
 
   for (const [index, player] of results.characters.entries()) {
     const tableRow = document.createElement('tr')
