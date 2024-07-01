@@ -30,7 +30,7 @@
     "eslint-plugin-perfectionist": "^2.10.0",
     "eslint-plugin-unicorn": "^53.0.0",
     "globals": "^15.3.0",
-    "hint": "^7.1.11",
+    "hint": "^7.1.12",
     "htmlnano": "^2.1.1",
     "postcss-preset-env": "^9.5.14",
     "rollup-plugin-visualizer": "^5.12.0",
