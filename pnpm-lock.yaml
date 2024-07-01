@@ -43,8 +43,8 @@ importers:
         specifier: ^9.4.0
         version: 9.4.0
       eslint-plugin-compat:
-        specifier: 5.0.0-2
-        version: 5.0.0-2(eslint@9.4.0)
+        specifier: 5.0.0
+        version: 5.0.0(eslint@9.4.0)
       eslint-plugin-perfectionist:
         specifier: ^2.10.0
         version: 2.10.0(eslint@9.4.0)(typescript@5.4.5)
@@ -1837,8 +1837,8 @@ packages:
     engines: {node: '>=6.0'}
     hasBin: true
 
-  eslint-plugin-compat@5.0.0-2:
-    resolution: {integrity: sha512-WXKPFiSO8+tU1DCWWxyXz517l10ZqPUPPohpEUhhWJ74vAF0UlsZB/d9WKj0+Q8UwAA+Wcc2spS6M9/INdCTzA==}
+  eslint-plugin-compat@5.0.0:
+    resolution: {integrity: sha512-29KNWyFkUbNVf6TIKVe9SVCGCtHjML3HnUg9C8LG2GsXf7miAeBOgdMc1n2B5n0sHUzg1/A4IFly7Jyf1gSbgQ==}
     engines: {node: '>=14.x'}
     peerDependencies:
       eslint: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -3407,6 +3407,10 @@ packages:
   q@1.5.1:
     resolution: {integrity: sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==}
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
+    deprecated: |-
+      You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+
+      (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   querystringify@2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
@@ -6502,7 +6506,7 @@ snapshots:
       source-map: 0.6.1
     optional: true
 
-  eslint-plugin-compat@5.0.0-2(eslint@9.4.0):
+  eslint-plugin-compat@5.0.0(eslint@9.4.0):
     dependencies:
       '@mdn/browser-compat-data': 5.5.31
       ast-metadata-inferer: 0.8.0
