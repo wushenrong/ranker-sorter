@@ -1,0 +1,49 @@
+import * as zod from '@zod/mini'
+
+zod.config(zod.core.locales.en())
+
+const player = zod.interface({
+  'image?': zod.url('Must be an URL').check(
+    zod.regex(/^https:\/\//, 'Must use HTTPS'),
+    zod.regex(
+      /[-_a-zA-Z0-9.]{2,256}\.[a-z]{2,4}\b(\/[-_a-zA-Z0-9./]*)/,
+      'Must be a website',
+    ),
+    zod.regex(/([-_a-zA-Z0-9]+)\.(png|jp(e)?g)$/, {
+      error: 'Must be pointing to a PNG or JPEG file',
+    }),
+  ),
+  name: zod
+    .string()
+    .check(zod.minLength(1, 'Must be 1 or more characters long')),
+})
+
+const ratings = zod.interface({
+  elo: zod.number(),
+  wins: zod.number(),
+  losses: zod.number(),
+  draws: zod.number(),
+})
+
+export const customRanker = zod.interface({
+  title: zod
+    .string()
+    .check(zod.minLength(3, 'Must be 3 or more characters long')),
+  players: zod
+    .array(
+      zod.union([
+        zod
+          .string()
+          .check(zod.minLength(1, 'Name must be 1 or more characters long')),
+        player,
+      ]),
+    )
+    .check(zod.minLength(2, 'Must have 2 or more players')),
+})
+
+export const rankerResults = zod.extend(customRanker, {
+  players: zod.array(zod.extend(player, ratings)),
+})
+
+export type Player = zod.infer<typeof player>
+export type Ratings = zod.infer<typeof ratings>
