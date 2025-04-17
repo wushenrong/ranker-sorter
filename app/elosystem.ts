@@ -1,4 +1,4 @@
-import type { Ratings } from './schema'
+import type { Ratings } from '~/schema'
 
 export type EloSystem = Record<string, Ratings>
 export type Score = 0.0 | 0.5 | 1.0
@@ -29,9 +29,8 @@ export const recordMatch = (
   const expectedA = calculateExpectedScore(ratingA, ratingB)
   const expectedB = 1 - expectedA
 
-  // Flooring to be conservative and have a consistent rounding
-  const newRatingA = Math.floor(ratingA + kFactor * (score - expectedA))
-  const newRatingB = Math.floor(ratingB + kFactor * (1 - score - expectedB))
+  const newRatingA = Math.round(ratingA + kFactor * (score - expectedA))
+  const newRatingB = Math.round(ratingB + kFactor * (1 - score - expectedB))
 
   const result = score === 1 ? 'win' : score === 0 ? 'loss' : 'draw'
 

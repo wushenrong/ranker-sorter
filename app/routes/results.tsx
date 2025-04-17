@@ -1,8 +1,8 @@
 import * as zod from '@zod/mini'
+import { Link } from 'react-router'
 
 import { rankerResults } from '~/schema'
 
-import { Link } from 'react-router'
 import type { Route } from './+types/results'
 
 const TABLE_HEADINGS = [
@@ -30,19 +30,17 @@ export default function Results({ actionData }: Route.ComponentProps) {
     return (
       <>
         {actionData?.error ? (
-          <>
-            <p className="text-center">Error: Unable to load ranker results</p>
-            <p className="text-center whitespace-pre-wrap">
-              {actionData.error}
-            </p>
-          </>
+          <div className="load-error">
+            <p>Error: Unable to load ranker results</p>
+            <p>{actionData.error}</p>
+          </div>
         ) : (
           <p>
             Error: Unable to create ranker results. Did you accidentally
             refreshed the browser?
           </p>
         )}
-        <Link to={'/'} replace>
+        <Link to="/" replace>
           Go back home
         </Link>
       </>
@@ -51,9 +49,31 @@ export default function Results({ actionData }: Route.ComponentProps) {
 
   const results = actionData.data
 
+  const saveResults = () => {
+    const data = JSON.stringify(results)
+    const blob = new Blob([data], { type: 'application/json' })
+    const href = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+
+    a.href = href
+    a.download = 'ranker-results.json'
+
+    document.body.appendChild(a)
+
+    a.click()
+    a.remove()
+
+    URL.revokeObjectURL(href)
+  }
+
   return (
     <>
       <p role="alert">Do not forget to save your results!</p>
+
+      <button onClick={saveResults} type="button">
+        Save Results
+      </button>
+
       <table>
         <caption>Result of ranking: {results.title}</caption>
         <thead>
@@ -78,6 +98,10 @@ export default function Results({ actionData }: Route.ComponentProps) {
           ))}
         </tbody>
       </table>
+
+      <Link to="/" replace>
+        Go back home
+      </Link>
     </>
   )
 }

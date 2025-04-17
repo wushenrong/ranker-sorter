@@ -1,15 +1,55 @@
-@import "tailwindcss";
+@import "open-props/style";
+@import "open-props/normalize";
+@import "open-props/buttons";
 
-@theme {
-  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+:root {
+  font-family: var(--font-system-ui);
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: var(--size-fluid-2);
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+p {
+  margin: var(--size-fluid-1) 0;
+}
+
+button {
+  margin: var(--size-fluid-1);
+}
+
+.ranker-creation-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selections > button {
+  padding: var(--size-3);
+}
+
+.load-error {
+  p:first-child {
+    text-align: center;
+
+    & + p {
+      white-space: pre-wrap;
+    }
+  }
+}
+
+.error-boundary {
+  padding: var(--size-fluid-2);
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+
+  & pre {
+    padding: var(--size-fluid-2);
+    width: 100%;
+    overflow-x: auto;
   }
 }

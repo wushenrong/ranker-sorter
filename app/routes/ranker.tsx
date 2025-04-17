@@ -5,32 +5,35 @@ import { useEffect, useState } from 'react'
 import { Link, useSubmit } from 'react-router'
 
 import { DEFAULT_RATINGS, recordMatch } from '~/elosystem'
-import { customRanker } from '~/schema'
+import { creationForm, customRanker } from '~/schema'
+import { shuffleArray } from '~/utils'
+
+import type { Route } from './+types/ranker'
 
 import type { EloSystem, Score } from '~/elosystem'
 import type { Player } from '~/schema'
-import type { Route } from './+types/ranker'
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
-  const formData = await request.formData()
-  const file = formData.get('custom-ranker')
+  const formData = Object.fromEntries(await request.formData())
+  const formResult = creationForm.safeParse(formData)
 
-  if (!(file instanceof File) || !file.size) {
-    return { ok: false as const, error: 'No file was selected' }
+  if (!formResult.success) {
+    return { ok: false as const, error: zod.prettifyError(formResult.error) }
   }
 
-  if (file.type !== 'application/json') {
-    return { ok: false as const, error: 'File is not a JSON file' }
-  }
-
-  const rankerData = JSON.parse(await file.text())
+  const rankerData = JSON.parse(await formResult.data['custom-ranker'].text())
   const result = customRanker.safeParse(rankerData)
 
   if (!result.success) {
     return { ok: false as const, error: zod.prettifyError(result.error) }
   }
 
-  return { ok: true as const, data: result.data }
+  const data = {
+    title: result.data.title,
+    players: shuffleArray(result.data.players),
+  }
+
+  return { ok: true as const, data }
 }
 
 export default function Ranker({ actionData }: Route.ComponentProps) {
@@ -38,21 +41,17 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
     return (
       <>
         {actionData?.error ? (
-          <>
-            <p className="text-center whitespace-pre-wrap">
-              Error: Unable to load ranker data
-            </p>
-            <p className="text-center whitespace-pre-wrap">
-              {actionData.error}
-            </p>
-          </>
+          <div className="load-error">
+            <p>Error: Unable to load ranker data</p>
+            <p>{actionData.error}</p>
+          </div>
         ) : (
           <p>
             Error: Unable to create ranker. Did you accidentally refreshed the
             browser?
           </p>
         )}
-        <Link to={'/'} replace>
+        <Link to="/" replace>
           Go back home
         </Link>
       </>
@@ -87,7 +86,7 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
         : player.name
   }
 
-  const onClick = (playerA: string, playerB: string, score: Score) => {
+  const select = (playerA: string, playerB: string, score: Score) => {
     return () => {
       const newRatings = recordMatch(ratings, playerA, playerB, score)
 
@@ -111,11 +110,7 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
           const name = typeof player !== 'string' ? player.name : player
           const image = typeof player !== 'string' ? player.image : undefined
 
-          return {
-            ...ratings[name],
-            name,
-            image: image,
-          }
+          return { ...ratings[name], name, image }
         })
         .sort((playerA, playerB) => playerB.elo - playerA.elo),
     }
@@ -129,7 +124,8 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
   }
 
   const combination = combinations(players.length, 2)
-  const estimatedTime = Math.ceil(combination / 60)
+  const estimatedMinutes = Math.floor(combination / 60)
+  const estimatedSeconds = combination % 60
   const playerAName = getPlayerName(players[currentPlayerA])
   const playerBName = getPlayerName(players[currentPlayerB])
 
@@ -140,35 +136,39 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
           <p>
             There are {combination} combination{combination > 1 ? 's' : ''} of 2
             players for {players.length} players. This will take about{' '}
-            {estimatedTime} minute{estimatedTime > 1 ? 's' : ''} if each choice
-            takes a second.
+            {estimatedMinutes > 0 && (
+              <>
+                {estimatedMinutes} minute{estimatedMinutes > 1 && 's'}{' '}
+                {estimatedSeconds && 'and'}
+              </>
+            )}
+            {estimatedSeconds > 0 && (
+              <>
+                {estimatedSeconds} second{estimatedSeconds > 1 && 's'}
+              </>
+            )}
+            if each choice takes a second.
           </p>
           <p>
             Current progress: {currentProgress}/{combination}
           </p>
-          <div>
+          <div className="selections">
             <button
-              className="p-4"
               type="button"
-              onClick={onClick(playerAName, playerBName, 1.0)}
+              onClick={select(playerAName, playerBName, 1.0)}
             >
               {playerAName}
             </button>
             <button
-              className="p-4"
               type="button"
-              onClick={onClick(playerAName, playerBName, 0.5)}
-            >
-              Draw
-            </button>
-            <button
-              className="p-4"
-              type="button"
-              onClick={onClick(playerAName, playerBName, 0.0)}
+              onClick={select(playerAName, playerBName, 0.0)}
             >
               {playerBName}
             </button>
           </div>
+          <button type="button" onClick={select(playerAName, playerBName, 0.5)}>
+            Draw / I Cannot Decide
+          </button>
         </>
       ) : (
         <>

@@ -31,10 +31,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <main className="flex flex-col items-center justify-center pt-16 pb-4">
+    <main>
+      <h1>Ranker Sorter</h1>
       <Outlet />
     </main>
   )
+}
+
+export function HydrateFallback() {
+  return <p>Loading, please wait...</p>
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
@@ -54,11 +59,11 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
+    <main className="error-boundary">
       <h1>{message}</h1>
       <p>{details}</p>
       {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
+        <pre className="stack-trace">
           <code>{stack}</code>
         </pre>
       )}

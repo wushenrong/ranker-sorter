@@ -1,8 +1,15 @@
 import { reactRouter } from '@react-router/dev/vite'
-import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { optimizeCssModules } from 'vite-plugin-optimize-css-modules'
+import postcssPresetEnv from 'postcss-preset-env'
 
 export default defineConfig({
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  base: '/ranker-sorter/',
+  css: {
+    postcss: {
+      plugins: [postcssPresetEnv({ minimumVendorImplementations: 2 })],
+    },
+  },
+  plugins: [reactRouter(), tsconfigPaths(), optimizeCssModules()],
 })

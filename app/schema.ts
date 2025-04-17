@@ -45,5 +45,14 @@ export const rankerResults = zod.extend(customRanker, {
   players: zod.array(zod.extend(player, ratings)),
 })
 
+export const creationForm = zod.interface({
+  'custom-ranker': zod
+    .file()
+    .check(
+      zod.minSize(1, 'Must select a file'),
+      zod.mime(['application/json'], 'Must be a JSON file'),
+    ),
+})
+
 export type Player = zod.infer<typeof player>
 export type Ratings = zod.infer<typeof ratings>

@@ -14,12 +14,15 @@ export default function Creator() {
       encType="multipart/form-data"
       method="post"
       replace={true}
-      className="flex flex-col items-center"
+      className="ranker-creation-form"
     >
-      <label>
-        Create custom ranker from JSON file:{' '}
-        <input name="custom-ranker" type="file" accept="application/json" />
-      </label>
+      <fieldset>
+        <legend>Load a custom ranker</legend>
+        <label>
+          Create custom ranker from JSON file:{' '}
+          <input name="custom-ranker" type="file" accept="application/json" />
+        </label>
+      </fieldset>
       <button type="submit">Create Ranker</button>
     </Form>
   )
