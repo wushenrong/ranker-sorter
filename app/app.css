@@ -21,23 +21,27 @@ button {
   margin: var(--size-fluid-1);
 }
 
-.ranker-creation-form {
+.ranker-creation {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.selections > button {
-  padding: var(--size-3);
+.selections {
+  display: flex;
+
+  > button {
+    padding: var(--size-3);
+    width: 100px;
+    height: 100px;
+  }
 }
 
-.load-error {
-  p:first-child {
-    text-align: center;
+.load-error > p:first-child {
+  text-align: center;
 
-    & + p {
-      white-space: pre-wrap;
-    }
+  & + p {
+    white-space: pre-wrap;
   }
 }
 

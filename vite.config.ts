@@ -1,8 +1,8 @@
 import { reactRouter } from '@react-router/dev/vite'
-import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
-import { optimizeCssModules } from 'vite-plugin-optimize-css-modules'
 import postcssPresetEnv from 'postcss-preset-env'
+import { defineConfig } from 'vite'
+import { optimizeCssModules } from 'vite-plugin-optimize-css-modules'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   base: '/ranker-sorter/',

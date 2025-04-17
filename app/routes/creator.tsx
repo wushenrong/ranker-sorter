@@ -1,17 +1,10 @@
 import { Form } from 'react-router'
 
-export function meta() {
-  return [
-    { title: 'Ranker Sorter' },
-    { content: 'Welcome to React Router!', name: 'description' },
-  ]
-}
-
 export default function Creator() {
   return (
     <Form
       action="/ranker"
-      className="ranker-creation-form"
+      className="ranker-creation"
       encType="multipart/form-data"
       method="post"
       replace={true}

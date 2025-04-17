@@ -17,7 +17,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <Meta />
+        <title>Ranker Sorter</title>
+        <meta
+          content="If you can rank chess players by using Elo, then why not for everything else."
+          name="description"
+        />
         <Links />
       </head>
       <body>

@@ -10,7 +10,11 @@
     }
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
+    "includes": ["**", "!.react-router", "!.vscode"]
+  },
+  "formatter": {
+    "useEditorconfig": true
   },
   "javascript": {
     "formatter": {
