@@ -5,10 +5,10 @@ export type Score = 0.0 | 0.5 | 1.0
 export type MatchResult = 'win' | 'loss' | 'draw'
 
 export const DEFAULT_RATINGS = {
-  elo: 1000,
-  wins: 0,
-  losses: 0,
   draws: 0,
+  elo: 1000,
+  losses: 0,
+  wins: 0,
 }
 
 const DEFAULT_K_FACTOR = 32
@@ -37,10 +37,10 @@ export const recordMatch = (
   const updateStats = (player: string, result: MatchResult) => {
     const current = system[player]
     return {
-      elo: player === playerA ? newRatingA : newRatingB,
-      wins: current.wins + (result === 'win' ? 1 : 0),
-      losses: current.losses + (result === 'loss' ? 1 : 0),
       draws: current.draws + (result === 'draw' ? 1 : 0),
+      elo: player === playerA ? newRatingA : newRatingB,
+      losses: current.losses + (result === 'loss' ? 1 : 0),
+      wins: current.wins + (result === 'win' ? 1 : 0),
     }
   }
 

@@ -19,10 +19,10 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   const result = rankerResults.safeParse(rankerResultsData)
 
   if (!result.success) {
-    return { ok: false as const, error: zod.prettifyError(result.error) }
+    return { error: zod.prettifyError(result.error), ok: false as const }
   }
 
-  return { ok: true as const, data: result.data }
+  return { data: result.data, ok: true as const }
 }
 
 export default function Results({ actionData }: Route.ComponentProps) {
@@ -40,7 +40,7 @@ export default function Results({ actionData }: Route.ComponentProps) {
             refreshed the browser?
           </p>
         )}
-        <Link to="/" replace>
+        <Link replace to="/">
           Go back home
         </Link>
       </>
@@ -99,7 +99,7 @@ export default function Results({ actionData }: Route.ComponentProps) {
         </tbody>
       </table>
 
-      <Link to="/" replace>
+      <Link replace to="/">
         Go back home
       </Link>
     </>

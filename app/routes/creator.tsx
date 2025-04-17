@@ -3,7 +3,7 @@ import { Form } from 'react-router'
 export function meta() {
   return [
     { title: 'Ranker Sorter' },
-    { name: 'description', content: 'Welcome to React Router!' },
+    { content: 'Welcome to React Router!', name: 'description' },
   ]
 }
 
@@ -11,16 +11,16 @@ export default function Creator() {
   return (
     <Form
       action="/ranker"
+      className="ranker-creation-form"
       encType="multipart/form-data"
       method="post"
       replace={true}
-      className="ranker-creation-form"
     >
       <fieldset>
         <legend>Load a custom ranker</legend>
         <label>
           Create custom ranker from JSON file:{' '}
-          <input name="custom-ranker" type="file" accept="application/json" />
+          <input accept="application/json" name="custom-ranker" type="file" />
         </label>
       </fieldset>
       <button type="submit">Create Ranker</button>

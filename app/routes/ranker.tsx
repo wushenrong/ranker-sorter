@@ -3,40 +3,58 @@ import * as zod from '@zod/mini'
 import { combinations } from 'mathjs'
 import { useEffect, useState } from 'react'
 import { Link, useSubmit } from 'react-router'
-
+import type { EloSystem, Score } from '~/elosystem'
 import { DEFAULT_RATINGS, recordMatch } from '~/elosystem'
+import type { Player } from '~/schema'
 import { creationForm, customRanker } from '~/schema'
 import { shuffleArray } from '~/utils'
 
 import type { Route } from './+types/ranker'
-
-import type { EloSystem, Score } from '~/elosystem'
-import type { Player } from '~/schema'
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = Object.fromEntries(await request.formData())
   const formResult = creationForm.safeParse(formData)
 
   if (!formResult.success) {
-    return { ok: false as const, error: zod.prettifyError(formResult.error) }
+    return { error: zod.prettifyError(formResult.error), ok: false as const }
   }
 
   const rankerData = JSON.parse(await formResult.data['custom-ranker'].text())
   const result = customRanker.safeParse(rankerData)
 
   if (!result.success) {
-    return { ok: false as const, error: zod.prettifyError(result.error) }
+    return { error: zod.prettifyError(result.error), ok: false as const }
   }
 
   const data = {
-    title: result.data.title,
     players: shuffleArray(result.data.players),
+    title: result.data.title,
   }
 
-  return { ok: true as const, data }
+  return { data, ok: true as const }
 }
 
 export default function Ranker({ actionData }: Route.ComponentProps) {
+  const submit = useSubmit()
+  const [ratings, setRatings] = useState<EloSystem>({})
+  const [currentProgress, setCurrentProgress] = useState(0)
+  const [currentPlayerA, setCurrentPlayerA] = useState(0)
+  const [currentPlayerB, setCurrentPlayerB] = useState(1)
+
+  useEffect(() => {
+    if (actionData?.data?.players) {
+      const system = actionData.data.players.reduce((acc, player) => {
+        const name = typeof player === 'string' ? player : player.name
+
+        acc[name] = { ...DEFAULT_RATINGS }
+
+        return acc
+      }, {} as EloSystem)
+
+      setRatings(system)
+    }
+  }, [actionData])
+
   if (!actionData || !actionData.ok) {
     return (
       <>
@@ -51,32 +69,14 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
             browser?
           </p>
         )}
-        <Link to="/" replace>
+        <Link replace to="/">
           Go back home
         </Link>
       </>
     )
   }
 
-  const submit = useSubmit()
-  const [ratings, setRatings] = useState<EloSystem>({})
-  const [currentProgress, setCurrentProgress] = useState(0)
-  const [currentPlayerA, setCurrentPlayerA] = useState(0)
-  const [currentPlayerB, setCurrentPlayerB] = useState(1)
-
   const players = actionData.data.players
-
-  useEffect(() => {
-    const system = players.reduce((acc, player) => {
-      const name = typeof player === 'string' ? player : player.name
-
-      acc[name] = { ...DEFAULT_RATINGS }
-
-      return acc
-    }, {} as EloSystem)
-
-    setRatings(system)
-  }, [players])
 
   const getPlayerName = (player: string | Player) => {
     return typeof player === 'undefined'
@@ -104,15 +104,15 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
 
   const viewResults = () => {
     const results = {
-      title: actionData.data.title,
       players: players
         .map((player) => {
           const name = typeof player !== 'string' ? player.name : player
           const image = typeof player !== 'string' ? player.image : undefined
 
-          return { ...ratings[name], name, image }
+          return { ...ratings[name], image, name }
         })
         .sort((playerA, playerB) => playerB.elo - playerA.elo),
+      title: actionData.data.title,
     }
 
     submit(JSON.stringify(results), {
@@ -154,19 +154,19 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
           </p>
           <div className="selections">
             <button
-              type="button"
               onClick={select(playerAName, playerBName, 1.0)}
+              type="button"
             >
               {playerAName}
             </button>
             <button
-              type="button"
               onClick={select(playerAName, playerBName, 0.0)}
+              type="button"
             >
               {playerBName}
             </button>
           </div>
-          <button type="button" onClick={select(playerAName, playerBName, 0.5)}>
+          <button onClick={select(playerAName, playerBName, 0.5)} type="button">
             Draw / I Cannot Decide
           </button>
         </>
@@ -178,7 +178,7 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
             browser as the ranker does not store any store any information on
             your computer.
           </p>
-          <button type="button" onClick={viewResults}>
+          <button onClick={viewResults} type="button">
             View Results
           </button>
         </>

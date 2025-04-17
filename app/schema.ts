@@ -19,16 +19,13 @@ const player = zod.interface({
 })
 
 const ratings = zod.interface({
-  elo: zod.number(),
-  wins: zod.number(),
-  losses: zod.number(),
   draws: zod.number(),
+  elo: zod.number(),
+  losses: zod.number(),
+  wins: zod.number(),
 })
 
 export const customRanker = zod.interface({
-  title: zod
-    .string()
-    .check(zod.minLength(3, 'Must be 3 or more characters long')),
   players: zod
     .array(
       zod.union([
@@ -39,6 +36,9 @@ export const customRanker = zod.interface({
       ]),
     )
     .check(zod.minLength(2, 'Must have 2 or more players')),
+  title: zod
+    .string()
+    .check(zod.minLength(3, 'Must be 3 or more characters long')),
 })
 
 export const rankerResults = zod.extend(customRanker, {
