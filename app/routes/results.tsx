@@ -89,7 +89,18 @@ export default function Results({ actionData }: Route.ComponentProps) {
           {results.players.map((player, index) => (
             <tr key={player.name}>
               <td>{index + 1}</td>
-              <th scope="row">{player.name}</th>
+              <th scope="row">
+                {player.image ? (
+                  <img
+                    alt={player.name}
+                    height={64}
+                    src={player.image}
+                    width={64}
+                  />
+                ) : (
+                  player.name
+                )}
+              </th>
               <td>{player.elo}</td>
               <td>{player.wins}</td>
               <td>{player.losses}</td>

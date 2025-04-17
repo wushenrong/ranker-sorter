@@ -36,6 +36,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 
 export default function Ranker({ actionData }: Route.ComponentProps) {
   const submit = useSubmit()
+
   const [ratings, setRatings] = useState<EloSystem>({})
   const [currentProgress, setCurrentProgress] = useState(0)
   const [currentPlayerA, setCurrentPlayerA] = useState(0)
@@ -86,6 +87,14 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
         : player.name
   }
 
+  const getPlayerImage = (player: string | Player) => {
+    if (typeof player === 'undefined' || typeof player === 'string') {
+      return undefined
+    }
+
+    return player.image
+  }
+
   const select = (playerA: string, playerB: string, score: Score) => {
     return () => {
       const newRatings = recordMatch(ratings, playerA, playerB, score)
@@ -128,6 +137,8 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
   const estimatedSeconds = combination % 60
   const playerAName = getPlayerName(players[currentPlayerA])
   const playerBName = getPlayerName(players[currentPlayerB])
+  const playerAImage = getPlayerImage(players[currentPlayerA])
+  const playerBImage = getPlayerImage(players[currentPlayerB])
 
   return (
     <>
@@ -157,13 +168,31 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
               onClick={select(playerAName, playerBName, 1.0)}
               type="button"
             >
-              {playerAName}
+              {playerAImage ? (
+                <img
+                  alt={playerAName}
+                  height={64}
+                  src={playerAImage}
+                  width={64}
+                />
+              ) : (
+                playerAName
+              )}
             </button>
             <button
               onClick={select(playerAName, playerBName, 0.0)}
               type="button"
             >
-              {playerBName}
+              {playerBImage ? (
+                <img
+                  alt={playerBName}
+                  height={64}
+                  src={playerBImage}
+                  width={64}
+                />
+              ) : (
+                playerBName
+              )}
             </button>
           </div>
           <button onClick={select(playerAName, playerBName, 0.5)} type="button">
