@@ -1,0 +1,112 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+import { Link, useActionData } from 'react-router'
+
+import { resultsAction } from '../app/actions'
+
+const TABLE_HEADINGS = [
+  'Rank',
+  'Player',
+  'Elo',
+  'Wins',
+  'Losses',
+  'Draws',
+] as const
+
+export default function Results() {
+  const actionData = useActionData<typeof resultsAction>()
+
+  if (!actionData || !actionData?.ok) {
+    return (
+      <>
+        {actionData?.error ? (
+          <div className="load-error">
+            <p>Error: Unable to load ranker results</p>
+            <p>{actionData.error}</p>
+          </div>
+        ) : (
+          <p>
+            Error: Unable to create ranker results. Did you accidentally
+            refreshed the browser?
+          </p>
+        )}
+        <Link replace to="/">
+          Go back home
+        </Link>
+      </>
+    )
+  }
+
+  const results = actionData.data
+
+  const saveResults = () => {
+    const data = JSON.stringify(results)
+    const blob = new Blob([data], { type: 'application/json' })
+    const href = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+
+    a.href = href
+    a.download = 'ranker-results.json'
+
+    document.body.appendChild(a)
+
+    a.click()
+    a.remove()
+
+    URL.revokeObjectURL(href)
+  }
+
+  return (
+    <>
+      <p role="alert">Do not forget to save your results!</p>
+
+      <button onClick={saveResults} type="button">
+        Save Results
+      </button>
+
+      <table>
+        <caption>Result of ranking: {results.title}</caption>
+        <thead>
+          <tr>
+            {TABLE_HEADINGS.map((heading) => (
+              <th key={heading} scope="col">
+                {heading}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {results.players.map((player, index) => (
+            <tr key={player.name}>
+              <th scope="row">
+                {player.image ? (
+                  <img
+                    alt={player.name}
+                    height={64}
+                    src={player.image}
+                    width={64}
+                  />
+                ) : (
+                  player.name
+                )}
+              </th>
+              <td>{index + 1}</td>
+              <td>{player.elo}</td>
+              <td>{player.wins}</td>
+              <td>{player.losses}</td>
+              <td>{player.draws}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <Link replace to="/">
+        Go back home
+      </Link>
+    </>
+  )
+}

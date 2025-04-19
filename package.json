@@ -1,0 +1,48 @@
+{
+  "dependencies": {
+    "@zod/mini": "4.0.0-beta.20250418T202744",
+    "mathjs": "^14.4.0",
+    "open-props": "^1.7.15",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.5.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.0-beta.1",
+    "@eslint/js": "^9.22.0",
+    "@total-typescript/ts-reset": "^0.6.1",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "postcss-preset-env": "^10.1.6",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.26.1",
+    "vite": "^6.3.1",
+    "vite-bundle-analyzer": "^0.19.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT-0",
+      "url": "https://spdx.org/licenses/MIT-0.html"
+    },
+    {
+      "type": "MIT",
+      "url": "https://spdx.org/licenses/MIT.html"
+    }
+  ],
+  "name": "ranker-sorter",
+  "packageManager": "pnpm@10.8.1+sha512.c50088ba998c67b8ca8c99df8a5e02fd2ae2e2b29aaf238feaa9e124248d3f48f9fb6db2424949ff901cffbb5e0f0cc1ad6aedb602cd29450751d11c35023677",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "dev": "vite",
+    "lint": "tsc && biome check",
+    "start": "vite preview"
+  },
+  "type": "module",
+  "version": "0.0.0"
+}
