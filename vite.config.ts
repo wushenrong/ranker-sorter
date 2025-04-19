@@ -10,7 +10,6 @@ import type { UserConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default {
-  base: '/ranker-sorter/',
   css: {
     postcss: {
       plugins: [postcssPresetEnv({ minimumVendorImplementations: 2 })],
