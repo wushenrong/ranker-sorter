@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import * as zod from '@zod/mini'
 import { Link } from 'react-router'
 
@@ -88,7 +94,6 @@ export default function Results({ actionData }: Route.ComponentProps) {
         <tbody>
           {results.players.map((player, index) => (
             <tr key={player.name}>
-              <td>{index + 1}</td>
               <th scope="row">
                 {player.image ? (
                   <img
@@ -101,6 +106,7 @@ export default function Results({ actionData }: Route.ComponentProps) {
                   player.name
                 )}
               </th>
+              <td>{index + 1}</td>
               <td>{player.elo}</td>
               <td>{player.wins}</td>
               <td>{player.losses}</td>

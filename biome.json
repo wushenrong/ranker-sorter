@@ -3,6 +3,24 @@
   "assist": {
     "actions": {
       "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ":NODE:",
+              ":BUN:",
+              ":BLANK_LINE:",
+              ":URL:",
+              ":PACKAGE_WITH_PROTOCOL:",
+              ":BLANK_LINE:",
+              ":PACKAGE:",
+              ":BLANK_LINE:",
+              ":ALIAS:",
+              ":BLANK_LINE:",
+              ":PATH:"
+            ]
+          }
+        },
         "useSortedAttributes": "on",
         "useSortedKeys": "on",
         "useSortedProperties": "on"
@@ -10,8 +28,7 @@
     }
   },
   "files": {
-    "ignoreUnknown": false,
-    "includes": ["**", "!.react-router", "!.vscode"]
+    "ignoreUnknown": false
   },
   "formatter": {
     "useEditorconfig": true

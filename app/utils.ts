@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT-0
+ */
+
 export function shuffleArray<T>(array: T[]) {
   const shuffledArray = [...array]
 

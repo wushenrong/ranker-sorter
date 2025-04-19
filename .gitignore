@@ -1,8 +1,12 @@
+# SPDX-FileCopyrightText: 2025 Samuel Wu
+#
+# SPDX-License-Identifier: MIT-0
+
 .DS_Store
 
 # React Router
-/.react-router/
-/build/
+.react-router/
+build/
 
 # VSCode
 .vscode/*

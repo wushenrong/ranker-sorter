@@ -2,6 +2,7 @@
   "recommendations": [
     "biomejs.biome",
     "editorconfig.editorconfig",
+    "phoenisx.cssvar",
     "yoavbls.pretty-ts-errors"
   ]
 }

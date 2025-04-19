@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import type { RouteConfig } from '@react-router/dev/routes'
 import { index, route } from '@react-router/dev/routes'
 

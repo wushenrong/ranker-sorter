@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 import { Form } from 'react-router'
 
 export default function Creator() {
@@ -16,6 +22,11 @@ export default function Creator() {
           <input accept="application/json" name="custom-ranker" type="file" />
         </label>
       </fieldset>
+      <p>
+        Once you create the ranker, you will have to finish the entire ranker to
+        save your results. This site <strong>does not</strong> save any data on
+        you computer. Do not reload the browser while completing the ranker.
+      </p>
       <button type="submit">Create Ranker</button>
     </Form>
   )

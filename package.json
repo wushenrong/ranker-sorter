@@ -17,14 +17,23 @@
     "@types/node": "^20.17.30",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "postcss-preset-env": "^10.1.5",
+    "postcss-preset-env": "^10.1.6",
     "react-router-devtools": "^1.1.10",
     "typescript": "^5.8.3",
     "vite": "^5.4.18",
     "vite-bundle-analyzer": "^0.18.1",
-    "vite-plugin-optimize-css-modules": "^1.2.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
+  "licenses": [
+    {
+      "type": "MIT-0",
+      "url": "https://spdx.org/licenses/MIT-0.html"
+    },
+    {
+      "type": "MIT",
+      "url": "https://spdx.org/licenses/MIT.html"
+    }
+  ],
   "name": "ranker-sorter",
   "packageManager": "pnpm@10.8.1+sha512.c50088ba998c67b8ca8c99df8a5e02fd2ae2e2b29aaf238feaa9e124248d3f48f9fb6db2424949ff901cffbb5e0f0cc1ad6aedb602cd29450751d11c35023677",
   "private": true,

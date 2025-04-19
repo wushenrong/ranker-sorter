@@ -1,6 +1,7 @@
-# EditorConfig is awesome: https://EditorConfig.org
+# SPDX-FileCopyrightText: 2025 Samuel Wu
+#
+# SPDX-License-Identifier: MIT-0
 
-# top-most EditorConfig file
 root = true
 
 [*]

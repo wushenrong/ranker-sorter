@@ -1,8 +1,14 @@
-import * as zod from '@zod/mini'
+/*
+ * SPDX-FileCopyrightText: 2025 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
+import * as zod from '@zod/mini'
 import { combinations } from 'mathjs'
 import { useEffect, useState } from 'react'
 import { Link, useSubmit } from 'react-router'
+
 import type { EloSystem, Score } from '~/elosystem'
 import { DEFAULT_RATINGS, recordMatch } from '~/elosystem'
 import type { Player } from '~/schema'
@@ -10,6 +16,16 @@ import { creationForm, customRanker } from '~/schema'
 import { shuffleArray } from '~/utils'
 
 import type { Route } from './+types/ranker'
+
+const getPlayerName = (player: string | Player) =>
+  typeof player !== 'undefined' && typeof player !== 'string'
+    ? player.name
+    : player
+
+const getPlayerImage = (player: string | Player) =>
+  typeof player !== 'undefined' && typeof player !== 'string'
+    ? player.image
+    : undefined
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = Object.fromEntries(await request.formData())
@@ -45,7 +61,7 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
   useEffect(() => {
     if (actionData?.data?.players) {
       const system = actionData.data.players.reduce((acc, player) => {
-        const name = typeof player === 'string' ? player : player.name
+        const name = getPlayerName(player)
 
         acc[name] = { ...DEFAULT_RATINGS }
 
@@ -79,22 +95,6 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
 
   const players = actionData.data.players
 
-  const getPlayerName = (player: string | Player) => {
-    return typeof player === 'undefined'
-      ? ''
-      : typeof player === 'string'
-        ? player
-        : player.name
-  }
-
-  const getPlayerImage = (player: string | Player) => {
-    if (typeof player === 'undefined' || typeof player === 'string') {
-      return undefined
-    }
-
-    return player.image
-  }
-
   const select = (playerA: string, playerB: string, score: Score) => {
     return () => {
       const newRatings = recordMatch(ratings, playerA, playerB, score)
@@ -115,8 +115,8 @@ export default function Ranker({ actionData }: Route.ComponentProps) {
     const results = {
       players: players
         .map((player) => {
-          const name = typeof player !== 'string' ? player.name : player
-          const image = typeof player !== 'string' ? player.image : undefined
+          const name = getPlayerName(player)
+          const image = getPlayerImage(player)
 
           return { ...ratings[name], image, name }
         })

@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Samuel Wu
+ *
+ * SPDX-License-Identifier: MIT-0
+ */
+
 import type { Ratings } from '~/schema'
 
 export type EloSystem = Record<string, Ratings>
