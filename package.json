@@ -2,7 +2,7 @@
   "dependencies": {
     "@react-router/node": "^7.5.1",
     "@react-router/serve": "^7.5.1",
-    "@zod/mini": "4.0.0-beta.20250414T061543",
+    "@zod/mini": "4.0.0-beta.20250418T202744",
     "isbot": "^5.1.26",
     "mathjs": "^14.4.0",
     "open-props": "^1.7.15",
