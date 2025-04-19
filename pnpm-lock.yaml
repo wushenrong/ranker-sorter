@@ -67,8 +67,8 @@ importers:
         specifier: ^5.4.18
         version: 5.4.18(@types/node@20.17.30)
       vite-bundle-analyzer:
-        specifier: ^0.18.1
-        version: 0.18.1
+        specifier: ^0.19.0
+        version: 0.19.0
       vite-tsconfig-paths:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.8.3)(vite@5.4.18(@types/node@20.17.30))
@@ -2600,8 +2600,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vite-bundle-analyzer@0.18.1:
-    resolution: {integrity: sha512-VQgrvxRuiZuOhM61p85lGpxzWR3TUbgn1LYtCBL09LUVoKy+yoxPwWTq+ihuPqT5L4tp0Jiiaa/dGYIRF8Guag==}
+  vite-bundle-analyzer@0.19.0:
+    resolution: {integrity: sha512-kMslGwnRlYpOCYzda+EUI2rRa5DYCdlbvbrVZO7WvwK1suV/uDFgiD1N5e+woHRsePPInt525wUBWYr1mu0oTQ==}
     hasBin: true
 
   vite-node@3.0.0-beta.2:
@@ -5233,7 +5233,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite-bundle-analyzer@0.18.1: {}
+  vite-bundle-analyzer@0.19.0: {}
 
   vite-node@3.0.0-beta.2(@types/node@20.17.30):
     dependencies:
