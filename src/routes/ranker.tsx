@@ -4,14 +4,19 @@
  * SPDX-License-Identifier: MIT
  */
 
+import * as zod from '@zod/mini'
 import { combinations } from 'mathjs'
 import { useEffect, useState } from 'react'
-import { Link, useActionData, useSubmit } from 'react-router'
+import {
+  ActionFunctionArgs,
+  Link,
+  useActionData,
+  useSubmit,
+} from 'react-router'
 
-import { rankerAction } from '../app/actions'
 import type { EloSystem, Score } from '../app/elosystem'
-import { DEFAULT_RATINGS, recordMatch } from '../app/elosystem'
-import type { Player } from '../app/schemas'
+import { DEFAULT_RATINGS, recordMatch, shuffleArray } from '../app/elosystem'
+import { creationForm, customRanker, type Player } from '../app/schemas'
 
 const getPlayerName = (player: string | Player) =>
   typeof player !== 'undefined' && typeof player !== 'string'
@@ -23,8 +28,31 @@ const getPlayerImage = (player: string | Player) =>
     ? player.image
     : undefined
 
-export default function Ranker() {
-  const actionData = useActionData<typeof rankerAction>()
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = Object.fromEntries(await request.formData())
+  const formResult = creationForm.safeParse(formData)
+
+  if (!formResult.success) {
+    return { error: zod.prettifyError(formResult.error), ok: false as const }
+  }
+
+  const rankerData = JSON.parse(await formResult.data['custom-ranker'].text())
+  const result = customRanker.safeParse(rankerData)
+
+  if (!result.success) {
+    return { error: zod.prettifyError(result.error), ok: false as const }
+  }
+
+  const data = {
+    players: shuffleArray(result.data.players),
+    title: result.data.title,
+  }
+
+  return { data, ok: true as const }
+}
+
+export function Component() {
+  const actionData = useActionData<typeof action>()
   const submit = useSubmit()
 
   const [ratings, setRatings] = useState<EloSystem>({})

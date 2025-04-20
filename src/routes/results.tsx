@@ -4,9 +4,10 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { Link, useActionData } from 'react-router'
+import * as zod from '@zod/mini'
+import { ActionFunctionArgs, Link, useActionData } from 'react-router'
 
-import { resultsAction } from '../app/actions'
+import { rankerResults } from '../app/schemas'
 
 const TABLE_HEADINGS = [
   'Rank',
@@ -17,8 +18,19 @@ const TABLE_HEADINGS = [
   'Draws',
 ] as const
 
-export default function Results() {
-  const actionData = useActionData<typeof resultsAction>()
+export async function action({ request }: ActionFunctionArgs) {
+  const rankerResultsData = await request.json()
+  const result = rankerResults.safeParse(rankerResultsData)
+
+  if (!result.success) {
+    return { error: zod.prettifyError(result.error), ok: false as const }
+  }
+
+  return { data: result.data, ok: true as const }
+}
+
+export function Component() {
+  const actionData = useActionData<typeof action>()
 
   if (!actionData || !actionData?.ok) {
     return (

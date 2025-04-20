@@ -4,7 +4,43 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { isRouteErrorResponse, Link, useRouteError } from 'react-router'
+import {
+  createBrowserRouter,
+  isRouteErrorResponse,
+  Link,
+  RouterProvider,
+  useRouteError,
+} from 'react-router'
+
+const router = createBrowserRouter(
+  [
+    {
+      ErrorBoundary,
+      HydrateFallback,
+      lazy: () => import('./routes/creator'),
+      index: true,
+    },
+    {
+      lazy: () => import('./routes/ranker'),
+      path: '/ranker',
+    },
+    {
+      lazy: () => import('./routes/results'),
+      path: '/results',
+    },
+  ],
+  {
+    basename: import.meta.env.BASE_URL,
+  },
+)
+
+export default function App() {
+  return <RouterProvider router={router} />
+}
+
+export function HydrateFallback() {
+  return <p>Loading, please wait...</p>
+}
 
 export function ErrorBoundary() {
   const error = useRouteError()
