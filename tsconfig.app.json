@@ -15,6 +15,7 @@
     "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "paths": { "~/*": ["./src/app/*"] },
     "skipLibCheck": true,
 
     /* Linting */

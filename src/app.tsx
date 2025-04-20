@@ -17,8 +17,8 @@ const router = createBrowserRouter(
     {
       ErrorBoundary,
       HydrateFallback,
-      lazy: () => import('./routes/creator'),
       index: true,
+      lazy: () => import('./routes/creator'),
     },
     {
       lazy: () => import('./routes/ranker'),
@@ -38,11 +38,11 @@ export default function App() {
   return <RouterProvider router={router} />
 }
 
-export function HydrateFallback() {
+function HydrateFallback() {
   return <p>Loading, please wait...</p>
 }
 
-export function ErrorBoundary() {
+function ErrorBoundary() {
   const error = useRouteError()
   let message = 'Oops!'
   let details = 'An unexpected error occurred.'

@@ -5,7 +5,7 @@
  */
 
 import * as zod from '@zod/mini'
-import { combinations } from 'mathjs'
+import { combinations } from 'mathjs/number'
 import { useEffect, useState } from 'react'
 import {
   ActionFunctionArgs,
@@ -14,16 +14,16 @@ import {
   useSubmit,
 } from 'react-router'
 
-import type { EloSystem, Score } from '../app/elosystem'
-import { DEFAULT_RATINGS, recordMatch, shuffleArray } from '../app/elosystem'
-import { creationForm, customRanker, type Player } from '../app/schemas'
+import type { EloSystem, Score } from '~/elosystem'
+import { DEFAULT_RATINGS, recordMatch, shuffleArray } from '~/elosystem'
+import { creationForm, customRanker, type Player } from '~/schemas'
 
-const getPlayerName = (player: string | Player) =>
+const getPlayerName = (player: Player) =>
   typeof player !== 'undefined' && typeof player !== 'string'
     ? player.name
     : player
 
-const getPlayerImage = (player: string | Player) =>
+const getPlayerImage = (player: Player) =>
   typeof player !== 'undefined' && typeof player !== 'string'
     ? player.image
     : undefined

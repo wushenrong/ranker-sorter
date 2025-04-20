@@ -7,7 +7,7 @@
 import * as zod from '@zod/mini'
 import { ActionFunctionArgs, Link, useActionData } from 'react-router'
 
-import { rankerResults } from '../app/schemas'
+import { rankerResults } from '~/schemas'
 
 const TABLE_HEADINGS = [
   'Rank',

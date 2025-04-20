@@ -60,5 +60,5 @@ export const creationForm = zod.interface({
     ),
 })
 
-export type Player = zod.infer<typeof player>
+export type Player = zod.infer<typeof player> | string
 export type Ratings = zod.infer<typeof ratings>
