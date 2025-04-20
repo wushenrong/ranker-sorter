@@ -10,8 +10,8 @@ import { ActionFunctionArgs, Link, useActionData } from 'react-router'
 import { rankerResults } from '~/schemas'
 
 const TABLE_HEADINGS = [
-  'Rank',
   'Player',
+  'Rank',
   'Elo',
   'Wins',
   'Losses',
