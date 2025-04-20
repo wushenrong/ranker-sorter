@@ -74,8 +74,6 @@ export function Component() {
 
   return (
     <>
-      <p role="alert">Do not forget to save your results!</p>
-
       <button onClick={saveResults} type="button">
         Save Results
       </button>

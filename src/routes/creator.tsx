@@ -22,11 +22,6 @@ export function Component() {
           <input accept="application/json" name="custom-ranker" type="file" />
         </label>
       </fieldset>
-      <p>
-        Once you create the ranker, you will have to finish the entire ranker to
-        save your results. This site <strong>does not</strong> save any data on
-        you computer. Do not reload the browser while completing the ranker.
-      </p>
       <button type="submit">Create Ranker</button>
     </Form>
   )

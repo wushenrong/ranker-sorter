@@ -1,76 +1,77 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ranker Sorter</title>
-    <meta
-      content="If you can rank chess players by using Elo, then why not for everything else."
-      name="description"
-    />
 
-    <!-- Start Single Page Apps for GitHub Pages -->
-    <script type="text/javascript">
-      /*
-      * SPDX-FileCopyrightText: 2016 Rafael Pedicini
-      * SPDX-FileCopyrightText: 2025 Samuel Wu
-      *
-      * SPDX-License-Identifier: MIT
-      */
-      // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      // This script checks to see if a redirect is present in the query string,
-      // converts it back into the correct url and adds it to the
-      // browser's history using window.history.replaceState(...),
-      // which won't cause the browser to attempt to load the new url.
-      // When the single page app is loaded further down in this file,
-      // the correct url will be waiting in the browser's history for
-      // the single page app to route accordingly.
-      (function (l) {
-        if (l.search[1] === '/') {
-          var decoded = l.search.slice(1).split('&').map(function (s) {
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
-            l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      }(window.location))
-    </script>
-    <!-- End Single Page Apps for GitHub Pages -->
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ranker Sorter</title>
+  <meta content="If you can rank chess players by using Elo, then why not for everything else." name="description" />
 
-  <body>
-    <h1>Ranker Sorter</h1>
+  <!-- Start Single Page Apps for GitHub Pages -->
+  <script type="text/javascript">
+    /*
+    * SPDX-FileCopyrightText: 2016 Rafael Pedicini
+    * SPDX-FileCopyrightText: 2025 Samuel Wu
+    *
+    * SPDX-License-Identifier: MIT
+    */
+    // Single Page Apps for GitHub Pages
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    // This script checks to see if a redirect is present in the query string,
+    // converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function (l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function (s) {
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
+  <!-- End Single Page Apps for GitHub Pages -->
+</head>
+
+<body>
+  <h1>Ranker Sorter</h1>
+  <p>
+    A yet another ranker that uses the ELO Rating System, famous in the world
+    of chess to rate the skills of players in a zero-sum game.
+  </p>
+  <section>
+    <h2>Why rank things using ELO?</h2>
     <p>
-      A yet another ranker that uses the ELO Rating System, famous in the world
-      of chess to rate the skills of players in a zero-sum game.
+      Well popularity and favorites is like a zero-sum game as something or
+      someone is competing how much time you will give focus to them as time
+      is a limited resource. So why not try to quantify that as a ranking.
     </p>
-    <section>
-      <h2>Why rank things using ELO?</h2>
-      <p>
-        Well popularity and favorites is like a zero-sum game as something or
-        someone is competing how much time you will give focus to them as time
-        is a limited resource. So why not try to quantify that as a ranking.
-      </p>
-    </section>
-    <main id="root"></main>
-    <footer>
-      <p>
-        Made with open source projects. Source code hosted on
-        <a href="https://github.com/wushenrong/ranker-sorter">GitHub</a>. Hosted
-        on <a href="https://pages.github.com">GitHub Pages</a>.
-      </p>
-      <p>
-        Some code in this project is AI generated which are licensed under the
-        <a href="https://spdx.org/licenses/MIT-0.html">MIT-0 License</a>. The
-        rest of the project is licensed under the <a
-          href="https://spdx.org/licenses/MIT.html"
-          >MIT License</a
-        >.
-      </p>
-    </footer>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  </section>
+  <p>
+    This site <strong>does not</strong> save any data on you computer.
+    Do not reload the browser while completing the ranker. Do not forget to
+    save your results after completing the ranker!
+  </p>
+  <main id="root"></main>
+  <footer>
+    <p>
+      Made with open source projects. Source code hosted on
+      <a href="https://github.com/wushenrong/ranker-sorter">GitHub</a>. Hosted
+      on <a href="https://pages.github.com">GitHub Pages</a>.
+    </p>
+    <p>
+      Some code in this project is AI generated which are licensed under the
+      <a href="https://spdx.org/licenses/MIT-0.html">MIT-0 License</a>. The
+      rest of the project is licensed under the <a href="https://spdx.org/licenses/MIT.html">MIT License</a>.
+    </p>
+  </footer>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
