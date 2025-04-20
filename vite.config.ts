@@ -7,7 +7,6 @@
 import react from '@vitejs/plugin-react-swc'
 import postcssPresetEnv from 'postcss-preset-env'
 import { defineConfig } from 'vite'
-import { analyzer } from 'vite-bundle-analyzer'
 
 export default defineConfig({
   base: '/ranker-sorter/',
@@ -16,5 +15,5 @@ export default defineConfig({
       plugins: [postcssPresetEnv({ minimumVendorImplementations: 2 })],
     },
   },
-  plugins: [react(), analyzer()],
+  plugins: [react()],
 })
