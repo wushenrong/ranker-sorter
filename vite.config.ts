@@ -7,7 +7,7 @@
 import react from '@vitejs/plugin-react-swc'
 import postcssPresetEnv from 'postcss-preset-env'
 import { defineConfig } from 'vite'
-import tsConfigPaths from "vite-tsconfig-paths";
+import tsConfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   base: '/ranker-sorter/',
