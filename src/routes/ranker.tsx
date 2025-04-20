@@ -16,7 +16,8 @@ import {
 
 import type { EloSystem, Score } from '~/elosystem'
 import { DEFAULT_RATINGS, recordMatch, shuffleArray } from '~/elosystem'
-import { creationForm, customRanker, type Player } from '~/schemas'
+import type { Player } from '~/schemas'
+import { creationForm, customRanker } from '~/schemas'
 
 const getPlayerName = (player: Player) =>
   typeof player !== 'undefined' && typeof player !== 'string'
