@@ -16,6 +16,7 @@ main {
   margin: var(--size-fluid-2);
 }
 
+h1,
 section {
   text-align: center;
 }
