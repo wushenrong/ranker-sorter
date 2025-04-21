@@ -4,15 +4,19 @@
  * SPDX-License-Identifier: MIT
  */
 
+import { useState } from 'react'
 import { Form } from 'react-router'
 
 export function Creator() {
+  const [isStarting, setIsStarting] = useState(false)
+
   return (
     <Form
       action="/ranker"
       className="ranker-creation"
       encType="multipart/form-data"
-      method="post"
+      method="POST"
+      onSubmit={() => setIsStarting(true)}
       replace={true}
     >
       <fieldset>
@@ -22,7 +26,9 @@ export function Creator() {
           <input accept="application/json" name="custom-ranker" type="file" />
         </label>
       </fieldset>
-      <button type="submit">Create Ranker</button>
+      <button disabled={isStarting} type="submit">
+        Create Ranker
+      </button>
     </Form>
   )
 }

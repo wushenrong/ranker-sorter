@@ -35,7 +35,7 @@
   "scripts": {
     "build": "tsc -b && vite build",
     "dev": "vite",
-    "lint": "tsc && biome check",
+    "lint": "tsc && biome check --fix",
     "start": "vite preview"
   },
   "type": "module",
