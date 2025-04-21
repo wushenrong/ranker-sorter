@@ -18,14 +18,26 @@ const router = createBrowserRouter(
       ErrorBoundary,
       HydrateFallback,
       index: true,
-      lazy: () => import('./routes/creator'),
+      lazy: {
+        Component: async () => (await import('./routes/creator')).Creator,
+      },
     },
     {
-      lazy: () => import('./routes/ranker'),
+      ErrorBoundary,
+      HydrateFallback,
+      lazy: {
+        action: async () => (await import('~/actions')).rankerAction,
+        Component: async () => (await import('./routes/ranker')).Ranker,
+      },
       path: '/ranker',
     },
     {
-      lazy: () => import('./routes/results'),
+      ErrorBoundary,
+      HydrateFallback,
+      lazy: {
+        action: async () => (await import('~/actions')).resultsAction,
+        Component: async () => (await import('./routes/results')).Results,
+      },
       path: '/results',
     },
   ],

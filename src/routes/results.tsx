@@ -4,10 +4,9 @@
  * SPDX-License-Identifier: MIT
  */
 
-import * as zod from '@zod/mini'
-import { ActionFunctionArgs, Link, useActionData } from 'react-router'
+import { Link, useActionData } from 'react-router'
 
-import { rankerResults } from '~/schemas'
+import { resultsAction } from '~/actions'
 
 const TABLE_HEADINGS = [
   'Player',
@@ -18,27 +17,18 @@ const TABLE_HEADINGS = [
   'Draws',
 ] as const
 
-export async function action({ request }: ActionFunctionArgs) {
-  const rankerResultsData = await request.json()
-  const result = rankerResults.safeParse(rankerResultsData)
+export function Results() {
+  const actionData = useActionData<typeof resultsAction>()
 
-  if (!result.success) {
-    return { error: zod.prettifyError(result.error), ok: false as const }
-  }
+  const actionResponse = actionData?.ok ? actionData.data : actionData?.error
 
-  return { data: result.data, ok: true as const }
-}
-
-export function Component() {
-  const actionData = useActionData<typeof action>()
-
-  if (!actionData || !actionData?.ok) {
+  if (!actionResponse || typeof actionResponse === 'string') {
     return (
       <>
-        {actionData?.error ? (
+        {actionResponse ? (
           <div className="load-error">
             <p>Error: Unable to load ranker results</p>
-            <p>{actionData.error}</p>
+            <p>{actionResponse}</p>
           </div>
         ) : (
           <p>
@@ -53,10 +43,8 @@ export function Component() {
     )
   }
 
-  const results = actionData.data
-
   const saveResults = () => {
-    const data = JSON.stringify(results)
+    const data = JSON.stringify(actionResponse)
     const blob = new Blob([data], { type: 'application/json' })
     const href = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -79,7 +67,7 @@ export function Component() {
       </button>
 
       <table>
-        <caption>Result of ranking: {results.title}</caption>
+        <caption>Result of ranking: {actionResponse.title}</caption>
         <thead>
           <tr>
             {TABLE_HEADINGS.map((heading) => (
@@ -90,7 +78,7 @@ export function Component() {
           </tr>
         </thead>
         <tbody>
-          {results.players.map((player, index) => (
+          {actionResponse.players.map((player, index) => (
             <tr key={player.name}>
               <th scope="row">
                 {player.image ? (

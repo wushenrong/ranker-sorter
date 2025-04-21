@@ -6,7 +6,7 @@
 
 import { Form } from 'react-router'
 
-export function Component() {
+export function Creator() {
   return (
     <Form
       action="/ranker"
