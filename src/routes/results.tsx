@@ -78,7 +78,7 @@ export function Results() {
           </tr>
         </thead>
         <tbody>
-          {actionResponse.players.map((player, index) => (
+          {actionResponse.players.map((player) => (
             <tr key={player.name}>
               <th scope="row">
                 {player.image ? (
@@ -92,7 +92,7 @@ export function Results() {
                   player.name
                 )}
               </th>
-              <td>{index + 1}</td>
+              <td>{player.rank}</td>
               <td>{player.elo}</td>
               <td>{player.wins}</td>
               <td>{player.losses}</td>

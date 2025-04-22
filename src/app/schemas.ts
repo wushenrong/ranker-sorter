@@ -25,10 +25,10 @@ const player = zod.interface({
 })
 
 const ratings = zod.interface({
-  draws: zod.number(),
-  elo: zod.number(),
-  losses: zod.number(),
-  wins: zod.number(),
+  draws: zod.number().check(zod.gte(0)),
+  elo: zod.number().check(zod.gte(0)),
+  losses: zod.number().check(zod.gte(0)),
+  wins: zod.number().check(zod.gte(0)),
 })
 
 export const customRanker = zod.interface({
@@ -47,9 +47,17 @@ export const customRanker = zod.interface({
     .check(zod.minLength(3, 'Must be 3 or more characters long')),
 })
 
-export const rankerResults = zod.extend(customRanker, {
-  players: zod.array(zod.extend(player, ratings)),
-})
+const playerResults = zod.array(
+  zod.extend(
+    player,
+    zod.extend(
+      ratings,
+      zod.interface({ rank: zod.number().check(zod.gte(1)) }),
+    ),
+  ),
+)
+
+export const results = zod.extend(customRanker, { players: playerResults })
 
 export const creationForm = zod.interface({
   'custom-ranker': zod
@@ -62,3 +70,4 @@ export const creationForm = zod.interface({
 
 export type Player = zod.infer<typeof player> | string
 export type Ratings = zod.infer<typeof ratings>
+export type PlayerResults = zod.infer<typeof playerResults>
