@@ -60,10 +60,10 @@ export function Ranker() {
   if (!actionResponse || typeof actionResponse === 'string') {
     return (
       <>
-        {actionData?.error ? (
+        {actionResponse ? (
           <div className="load-error">
             <p>Error: Unable to load ranker data</p>
-            <p>{actionData.error}</p>
+            <p>{actionResponse}</p>
           </div>
         ) : (
           <p>
