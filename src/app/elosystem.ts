@@ -7,23 +7,43 @@
  * implementation can be found at https://github.com/Kraktoos/Python-Elo-System.
  */
 
-import type { Ratings } from './schemas'
+import type { Ratings } from "./schemas";
 
-export type EloSystem = Record<string, Ratings>
-export type Score = 0.0 | 0.5 | 1.0
-export type MatchResult = 'win' | 'loss' | 'draw'
+export type EloSystem = Record<string, Ratings>;
+export type Score = 0.0 | 0.5 | 1.0;
+export type MatchResult = "win" | "loss" | "draw";
 
 export const DEFAULT_RATINGS = {
   draws: 0,
   elo: 1000,
   losses: 0,
   wins: 0,
-}
+};
 
-const DEFAULT_K_FACTOR = 32
+const DEFAULT_K_FACTOR = 32;
 
 const calculateExpectedScore = (ratingA: number, ratingB: number) =>
-  1 / (1 + 10 ** ((ratingB - ratingA) / 400))
+  1 / (1 + 10 ** ((ratingB - ratingA) / 400));
+
+// Use banker's instead of maths' rounding
+export function round(x: number) {
+  if (Number.isNaN(x)) {
+    return NaN;
+  }
+
+  const floor = Math.floor(x);
+  const diff = x - floor;
+
+  if (diff < 0.5) {
+    return floor;
+  }
+
+  if (diff > 0.5) {
+    return floor + 1;
+  }
+
+  return floor % 2 === 0 ? floor : floor + 1;
+}
 
 export function recordMatch(
   system: EloSystem,
@@ -32,50 +52,46 @@ export function recordMatch(
   score: Score,
   kFactor = DEFAULT_K_FACTOR,
 ) {
-  const ratingA = system[playerA].elo
-  const ratingB = system[playerB].elo
+  const ratingA = system[playerA].elo;
+  const ratingB = system[playerB].elo;
 
-  const expectedA = calculateExpectedScore(ratingA, ratingB)
-  const expectedB = 1 - expectedA
+  const expectedA = calculateExpectedScore(ratingA, ratingB);
+  const expectedB = 1 - expectedA;
 
-  const newRatingA = Math.round(ratingA + kFactor * (score - expectedA))
-  const newRatingB = Math.round(ratingB + kFactor * (1 - score - expectedB))
+  const newRatingA = round(ratingA + kFactor * (score - expectedA));
+  const newRatingB = round(ratingB + kFactor * (1 - score - expectedB));
 
-  const result = score === 1 ? 'win' : score === 0 ? 'loss' : 'draw'
+  const result = score === 1 ? "win" : score === 0 ? "loss" : "draw";
 
   const updateStats = (player: string, result: MatchResult) => {
-    const current = system[player]
+    const current = system[player];
     return {
-      draws: current.draws + (result === 'draw' ? 1 : 0),
+      draws: current.draws + (result === "draw" ? 1 : 0),
       elo: player === playerA ? newRatingA : newRatingB,
-      losses: current.losses + (result === 'loss' ? 1 : 0),
-      wins: current.wins + (result === 'win' ? 1 : 0),
-    }
-  }
+      losses: current.losses + (result === "loss" ? 1 : 0),
+      wins: current.wins + (result === "win" ? 1 : 0),
+    };
+  };
 
   return {
     ...system,
     [playerA]: updateStats(playerA, result),
     [playerB]: updateStats(
       playerB,
-      result === 'win' ? 'loss' : result === 'loss' ? 'win' : result,
+      result === "win" ? "loss" : result === "loss" ? "win" : result,
     ),
-  }
+  };
 }
 
-export function shuffleArray<T>(array: T[]) {
-  const shuffledArray = [...array]
+export function shuffleArray<T>(array: readonly T[]) {
+  const result = array.slice();
 
-  const swap = (arr: T[], i: number, j: number) => {
-    const temp = arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp
+  let i = result.length;
+
+  while (i > 1) {
+    const j = Math.floor(Math.random() * i--);
+    [result[i], result[j]] = [result[j], result[i]];
   }
 
-  for (let i = shuffledArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    swap(shuffledArray, i, j)
-  }
-
-  return shuffledArray
+  return result;
 }

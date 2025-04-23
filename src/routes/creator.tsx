@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { useState } from 'react'
-import { Form } from 'react-router'
+import { useState } from "react";
+import { Form } from "react-router";
 
 export function Creator() {
-  const [isStarting, setIsStarting] = useState(false)
+  const [isStarting, setIsStarting] = useState(false);
 
   return (
     <Form
@@ -22,7 +22,7 @@ export function Creator() {
       <fieldset>
         <legend>Load a custom ranker</legend>
         <label>
-          Create custom ranker from JSON file:{' '}
+          Create custom ranker from JSON file:{" "}
           <input accept="application/json" name="custom-ranker" type="file" />
         </label>
       </fieldset>
@@ -30,5 +30,5 @@ export function Creator() {
         Create Ranker
       </button>
     </Form>
-  )
+  );
 }

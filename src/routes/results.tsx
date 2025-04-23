@@ -4,25 +4,25 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { Link, useActionData } from 'react-router'
+import { Link, useActionData } from "react-router";
 
-import { resultsAction } from '~/actions'
+import { resultsAction } from "~/actions";
 
 const TABLE_HEADINGS = [
-  'Player',
-  'Rank',
-  'Elo',
-  'Wins',
-  'Losses',
-  'Draws',
-] as const
+  "Player",
+  "Rank",
+  "Elo",
+  "Wins",
+  "Losses",
+  "Draws",
+] as const;
 
 export function Results() {
-  const actionData = useActionData<typeof resultsAction>()
+  const actionData = useActionData<typeof resultsAction>();
 
-  const actionResponse = actionData?.ok ? actionData.data : actionData?.error
+  const actionResponse = actionData?.ok ? actionData.data : actionData?.error;
 
-  if (!actionResponse || typeof actionResponse === 'string') {
+  if (!actionResponse || typeof actionResponse === "string") {
     return (
       <>
         {actionResponse ? (
@@ -40,25 +40,25 @@ export function Results() {
           Go back home
         </Link>
       </>
-    )
+    );
   }
 
   const saveResults = () => {
-    const data = JSON.stringify(actionResponse)
-    const blob = new Blob([data], { type: 'application/json' })
-    const href = URL.createObjectURL(blob)
-    const a = document.createElement('a')
+    const data = JSON.stringify(actionResponse);
+    const blob = new Blob([data], { type: "application/json" });
+    const href = URL.createObjectURL(blob);
+    const a = document.createElement("a");
 
-    a.href = href
-    a.download = 'ranker-results.json'
+    a.href = href;
+    a.download = "ranker-results.json";
 
-    document.body.appendChild(a)
+    document.body.appendChild(a);
 
-    a.click()
-    a.remove()
+    a.click();
+    a.remove();
 
-    URL.revokeObjectURL(href)
-  }
+    URL.revokeObjectURL(href);
+  };
 
   return (
     <>
@@ -106,5 +106,5 @@ export function Results() {
         Go back home
       </Link>
     </>
-  )
+  );
 }

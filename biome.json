@@ -38,12 +38,6 @@
       "enabled": true
     }
   },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single",
-      "semicolons": "asNeeded"
-    }
-  },
   "vcs": {
     "clientKind": "git",
     "enabled": true,
