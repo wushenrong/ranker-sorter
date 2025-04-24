@@ -27,7 +27,7 @@ export function Creator() {
         </label>
       </fieldset>
       <button disabled={isStarting} type="submit">
-        Create Ranker
+        {isStarting ? "Creating ranker..." : "Create Ranker"}
       </button>
     </Form>
   );

@@ -178,6 +178,10 @@ export function Ranker() {
             if each choice takes a second.
           </p>
           <p>
+            The "Draw / I Cannot Decide" button should be used as the last
+            option, there is no penalty but result might be less accurate.
+          </p>
+          <p>
             Current progress: {currentProgress}/{combination}
           </p>
           <div className="selections">
@@ -209,7 +213,7 @@ export function Ranker() {
             computer.
           </p>
           <button disabled={isFinishing} onClick={viewResults} type="button">
-            View Results
+            {isFinishing ? "Please wait..." : "View Results"}
           </button>
         </>
       )}
