@@ -55,7 +55,7 @@ const playerResult = zod.object({
   rank: zod.number().check(zod.gte(1)),
 });
 
-export const results = zod.extend(customRanker, { players: playerResult });
+export const results = zod.extend(customRanker, { players: zod.array(playerResult) });
 
 export const creationForm = zod.object({
   "custom-ranker": zod
