@@ -9,8 +9,8 @@ Yet another ranker that sorts using ELO.
 Install corepack, pnpm, and dependencies:
 
 ```sh
-# Install corepack
-npm install -g corepack
+# Install the latest version of corepack
+npm install -g corepack@latest
 
 # Install pnpm
 corepack install
@@ -40,5 +40,4 @@ pnpm run build
 ## License
 
 Ranker Sorter is licensed under the MIT License using SPDX expressions. Some
-code in the project is AI generated which they are licensed under the MIT-0
-License.
+code is generated using AI in which they are licensed under the MIT-0 License.

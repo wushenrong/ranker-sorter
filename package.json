@@ -1,36 +1,27 @@
 {
   "dependencies": {
-    "@zod/mini": "4.0.0-beta.20250420T053007",
-    "mathjs": "^14.4.0",
-    "open-props": "^1.7.15",
+    "mathjs": "^14.5.3",
+    "open-props": "^1.7.16",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.5.2"
+    "react-router": "^7.7.0",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.0-beta.1",
+    "@biomejs/biome": "2.1.2",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react-swc": "^3.9.0",
-    "postcss-preset-env": "^10.1.6",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react-swc": "^3.11.0",
+    "postcss-preset-env": "^10.2.4",
     "typescript": "~5.8.3",
-    "vite": "^6.3.3",
+    "vite": "^6.3.5",
     "vite-bundle-analyzer": "^0.19.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
-  "licenses": [
-    {
-      "type": "MIT-0",
-      "url": "https://spdx.org/licenses/MIT-0.html"
-    },
-    {
-      "type": "MIT",
-      "url": "https://spdx.org/licenses/MIT.html"
-    }
-  ],
+  "license": "(MIT AND MIT-0)",
   "name": "ranker-sorter",
-  "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f",
+  "packageManager": "pnpm@10.14.0-0+sha512.2cd47a0cbf5f1d1de7693a88307a0ede5be94e0d3b34853d800ee775efbea0650cb562b77605ec80bc8d925f5cd27c4dfe8bb04d3a0b76090784c664450d32d6",
   "private": true,
   "scripts": {
     "build": "tsc -b && vite build",

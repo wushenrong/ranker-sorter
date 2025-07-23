@@ -8,10 +8,10 @@ import { combinations } from "mathjs/number";
 import { useEffect, useState } from "react";
 import { Link, useActionData, useSubmit } from "react-router";
 
-import { rankerAction } from "~/actions";
+import type { rankerAction } from "~/actions";
 import type { EloSystem, Score } from "~/elosystem";
 import { DEFAULT_RATINGS, recordMatch, round } from "~/elosystem";
-import type { Player, PlayerResults } from "~/schemas";
+import type { Player, PlayerResult } from "~/schemas";
 
 const getPlayerName = (player: Player) =>
   typeof player !== "undefined" && typeof player !== "string"
@@ -123,7 +123,7 @@ export function Ranker() {
           };
         })
         .sort((playerA, playerB) => playerB.elo - playerA.elo)
-        .reduce<PlayerResults>((acc, player, i) => {
+        .reduce<PlayerResult[]>((acc, player, i) => {
           const prev = acc[i - 1];
           const rank =
             i === 0 ? 1 : player.elo === prev.elo ? prev.rank : i + 1;
