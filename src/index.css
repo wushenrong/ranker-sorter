@@ -36,8 +36,8 @@ table {
 }
 
 img {
-  margin: 0 auto;
   align-content: center;
+  margin: 0 auto;
 }
 
 .ranker-creation {
@@ -50,8 +50,8 @@ img {
   display: flex;
 
   > button {
-    padding: var(--size-fluid-1);
     width: 100%;
+    padding: var(--size-fluid-1);
   }
 }
 

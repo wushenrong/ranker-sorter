@@ -1,5 +1,5 @@
-import * as zod from "@zod/mini";
-import { ActionFunctionArgs } from "react-router";
+import type { ActionFunctionArgs } from "react-router";
+import * as zod from "zod/mini";
 
 import { shuffleArray } from "./elosystem";
 import { creationForm, customRanker, results } from "./schemas";

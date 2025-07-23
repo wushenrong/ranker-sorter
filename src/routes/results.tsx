@@ -6,7 +6,7 @@
 
 import { Link, useActionData } from "react-router";
 
-import { resultsAction } from "~/actions";
+import type { resultsAction } from "~/actions";
 
 const TABLE_HEADINGS = [
   "Player",
