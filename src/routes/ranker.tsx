@@ -37,10 +37,6 @@ export function Ranker() {
 
   const actionResponse = actionData?.ok ? actionData.data : actionData?.error;
 
-  // SPDX-SnippetBegin
-  // SPDX-License-Identifier: MIT-0
-  // SPDX-SnippetCopyrightText: Samuel Wu
-  //
   // The following code was refactored by ChatGPT.
   useEffect(() => {
     if (actionResponse && typeof actionResponse !== "string") {
@@ -55,7 +51,6 @@ export function Ranker() {
       setRatings(system);
     }
   }, [actionResponse]);
-  // SPDX-SnippetEnd
 
   if (!actionResponse || typeof actionResponse === "string") {
     return (
