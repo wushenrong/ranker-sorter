@@ -2,7 +2,7 @@
   "dependencies": {
     "mathjs": "^14.5.3",
     "open-props": "^1.7.16",
-    "react": "^19.1.0",
+    "react": "^19.1.1",
     "react-dom": "^19.1.0",
     "react-router": "^7.7.0",
     "zod": "^4.0.5"
@@ -10,7 +10,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.1.2",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/react": "^19.1.8",
+    "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react-swc": "^3.11.0",
     "postcss-preset-env": "^10.2.4",
