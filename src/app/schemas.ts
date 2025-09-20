@@ -55,7 +55,9 @@ const playerResult = zod.object({
   rank: zod.number().check(zod.gte(1)),
 });
 
-export const results = zod.extend(customRanker, { players: zod.array(playerResult) });
+export const results = zod.extend(customRanker, {
+  players: zod.array(playerResult),
+});
 
 export const creationForm = zod.object({
   "custom-ranker": zod
@@ -65,6 +67,18 @@ export const creationForm = zod.object({
       zod.mime(["application/json"], "Must be a JSON file"),
     ),
 });
+
+/*
+ * export const endpointResponse = zod.union([
+ *   zod.object({
+ *     result: zod.literal("success"),
+ *   }),
+ *   zod.object({
+ *     error: zod.string(),
+ *     result: zod.literal("error"),
+ *   }),
+ * ]);
+ */
 
 export type Player = zod.infer<typeof player> | string;
 export type Ratings = zod.infer<typeof ratings>;

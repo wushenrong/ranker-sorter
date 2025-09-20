@@ -4,9 +4,18 @@
  * SPDX-License-Identifier: MIT
  */
 
+/*
+ * import { useState } from "react";
+ */
 import { Link, useActionData } from "react-router";
 
 import type { resultsAction } from "~/actions";
+
+/*
+ * import { endpointResponse } from "~/schemas";
+ *
+ * type SendState = "unsent" | "sending" | "error" | "sent";
+ */
 
 const TABLE_HEADINGS = [
   "Player",
@@ -19,6 +28,10 @@ const TABLE_HEADINGS = [
 
 export function Results() {
   const actionData = useActionData<typeof resultsAction>();
+
+  /*
+   * const [sendState, setSendState] = useState<SendState>("unsent");
+   */
 
   const actionResponse = actionData?.ok ? actionData.data : actionData?.error;
 
@@ -43,6 +56,39 @@ export function Results() {
     );
   }
 
+  /*
+   *const sendResults = async () => {
+   *    if (sendState === "sent" || sendState === "sending") {
+   *      return;
+   *    }
+   *
+   *    setSendState("sending");
+   *
+   *    const response = await fetch(import.meta.env.VITE_DATABASE_ENDPOINT, {
+   *      body: JSON.stringify(actionResponse),
+   *      headers: {
+   *        "Content-Type": "text/plain;charset=utf-8",
+   *      },
+   *      method: "POST",
+   *      redirect: "follow",
+   *    });
+   *
+   *    if (!response.ok) {
+   *      setSendState("error");
+   *      return;
+   *    }
+   *
+   *    const result = endpointResponse.safeParse(await response.json());
+   *
+   *    if (!result.success || result.data.result === "error") {
+   *      setSendState("error");
+   *      return;
+   *    }
+   *
+   *    setSendState("sent");
+   *  };
+   */
+
   const saveResults = () => {
     const data = JSON.stringify(actionResponse);
     const blob = new Blob([data], { type: "application/json" });
@@ -62,9 +108,28 @@ export function Results() {
 
   return (
     <>
+      {/*
+       * <div>
+       *  <button
+       *    disabled={sendState === "sent" || sendState === "sending"}
+       *    onClick={sendResults}
+       *    type="button"
+       *  >
+       *    {sendState === "sent"
+       *      ? "Results Sent"
+       *      : sendState === "error"
+       *        ? "Error sending results. Click to try again."
+       *        : sendState === "sending"
+       *          ? "Sending Results"
+       *          : "Send Results"}
+       *  </button>
+       */}
       <button onClick={saveResults} type="button">
         Save Results
       </button>
+      {/*
+       * </div>
+       */}
 
       <table>
         <caption>Result of ranking: {actionResponse.title}</caption>

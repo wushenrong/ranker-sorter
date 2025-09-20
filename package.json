@@ -1,27 +1,27 @@
 {
   "dependencies": {
-    "mathjs": "^14.5.3",
+    "mathjs": "^14.7.0",
     "open-props": "^1.7.16",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router": "^7.7.0",
-    "zod": "^4.0.5"
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router": "^7.9.1",
+    "zod": "^4.1.9"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.2",
+    "@biomejs/biome": "2.2.4",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react-swc": "^3.11.0",
-    "postcss-preset-env": "^10.2.4",
+    "postcss-preset-env": "^10.3.1",
     "typescript": "~5.8.3",
-    "vite": "^7.0.5",
+    "vite": "^7.1.6",
     "vite-bundle-analyzer": "^0.19.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "license": "(MIT AND MIT-0)",
   "name": "ranker-sorter",
-  "packageManager": "pnpm@10.14.0-0+sha512.2cd47a0cbf5f1d1de7693a88307a0ede5be94e0d3b34853d800ee775efbea0650cb562b77605ec80bc8d925f5cd27c4dfe8bb04d3a0b76090784c664450d32d6",
+  "packageManager": "pnpm@10.17.0+sha512.fce8a3dd29a4ed2ec566fb53efbb04d8c44a0f05bc6f24a73046910fb9c3ce7afa35a0980500668fa3573345bd644644fa98338fa168235c80f4aa17aa17fbef",
   "private": true,
   "scripts": {
     "build": "tsc -b && vite build",
