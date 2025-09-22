@@ -27,24 +27,21 @@ const DEFAULT_K_FACTOR = 32;
 const calculateExpectedScore = (ratingA: number, ratingB: number) =>
   1 / (1 + 10 ** ((ratingB - ratingA) / 400));
 
-// Use banker's instead of maths' rounding
-export function round(x: number) {
-  if (Number.isNaN(x)) {
-    return NaN;
-  }
+function updateStats(
+  system: EloSystem,
+  player: string,
+  rating: number,
+  result: MatchResult,
+) {
+  const current = system[player];
 
-  const floor = Math.floor(x);
-  const diff = x - floor;
-
-  if (diff < 0.5) {
-    return floor;
-  }
-
-  if (diff > 0.5) {
-    return floor + 1;
-  }
-
-  return floor % 2 === 0 ? floor : floor + 1;
+  return {
+    ...current,
+    draws: current.draws + (result === "draw" ? 1 : 0),
+    elo: rating,
+    losses: current.losses + (result === "loss" ? 1 : 0),
+    wins: current.wins + (result === "win" ? 1 : 0),
+  };
 }
 
 export function recordMatch(
@@ -54,48 +51,46 @@ export function recordMatch(
   score: Score,
   kFactor = DEFAULT_K_FACTOR,
 ) {
+  if (!system[playerA]) {
+    throw new Error(`Player '${playerA}' does not exist in the system.`);
+  }
+
+  if (!system[playerB]) {
+    throw new Error(`Player '${playerB}' does not exist in the system.`);
+  }
+
   const ratingA = system[playerA].elo;
   const ratingB = system[playerB].elo;
 
   const expectedA = calculateExpectedScore(ratingA, ratingB);
   const expectedB = 1 - expectedA;
 
-  const newRatingA = round(ratingA + kFactor * (score - expectedA));
-  const newRatingB = round(ratingB + kFactor * (1 - score - expectedB));
+  const newRatingA = Math.round(ratingA + kFactor * (score - expectedA));
+  const newRatingB = Math.round(ratingB + kFactor * (1 - score - expectedB));
 
   const result = score === 1 ? "win" : score === 0 ? "loss" : "draw";
 
-  const updateStats = (player: string, result: MatchResult) => {
-    const current = system[player];
-
-    return {
-      ...current,
-      draws: current.draws + (result === "draw" ? 1 : 0),
-      elo: player === playerA ? newRatingA : newRatingB,
-      losses: current.losses + (result === "loss" ? 1 : 0),
-      wins: current.wins + (result === "win" ? 1 : 0),
-    };
-  };
-
   return {
     ...system,
-    [playerA]: updateStats(playerA, result),
+    [playerA]: updateStats(system, playerA, newRatingA, result),
     [playerB]: updateStats(
+      system,
       playerB,
+      newRatingB,
       result === "win" ? "loss" : result === "loss" ? "win" : result,
     ),
   };
 }
 
-export function shuffleArray<T>(array: readonly T[]) {
+export function shuffleArray<T>(array: readonly T[]): readonly T[] {
   const result = array.slice();
-
   let i = result.length;
 
   while (i > 1) {
-    const j = Math.floor(Math.random() * i--);
+    i--;
+    const j = Math.floor(Math.random() * i);
     [result[i], result[j]] = [result[j], result[i]];
   }
 
-  return result;
+  return result as readonly T[];
 }

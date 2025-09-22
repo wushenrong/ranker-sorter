@@ -9,7 +9,7 @@ import { Link, useActionData, useSubmit } from "react-router";
 
 import type { rankerAction } from "~/actions";
 import type { EloSystem, Score } from "~/elosystem";
-import { recordMatch, round } from "~/elosystem";
+import { recordMatch } from "~/elosystem";
 import type { PlayerResult } from "~/schemas";
 
 export function Ranker() {
@@ -63,14 +63,15 @@ export function Ranker() {
       players: Object.entries(ratings)
         .map(([name, rating]) => ({
           ...rating,
-          elo: round(rating.elo / 10) * 10,
           name,
         }))
         .sort((playerA, playerB) => playerB.elo - playerA.elo)
         .reduce<PlayerResult[]>((acc, player, i) => {
           const prev = acc[i - 1];
+          // Get the rank of the character by elo, if two players have the same
+          // elo, give them the same rank.
           const rank =
-            i === 0 ? 1 : player.elo === prev.elo ? prev.rank : i + 1;
+            i === 0 ? 1 : player.elo === prev.elo ? prev.rank : prev.rank + 1;
 
           acc.push({ ...player, rank });
 
