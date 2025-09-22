@@ -8,19 +8,21 @@ import * as zod from "zod/mini";
 
 zod.config(zod.core.locales.en());
 
-const player = zod.object({
-  image: zod.optional(
-    zod.url("Must be an URL").check(
-      zod.regex(/^https:\/\//, "Must use HTTPS"),
-      zod.regex(
-        /[-_a-zA-Z0-9.]{2,256}\.[a-z]{2,4}\b(\/[-_a-zA-Z0-9./]*)/,
-        "Must be a website",
-      ),
-      zod.regex(/([-_a-zA-Z0-9]+)\.(png|jp(e)?g)$/, {
-        error: "Must be pointing to a PNG or JPEG file",
-      }),
+const image = zod.optional(
+  zod.url("Must be an URL").check(
+    zod.regex(/^https:\/\//, "Must use HTTPS"),
+    zod.regex(
+      /[-_a-zA-Z0-9.]{2,256}\.[a-z]{2,4}\b(\/[-_a-zA-Z0-9./]*)/,
+      "Must be a website",
     ),
+    zod.regex(/([-_a-zA-Z0-9]+)\.(png|jp(e)?g)$/, {
+      error: "Must be pointing to a PNG or JPEG file",
+    }),
   ),
+);
+
+const player = zod.object({
+  image,
   name: zod
     .string()
     .check(zod.minLength(1, "Must be 1 or more characters long")),
@@ -29,20 +31,14 @@ const player = zod.object({
 const ratings = zod.object({
   draws: zod.number().check(zod.gte(0)),
   elo: zod.number().check(zod.gte(0)),
+  image,
   losses: zod.number().check(zod.gte(0)),
   wins: zod.number().check(zod.gte(0)),
 });
 
 export const customRanker = zod.object({
   players: zod
-    .array(
-      zod.union([
-        zod
-          .string()
-          .check(zod.minLength(1, "Name must be 1 or more characters long")),
-        player,
-      ]),
-    )
+    .array(player)
     .check(zod.minLength(2, "Must have 2 or more players")),
   title: zod
     .string()

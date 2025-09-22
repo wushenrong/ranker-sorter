@@ -28,7 +28,8 @@
     }
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
+    "includes": ["src/**", "!backend"]
   },
   "formatter": {
     "useEditorconfig": true

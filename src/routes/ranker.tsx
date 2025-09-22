@@ -4,61 +4,32 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { combinations } from "mathjs/number";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useActionData, useSubmit } from "react-router";
 
 import type { rankerAction } from "~/actions";
 import type { EloSystem, Score } from "~/elosystem";
-import { DEFAULT_RATINGS, recordMatch, round } from "~/elosystem";
-import type { Player, PlayerResult } from "~/schemas";
-
-const getPlayerName = (player: Player) =>
-  typeof player !== "undefined" && typeof player !== "string"
-    ? player.name
-    : player;
-
-const getPlayerImage = (player: Player) =>
-  typeof player !== "undefined" && typeof player !== "string"
-    ? player.image
-    : undefined;
+import { recordMatch, round } from "~/elosystem";
+import type { PlayerResult } from "~/schemas";
 
 export function Ranker() {
   const actionData = useActionData<typeof rankerAction>();
   const submit = useSubmit();
 
-  const [ratings, setRatings] = useState<EloSystem>({});
-  const [currentProgress, setCurrentProgress] = useState(0);
-  const [currentPlayerA, setCurrentPlayerA] = useState(0);
-  const [currentPlayerB, setCurrentPlayerB] = useState(1);
+  const [ratings, setRatings] = useState<EloSystem>(
+    actionData?.data?.system || {},
+  );
 
-  const [swap, setSwap] = useState(false);
+  const [currentProgress, setCurrentProgress] = useState(0);
   const [isFinishing, setIsFinishing] = useState(false);
 
-  const actionResponse = actionData?.ok ? actionData.data : actionData?.error;
-
-  // The following code was refactored by ChatGPT.
-  useEffect(() => {
-    if (actionResponse && typeof actionResponse !== "string") {
-      const system = actionResponse.players.reduce<EloSystem>((acc, player) => {
-        const name = getPlayerName(player);
-
-        acc[name] = { ...DEFAULT_RATINGS };
-
-        return acc;
-      }, {});
-
-      setRatings(system);
-    }
-  }, [actionResponse]);
-
-  if (!actionResponse || typeof actionResponse === "string") {
+  if (!actionData?.ok) {
     return (
       <>
-        {actionResponse ? (
+        {actionData?.error ? (
           <div className="load-error">
             <p>Error: Unable to load ranker data</p>
-            <p>{actionResponse}</p>
+            <p>{actionData?.error}</p>
           </div>
         ) : (
           <p>
@@ -73,23 +44,12 @@ export function Ranker() {
     );
   }
 
-  const players = actionResponse.players;
-
-  const selectWinner =
-    (playerA: string, playerB: string, score: Score) => () => {
-      const newRatings = recordMatch(ratings, playerA, playerB, score);
-
-      setRatings(newRatings);
-      setCurrentPlayerB((count) => count + 1);
-
-      if (currentPlayerB >= players.length - 1) {
-        setCurrentPlayerA((count) => count + 1);
-        setCurrentPlayerB(currentPlayerA + 2);
-      }
-
+  const selectWinner = (playerA: string, playerB: string, score: Score) => {
+    return () => {
+      setRatings(recordMatch(ratings, playerA, playerB, score));
       setCurrentProgress((count) => count + 1);
-      setSwap(Math.random() >= 0.5);
     };
+  };
 
   const viewResults = () => {
     if (isFinishing) {
@@ -98,25 +58,14 @@ export function Ranker() {
 
     setIsFinishing(true);
 
-    // SPDX-SnippetBegin
-    // SPDX-License-Identifier: MIT-0
-    // SPDX-SnippetCopyrightText: Samuel Wu
-    //
-    // The following code was refactored by ChatGPT.
+    // The following code was refactored by ChatGPT and GitHub Copilot.
     const results = {
-      players: players
-        .map((player) => {
-          const name = getPlayerName(player);
-          const image = getPlayerImage(player);
-          const rating = ratings[name];
-
-          return {
-            ...rating,
-            elo: round(rating.elo / 10) * 10,
-            image,
-            name,
-          };
-        })
+      players: Object.entries(ratings)
+        .map(([name, rating]) => ({
+          ...rating,
+          elo: round(rating.elo / 10) * 10,
+          name,
+        }))
         .sort((playerA, playerB) => playerB.elo - playerA.elo)
         .reduce<PlayerResult[]>((acc, player, i) => {
           const prev = acc[i - 1];
@@ -127,9 +76,8 @@ export function Ranker() {
 
           return acc;
         }, []),
-      title: actionResponse.title,
+      title: actionData.data.title,
     };
-    // SPDX-SnippetEnd
 
     submit(JSON.stringify(results), {
       action: "/results",
@@ -139,79 +87,77 @@ export function Ranker() {
     });
   };
 
-  const combination = combinations(players.length, 2);
-  const estimatedMinutes = Math.floor(combination / 60);
-  const estimatedSeconds = combination % 60;
-  const playerAName = getPlayerName(players[currentPlayerA]);
-  const playerBName = getPlayerName(players[currentPlayerB]);
-  const playerAImage = getPlayerImage(players[currentPlayerA]);
-  const playerBImage = getPlayerImage(players[currentPlayerB]);
+  const matches = actionData.data.matches;
+  const combinations = actionData.data.matches.length;
 
-  const optionA = swap ? playerAName : playerBName;
-  const optionB = optionA === playerAName ? playerBName : playerAName;
-  const optionAImage = optionA === playerAName ? playerAImage : playerBImage;
-  const optionBImage = optionB === playerBName ? playerBImage : playerAImage;
+  if (currentProgress < combinations) {
+    const estimatedMinutes = Math.floor(combinations / 60);
+    const estimatedSeconds = combinations % 60;
+
+    const optionA = matches[currentProgress][0];
+    const optionB = matches[currentProgress][1];
+    const optionAImage = ratings[optionA].image;
+    const optionBImage = ratings[optionB].image;
+
+    return (
+      <>
+        <p>
+          There are {combinations} combination{combinations > 1 && "s"} of 2{" "}
+          players for {Object.keys(ratings).length} players. This will take{" "}
+          about{" "}
+          {estimatedMinutes > 0 && (
+            <>
+              {estimatedMinutes} minute{estimatedMinutes > 1 && "s"}{" "}
+              {estimatedSeconds && "and"}
+            </>
+          )}
+          {estimatedSeconds > 0 && (
+            <>
+              {estimatedSeconds} second{estimatedSeconds > 1 && "s"}{" "}
+            </>
+          )}
+          if each choice takes a second.
+        </p>
+        <p>
+          The "Draw / I Cannot Decide" button should be used as the last option,
+          there is no penalty but result might be less accurate.
+        </p>
+        <p>
+          Current progress: {currentProgress}/{combinations}
+        </p>
+        <div className="selections">
+          <button onClick={selectWinner(optionA, optionB, 1.0)} type="button">
+            {optionAImage ? (
+              <img alt={optionA} height={64} src={optionAImage} width={64} />
+            ) : (
+              optionA
+            )}
+          </button>
+          <button onClick={selectWinner(optionA, optionB, 0.0)} type="button">
+            {optionBImage ? (
+              <img alt={optionB} height={64} src={optionBImage} width={64} />
+            ) : (
+              optionB
+            )}
+          </button>
+        </div>
+        <button onClick={selectWinner(optionA, optionB, 0.5)} type="button">
+          Draw / I Cannot Decide
+        </button>
+      </>
+    );
+  }
 
   return (
     <>
-      {currentProgress < combination ? (
-        <>
-          <p>
-            There are {combination} combination{combination > 1 && "s"} of 2
-            players for {players.length} players. This will take about{" "}
-            {estimatedMinutes > 0 && (
-              <>
-                {estimatedMinutes} minute{estimatedMinutes > 1 && "s"}{" "}
-                {estimatedSeconds && "and"}
-              </>
-            )}
-            {estimatedSeconds > 0 && (
-              <>
-                {estimatedSeconds} second{estimatedSeconds > 1 && "s"}{" "}
-              </>
-            )}
-            if each choice takes a second.
-          </p>
-          <p>
-            The "Draw / I Cannot Decide" button should be used as the last
-            option, there is no penalty but result might be less accurate.
-          </p>
-          <p>
-            Current progress: {currentProgress}/{combination}
-          </p>
-          <div className="selections">
-            <button onClick={selectWinner(optionA, optionB, 1.0)} type="button">
-              {optionAImage ? (
-                <img alt={optionA} height={64} src={optionAImage} width={64} />
-              ) : (
-                optionA
-              )}
-            </button>
-            <button onClick={selectWinner(optionA, optionB, 0.0)} type="button">
-              {optionBImage ? (
-                <img alt={optionB} height={64} src={optionBImage} width={64} />
-              ) : (
-                optionB
-              )}
-            </button>
-          </div>
-          <button onClick={selectWinner(optionA, optionB, 0.5)} type="button">
-            Draw / I Cannot Decide
-          </button>
-        </>
-      ) : (
-        <>
-          <p role="alert">
-            You have completed the ranker, on the next page you will have a
-            chance to view and save your results. Remember, do not reload your
-            browser as the ranker does not store any information on your
-            computer.
-          </p>
-          <button disabled={isFinishing} onClick={viewResults} type="button">
-            {isFinishing ? "Please wait..." : "View Results"}
-          </button>
-        </>
-      )}
+      <p role="alert">
+        You have completed the ranker, on the next page you will have a chance
+        to view and save your results. Remember, do not reload your browser as
+        the ranker does not store any information on your computer.
+      </p>
+      <button disabled={isFinishing} onClick={viewResults} type="button">
+        {isFinishing ? "Please wait..." : "View Results"}
+      </button>
     </>
   );
 }

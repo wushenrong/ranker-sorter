@@ -132,7 +132,7 @@ export function Results() {
        */}
 
       <table>
-        <caption>Result of ranking: {actionResponse.title}</caption>
+        <caption>Result of ranking {actionResponse.title}</caption>
         <thead>
           <tr>
             {TABLE_HEADINGS.map((heading) => (

@@ -23,7 +23,9 @@ section {
 
 footer {
   display: flex;
+  flex-direction: column;
   margin: 0 var(--size-fluid-6);
+  text-align: center;
 }
 
 p,
@@ -38,6 +40,10 @@ table {
 img {
   align-content: center;
   margin: 0 auto;
+}
+
+h1 ~ p {
+  text-align: center;
 }
 
 .ranker-creation {

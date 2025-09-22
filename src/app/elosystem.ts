@@ -67,7 +67,9 @@ export function recordMatch(
 
   const updateStats = (player: string, result: MatchResult) => {
     const current = system[player];
+
     return {
+      ...current,
       draws: current.draws + (result === "draw" ? 1 : 0),
       elo: player === playerA ? newRatingA : newRatingB,
       losses: current.losses + (result === "loss" ? 1 : 0),
