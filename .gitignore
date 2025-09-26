@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2025 Samuel Wu
+#
+# SPDX-License-Identifier: MIT-0
+
+.DS_Store
+/node_modules/
+
+# React Router
+/.react-router/
+/build/

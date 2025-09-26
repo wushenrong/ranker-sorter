@@ -1,0 +1,4 @@
+hoist: false
+
+onlyBuiltDependencies:
+  - esbuild
