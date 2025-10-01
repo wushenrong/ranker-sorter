@@ -49,11 +49,11 @@ importers:
         specifier: ^20.19.17
         version: 20.19.17
       '@types/react':
-        specifier: ^19.1.13
-        version: 19.1.13
+        specifier: ^19.1.16
+        version: 19.1.16
       '@types/react-dom':
         specifier: ^19.1.9
-        version: 19.1.9(@types/react@19.1.13)
+        version: 19.1.9(@types/react@19.1.16)
       postcss-jit-props:
         specifier: ^1.0.16
         version: 1.0.16(postcss@8.5.6)
@@ -908,8 +908,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.0.0
 
-  '@types/react@19.1.13':
-    resolution: {integrity: sha512-hHkbU/eoO3EG5/MZkuFSKmYqPbSVk5byPFa3e7y/8TybHiLMACgI8seVYlicwk7H5K/rI2px9xrQp/C+AUDTiQ==}
+  '@types/react@19.1.16':
+    resolution: {integrity: sha512-WBM/nDbEZmDUORKnh5i1bTnAz6vTohUf9b8esSMu+b24+srbaxa04UbJgWx78CVfNXA20sNu0odEIluZDFdCog==}
 
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -2831,11 +2831,11 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/react-dom@19.1.9(@types/react@19.1.13)':
+  '@types/react-dom@19.1.9(@types/react@19.1.16)':
     dependencies:
-      '@types/react': 19.1.13
+      '@types/react': 19.1.16
 
-  '@types/react@19.1.13':
+  '@types/react@19.1.16':
     dependencies:
       csstype: 3.1.3
 
