@@ -36,8 +36,8 @@ importers:
         specifier: ^7.10.1
         version: 7.10.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       zod:
-        specifier: 4.1.13
-        version: 4.1.13
+        specifier: 4.3.4
+        version: 4.3.4
     devDependencies:
       '@biomejs/biome':
         specifier: 2.3.8
@@ -1837,8 +1837,8 @@ packages:
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
-  zod@4.1.13:
-    resolution: {integrity: sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==}
+  zod@4.3.4:
+    resolution: {integrity: sha512-Zw/uYiiyF6pUT1qmKbZziChgNPRu+ZRneAsMUDU6IwmXdWt5JwcUfy2bvLOCUtz5UniaN/Zx5aFttZYbYc7O/A==}
 
 snapshots:
 
@@ -3612,4 +3612,4 @@ snapshots:
 
   yallist@3.1.1: {}
 
-  zod@4.1.13: {}
+  zod@4.3.4: {}
