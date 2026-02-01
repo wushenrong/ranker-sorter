@@ -24,8 +24,8 @@ importers:
         specifier: ^2.1.2
         version: 2.1.2
       open-props:
-        specifier: ^1.7.17
-        version: 1.7.17
+        specifier: ^1.7.23
+        version: 1.7.23
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -1416,8 +1416,8 @@ packages:
     resolution: {integrity: sha512-737ZY3yNnXy37FHkQxPzt4UZ2UWPWiCZWLvFZ4fu5cueciegX0zGPnrlY6bwRg4FdQOe9YU8MkmJwGhoMybl8A==}
     engines: {node: '>= 0.8'}
 
-  open-props@1.7.17:
-    resolution: {integrity: sha512-Sa6zW2cdOFSCqjmlIZ6q3F0p4Hixab+xbMPRDbrM42mZIeGrqN2ty0Twxof1sYjuhwBe+Ft7dDyB6rLmyRInZQ==}
+  open-props@1.7.23:
+    resolution: {integrity: sha512-+xyrJmxV9QUBFbSwPROYhOg/FLXry+uuPr4R+B5EaE4556Oc18/8ZC/fL5A+/lbRSwNvA0Alh+C0KpyFWLmLZg==}
 
   p-map@7.0.4:
     resolution: {integrity: sha512-tkAQEw8ysMzmkhgw8k+1U/iPhWNhykKnSk4Rd5zLoPJCuJaGRPo6YposrZgaxHKzDHdDWWZvE/Sk7hsL2X/CpQ==}
@@ -3123,7 +3123,7 @@ snapshots:
 
   on-headers@1.1.0: {}
 
-  open-props@1.7.17: {}
+  open-props@1.7.23: {}
 
   p-map@7.0.4: {}
 
