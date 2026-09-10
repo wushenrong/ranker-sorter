@@ -1,4 +1,4 @@
-# Ranker Sorter
+# [Archived] Ranker Sorter
 
 Yet another ranker that sorts using ELO.
 
